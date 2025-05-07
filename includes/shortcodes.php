@@ -53,3 +53,43 @@ function golden_shark_formulario_lead_shortcode()
     return ob_get_clean();
 }
 add_shortcode('formulario_lead', 'golden_shark_formulario_lead_shortcode');
+
+//Shortcode para el listado de los eventos 
+function golden_shark_shortcode_lista_eventos()
+{
+    $eventos = get_option('golden_shark_eventos', []);
+    if (empty($eventos)) {
+        return '<p>No hay eventos disponibles en este momento.</p>';
+    }
+
+    ob_start();
+    echo '<ul class="gs-eventos-lista">';
+    foreach ($eventos as $evento) {
+        echo '<li><strong>' . esc_html($evento['titulo']) . '</strong> – ' . esc_html($evento['fecha']) . ' en ' . esc_html($evento['lugar']) . '</li>';
+    }
+    echo '</ul>';
+
+    return ob_get_clean();
+}
+add_shortcode('lista_eventos', 'golden_shark_shortcode_lista_eventos');
+
+//Shortcode para el listado de una nota aleatoria 
+function golden_shark_shortcode_nota_aleatoria()
+{
+    $notas = get_option('golden_shark_notas', []);
+    $mostrar = get_option('golden_shark_habilitar_notificaciones', '1');
+
+    if ($mostrar !== '1' || empty($notas)) return '';
+
+    $nota = $notas[array_rand($notas)];
+    return '<div class="gs-nota-aleatoria" style="background:#fefefe;border-left:4px solid #666;padding:10px;margin-top:10px;"><strong>Nota interna:</strong><br>' . nl2br(esc_html($nota['contenido'])) . '</div>';
+}
+add_shortcode('nota_aleatoria', 'golden_shark_shortcode_nota_aleatoria');
+
+//Shortcode para el total de los leads capturados como métrica
+function golden_shark_shortcode_total_leads()
+{
+    $leads = get_option('golden_shark_leads', []);
+    return '<p>Total de leads registrados: <strong>' . count($leads) . '</strong></p>';
+}
+add_shortcode('total_leads', 'golden_shark_shortcode_total_leads');

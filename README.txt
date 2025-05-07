@@ -45,6 +45,9 @@ Pensado para ser una herramienta **privada**, segura y personalizable para equip
 
 * `[frase_motivacional]` – Muestra una frase aleatoria del sistema.
 * `[formulario_lead]` – Muestra el formulario público de leads.
+* `[lista_eventos]` – Lista todos los eventos internos registrados.
+* `[nota_aleatoria]` – Muestra una nota interna aleatoria si las notificaciones están activadas.
+* `[total_leads]` – Muestra el número total de leads registrados.
 
 == Seguridad ==
 

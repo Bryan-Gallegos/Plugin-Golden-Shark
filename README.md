@@ -30,10 +30,14 @@
 
 ## 🧩 Shortcodes disponibles
 
-| Shortcode | Función |
-|----------|---------|
-| `[frase_motivacional]` | Muestra una frase aleatoria desde la base de datos |
-| `[formulario_lead]`    | Muestra el formulario público de leads |
+| Shortcode               | Función                                                                 |
+|------------------------|------------------------------------------------------------------------|
+| `[frase_motivacional]` | Muestra una frase aleatoria desde la base de datos                     |
+| `[formulario_lead]`    | Muestra el formulario público de leads                                 |
+| `[lista_eventos]`       | Lista todos los eventos internos guardados                             |
+| `[nota_aleatoria]`      | Muestra una nota interna aleatoria (si las notificaciones están activas) |
+| `[total_leads]`         | Muestra el total actual de leads capturados                           |
+
 
 ---
 
