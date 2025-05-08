@@ -68,6 +68,10 @@ Todas las configuraciones principales (colores, mensajes y notificaciones) está
 
 ## 🗓️ Historial de cambios
 
+### v1.6
+- Nueva opción: exportación del historial individual del usuario en CSV desde el panel principal.
+- Añadida protección de seguridad con `wp_nonce_field` al formulario de exportación.
+
 ### v1.5
 - Registro individual de historial por usuario.
 - Visualización del historial personal en el Dashboard.

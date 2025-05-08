@@ -7,8 +7,13 @@ function golden_shark_render_dashboard()
   if (!golden_shark_user_can('edit_posts')) {
     wp_die('No tienes permiso para acceder a esta sección.');
   }
-  // 🗂 Exportar historial individual del usuario
-  if (isset($_POST['gs_exportar_historial_usuario'])) {
+
+  // 🗂 Exportar historial individual del usuario (con verificación de nonce)
+  if (
+    isset($_POST['gs_exportar_historial_usuario']) &&
+    isset($_POST['_wpnonce']) &&
+    wp_verify_nonce($_POST['_wpnonce'], 'gs_exportar_historial_usuario_nonce')
+  ) {
     $usuario_historial = get_user_meta(get_current_user_id(), 'gs_historial_usuario', true);
     if (!empty($usuario_historial)) {
       header('Content-Type: text/csv');
@@ -48,27 +53,27 @@ function golden_shark_render_dashboard()
   if (!empty($frases)) {
     $frase = $frases[array_rand($frases)];
     echo '<div class="golden-shark-frase-box" style="border-color:' . esc_attr($color_dashboard) . ';">
-                <strong>Frase motivacional del día:</strong><br>' . esc_html($frase) . '
-              </div>';
+      <strong>Frase motivacional del día:</strong><br>' . esc_html($frase) . '
+    </div>';
   }
 
   // Tarjetas de resumen
   echo '<div class="golden-shark-resumen">';
 
   echo '<div class="golden-shark-resumen-box" style="border-color:#f39c12;">
-            <h2>' . $total_frases . '</h2>
-            <p>Frases motivacionales</p>
-          </div>';
+    <h2>' . $total_frases . '</h2>
+    <p>Frases motivacionales</p>
+  </div>';
 
   echo '<div class="golden-shark-resumen-box" style="border-color:#2ecc71;">
-            <h2>' . $total_eventos . '</h2>
-            <p>Eventos internos</p>
-          </div>';
+    <h2>' . $total_eventos . '</h2>
+    <p>Eventos internos</p>
+  </div>';
 
   echo '<div class="golden-shark-resumen-box" style="border-color:#3498db;">
-            <h2>' . $total_leads . '</h2>
-            <p>Leads capturados</p>
-          </div>';
+    <h2>' . $total_leads . '</h2>
+    <p>Leads capturados</p>
+  </div>';
 
   echo '<h3 style="margin-top:40px;">Resumen gráfico:</h3>';
   echo '<canvas id="goldenSharkChart" width="400" height="150" style="max-width:600px;"></canvas>';
@@ -83,12 +88,14 @@ function golden_shark_render_dashboard()
       echo '<li><strong>' . esc_html($entrada['fecha']) . '</strong>: ' . esc_html($entrada['accion']) . '</li>';
     }
     echo '</ul>';
+
+    // Botón de exportar historial del usuario
+    echo '<form method="post" style="margin-top:20px;">';
+    wp_nonce_field('gs_exportar_historial_usuario_nonce');
+    echo '<input type="hidden" name="gs_exportar_historial_usuario" value="1">';
+    echo '<input type="submit" class="button button-secondary" value="📤 Exportar mi historial en CSV">';
+    echo '</form>';
   }
-  // Botón de exportar historial del usuario
-  echo '<form method="post" style="margin-top:20px;">
-<input type="hidden" name="gs_exportar_historial_usuario" value="1">
-<input type="submit" class="button button-secondary" value="📤 Exportar mi historial en CSV">
-</form>';
 
   echo '</div>'; // cierre tarjetas de resumen
   echo '</div>'; // cierre div.wrap
