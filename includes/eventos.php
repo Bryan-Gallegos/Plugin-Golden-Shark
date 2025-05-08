@@ -37,6 +37,7 @@ function golden_shark_render_eventos()
         ];
         update_option('golden_shark_eventos', $eventos);
         golden_shark_log('Se registró un nuevo evento: ' . $_POST['evento_titulo']);
+        update_user_meta(get_current_user_id(), 'gs_notificacion_interna', '✅ Evento guardado correctamente.');
         echo '<div class="updated"><p>Evento guardado correctamente.</p></div>';
     }
 
@@ -56,6 +57,7 @@ function golden_shark_render_eventos()
             ];
             update_option('golden_shark_eventos', $eventos);
             golden_shark_log('Se editó el evento: ' . $_POST['evento_titulo']);
+            update_user_meta(get_current_user_id(), 'gs_notificacion_interna', '✅ Evento actualizado correctamente.');
             echo '<div class="updated"><p>Evento actualizado correctamente.</p></div>';
         }
     }
@@ -75,6 +77,7 @@ function golden_shark_render_eventos()
             $eventos = array_values($eventos);
             update_option('golden_shark_eventos', $eventos);
             golden_shark_log('Se eliminó un evento con ID: ' . $id);
+            update_user_meta(get_current_user_id(), 'gs_notificacion_interna', '🗑️ Evento eliminado correctamente.');
             echo '<div class="updated"><p>Evento eliminado.</p></div>';
         }
     }

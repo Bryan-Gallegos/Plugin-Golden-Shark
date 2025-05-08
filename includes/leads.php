@@ -30,6 +30,7 @@ function golden_shark_render_leads()
             ];
             update_option('golden_shark_leads', $leads);
             golden_shark_log('Se registró un nuevo lead: ' . $nombre . ' (' . $correo . ')');
+            update_user_meta(get_current_user_id(), 'gs_notificacion_interna', '✅ Lead guardado correctamente.');
             echo '<div class="updated"><p>Lead guardado correctamente.</p></div>';
         }
     }
@@ -50,6 +51,7 @@ function golden_shark_render_leads()
             $leads = array_values($leads);
             update_option('golden_shark_leads', $leads);
             golden_shark_log('Se eliminó el lead: ' . $lead_eliminado['nombre'] . ' (' . $lead_eliminado['correo'] . ')');
+            update_user_meta(get_current_user_id(), 'gs_notificacion_interna', '🗑️ Lead eliminado correctamente.');
             echo '<div class="updated"><p>Lead eliminado.</p></div>';
         }
     }
@@ -70,6 +72,7 @@ function golden_shark_render_leads()
             ];
             update_option('golden_shark_leads', $leads);
             golden_shark_log('Se editó el lead: ' . $_POST['lead_nombre'] . ' (' . $_POST['lead_correo'] . ')');
+            update_user_meta(get_current_user_id(), 'gs_notificacion_interna', '✅ Lead actualizado correctamente.');
             echo '<div class="updated"><p>Lead actualizado correctamente.</p></div>';
         }
     }

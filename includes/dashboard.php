@@ -6,7 +6,14 @@ function golden_shark_render_dashboard()
 {
     if (!golden_shark_user_can('edit_posts')) {
         wp_die('No tienes permiso para acceder a esta sección.');
-    }  
+    }
+
+    // ✅ Mostrar notificación temporal si existe
+    $notificacion = get_user_meta(get_current_user_id(), 'gs_notificacion_interna', true);
+    if (!empty($notificacion)) {
+        echo '<div class="notice notice-success is-dismissible"><p>' . esc_html($notificacion) . '</p></div>';
+        delete_user_meta(get_current_user_id(), 'gs_notificacion_interna');
+    }
 
     $frases = get_option('golden_shark_frases', []);
     $eventos = get_option('golden_shark_eventos', []);
@@ -37,17 +44,17 @@ function golden_shark_render_dashboard()
             <h2>' . $total_frases . '</h2>
             <p>Frases motivacionales</p>
           </div>';
-        
+
     echo '<div class="golden-shark-resumen-box" style="border-color:#2ecc71;">
             <h2>' . $total_eventos . '</h2>
             <p>Eventos internos</p>
           </div>';
-    
+
     echo '<div class="golden-shark-resumen-box" style="border-color:#3498db;">
             <h2>' . $total_leads . '</h2>
             <p>Leads capturados</p>
           </div>';
 
-    echo '</div>'; //cierre tarjetas de resumen
-    echo '</div>'; //Cierre div.wrap
+    echo '</div>'; // cierre tarjetas de resumen
+    echo '</div>'; // cierre div.wrap
 }

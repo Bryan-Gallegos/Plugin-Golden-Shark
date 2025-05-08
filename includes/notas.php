@@ -23,6 +23,7 @@ function golden_shark_render_notas()
         ];
         update_option('golden_shark_notas', $notas);
         golden_shark_log('Se agregó una nueva nota interna.');
+        update_user_meta(get_current_user_id(), 'gs_notificacion_interna', '✅ Nota guardada correctamente.');
         $mensaje = '<div class="updated"><p>Nota guardada correctamente.</p></div>';
     }
 
@@ -37,6 +38,7 @@ function golden_shark_render_notas()
             $notas[$id]['contenido'] = sanitize_textarea_field($_POST['nota_contenido']);
             update_option('golden_shark_notas', $notas);
             golden_shark_log('Se editó una nota interna.');
+            update_user_meta(get_current_user_id(), 'gs_notificacion_interna', '✅ Nota actualizada correctamente.');
             $mensaje = '<div class="updated"><p>Nota actualizada correctamente.</p></div>';
         }
     }
@@ -52,6 +54,7 @@ function golden_shark_render_notas()
             $notas = array_values($notas);
             update_option('golden_shark_notas', $notas);
             golden_shark_log('Se eliminó una nota interna.');
+            update_user_meta(get_current_user_id(), 'gs_notificacion_interna', '🗑️ Nota eliminada correctamente.');
             $mensaje = '<div class="updated"><p>Nota eliminada.</p></div>';
         }
     }

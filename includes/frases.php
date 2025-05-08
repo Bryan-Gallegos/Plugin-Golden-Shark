@@ -21,6 +21,7 @@ function golden_shark_render_frases()
             $frases[] = $nueva_frase;
             update_option('golden_shark_frases', $frases);
             golden_shark_log('Se agregó una nueva frase: "' . $nueva_frase . '"');
+            update_user_meta(get_current_user_id(), 'gs_notificacion_interna', '✅ Frase motivacional guardada.');
             echo '<div class="updated"><p>Frase agregada correctamente.</p></div>';
         }
     }
@@ -36,6 +37,7 @@ function golden_shark_render_frases()
             $frases[$id] = sanitize_text_field($_POST['nueva_frase']);
             update_option('golden_shark_frases', $frases);
             golden_shark_log('Se editó la frase en la posición ' . $id);
+            update_user_meta(get_current_user_id(), 'gs_notificacion_interna', '✅ Frase actualizada.');
             echo '<div class="updated"><p>Frase actualizada correctamente.</p></div>';
         }
     }
@@ -55,6 +57,7 @@ function golden_shark_render_frases()
             $frases = array_values($frases);
             update_option('golden_shark_frases', $frases);
             golden_shark_log('Se eliminó la frase: "' . $frase_eliminada . '"');
+            update_user_meta(get_current_user_id(), 'gs_notificacion_interna', '🗑️ Frase eliminada correctamente.');
             echo '<div class="updated"><p>Frase eliminada.</p></div>';
         }
     }

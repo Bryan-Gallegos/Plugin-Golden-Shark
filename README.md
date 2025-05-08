@@ -68,6 +68,9 @@ Todas las configuraciones principales (colores, mensajes y notificaciones) está
 
 ## 🗓️ Historial de cambios
 
+### v1.2
+- Implementado sistema de notificaciones internas tras acciones clave (crear, editar, eliminar).
+
 ### v1.1
 - Nuevos shortcodes: `[lista_eventos]`, `[nota_aleatoria]`, `[total_leads]`
 - Mejora visual del dashboard

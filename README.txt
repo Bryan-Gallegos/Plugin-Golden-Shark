@@ -4,7 +4,7 @@ Donate link: https://example.com/
 Tags: administración, leads, eventos, frases, notas, panel interno
 Requires at least: 5.8
 Tested up to: 6.5
-Stable tag: 1.1
+Stable tag: 1.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -64,6 +64,10 @@ Todas las acciones están protegidas con `nonce` y verificaciones de capacidad d
 7. Historial de actividad.
 
 == Changelog ==
+
+= 1.2 =
+* Nuevo sistema de notificaciones internas.
+* Mensajes automáticos al crear, editar o eliminar eventos, leads, frases y notas.
 
 = 1.1 =
 * Nuevos shortcodes: lista_eventos, nota_aleatoria, total_leads.
