@@ -45,12 +45,28 @@ function golden_shark_admin_assets($hook) {
     );
 
     wp_enqueue_script(
+        'chart-js',
+        'https://cdn.jsdelivr.net/npm/chart.js',
+        [],
+        null,
+        true
+    );
+
+    wp_enqueue_script(
         'golden-shark-admin-script',
         plugin_dir_url(__FILE__) . '../assets/js/admin-scripts.js',
         [],
         '1.0',
         true
     );
+
+    //Pasar datos al script
+    wp_localize_script('golden-shark-admin-script', 'gsData', [
+        'frases'  => count(get_option('golden_shark_frases', [])),
+        'eventos' => count(get_option('golden_shark_eventos', [])),
+        'leads'   => count(get_option('golden_shark_leads', [])),
+        
+    ]);
 }
 add_action('admin_enqueue_scripts', 'golden_shark_admin_assets');
 

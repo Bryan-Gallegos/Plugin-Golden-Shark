@@ -54,6 +54,9 @@ function golden_shark_render_dashboard()
             <h2>' . $total_leads . '</h2>
             <p>Leads capturados</p>
           </div>';
+        
+    echo '<h3 style="margin-top:40px;">Resumen gráfico:</h3>';
+    echo '<canvas id="goldenSharkChart" width="400" height="150" style="max-width:600px;"></canvas>';          
 
     echo '</div>'; // cierre tarjetas de resumen
     echo '</div>'; // cierre div.wrap

@@ -9,3 +9,31 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    if (typeof gsData !== 'undefined') {
+        const ctx = document.getElementById('goldenSharkChart');
+        if (ctx) {
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Frases', 'Eventos', 'Leads'],
+                    datasets: [{
+                        label: 'Resumen de registros',
+                        data: [gsData.frases, gsData.eventos, gsData.leads],
+                        backgroundColor: ['#f39c12', '#2ecc71', '#3498db']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { precision:0 }
+                        }
+                    }
+                }
+            });
+        }
+    }
+});

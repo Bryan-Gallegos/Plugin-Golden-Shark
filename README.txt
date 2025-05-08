@@ -4,7 +4,7 @@ Donate link: https://example.com/
 Tags: administración, leads, eventos, frases, notas, panel interno
 Requires at least: 5.8
 Tested up to: 6.5
-Stable tag: 1.3
+Stable tag: 1.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -64,6 +64,10 @@ Todas las acciones están protegidas con `nonce` y verificaciones de capacidad d
 7. Historial de actividad.
 
 == Changelog ==
+
+= 1.4 =
+* Se añadió gráfico de resumen (Chart.js) al panel principal.
+* Se pasaron datos dinámicamente a JavaScript desde PHP.
 
 = 1.3 =
 * Added WordPress dashboard widget to show total events, leads, and phrases.
