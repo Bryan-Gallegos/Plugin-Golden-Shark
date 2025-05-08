@@ -9,16 +9,6 @@ Este documento describe el plan de evolución del plugin **Golden Shark Admin Pa
 
 ---
 
-## 🔄 Próxima versión: v1.6 – Exportaciones avanzadas y mejoras UX
-**Objetivo**: hacer el sistema más útil para informes y más amigable para el usuario.
-- [ ] Exportar historial individual por usuario (CSV).
-- [ ] Exportar leads filtrados por fecha o palabra clave.
-- [ ] Mejoras visuales con íconos o badges en listas de notas y eventos.
-- [ ] Autoenfoque en campos al editar.
-- [ ] Mensajes de validación más claros.
-
----
-
 ## 🗂️ v1.7 – Módulo de tareas / pendientes
 **Objetivo**: permitir al equipo organizar y registrar tareas internas.
 - [ ] Nuevo módulo “Tareas internas”.
