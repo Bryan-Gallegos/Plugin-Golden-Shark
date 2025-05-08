@@ -69,7 +69,8 @@ Todas las configuraciones principales (colores, mensajes y notificaciones) está
 ## 🗓️ Historial de cambios
 
 ### v1.4
-- Se añadieron widgets de resumen en el escritorio principal de WordPress.
+- Se añadió gráfico de resumen al dashboard usando Chart.js.
+- Se integró paso de datos de PHP a JavaScript con `wp_localize_script`.
 
 ### v1.3
 - Se agregó un widget en el escritorio principal de WordPress mostrando resumen de eventos, leads y frases.
