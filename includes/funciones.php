@@ -6,7 +6,7 @@ function golden_shark_user_can($capability = 'manage_options') {
     return current_user_can($capability);
 }
 
-// 📝 Registrar una acción en el historial
+// 📝 Registrar una acción en el historial general
 function golden_shark_log($mensaje) {
     $historial = get_option('golden_shark_historial', []);
     $historial[] = [
@@ -14,6 +14,26 @@ function golden_shark_log($mensaje) {
         'fecha'   => current_time('Y-m-d H:i:s')
     ];
     update_option('golden_shark_historial', $historial);
+}
+
+// 🧍 Registrar una acción en el historial personal del usuario actual
+function golden_shark_log_usuario($mensaje) {
+    $user_id = get_current_user_id();
+    if (!$user_id) return;
+
+    $historial = get_user_meta($user_id, 'gs_historial_usuario', true);
+    if (!is_array($historial)) $historial = [];
+
+    $historial[] = [
+        'mensaje' => sanitize_text_field($mensaje),
+        'fecha'   => current_time('Y-m-d H:i:s')
+    ];
+
+    if (count($historial) > 50) {
+        $historial = array_slice($historial, -50);
+    }
+    
+    update_user_meta($user_id, 'gs_historial_usuario', $historial);
 }
 
 // 🔄 Registrar cambios de configuración
@@ -28,7 +48,9 @@ function golden_shark_log_cambio_configuracion($option, $old_value, $value) {
     ];
 
     if (isset($mensajes[$option])) {
-        golden_shark_log($mensajes[$option] . ': "' . sanitize_text_field($value) . '"');
+        $texto = $mensajes[$option] . ': "' . sanitize_text_field($value) . '"';
+        golden_shark_log($texto);
+        golden_shark_log_usuario($texto);
     }
 }
 add_action('updated_option', 'golden_shark_log_cambio_configuracion', 10, 3);
@@ -60,12 +82,11 @@ function golden_shark_admin_assets($hook) {
         true
     );
 
-    //Pasar datos al script
+    // Pasar datos al script
     wp_localize_script('golden-shark-admin-script', 'gsData', [
         'frases'  => count(get_option('golden_shark_frases', [])),
         'eventos' => count(get_option('golden_shark_eventos', [])),
         'leads'   => count(get_option('golden_shark_leads', [])),
-        
     ]);
 }
 add_action('admin_enqueue_scripts', 'golden_shark_admin_assets');

@@ -4,7 +4,7 @@ Donate link: https://example.com/
 Tags: administración, leads, eventos, frases, notas, panel interno
 Requires at least: 5.8
 Tested up to: 6.5
-Stable tag: 1.4
+Stable tag: 1.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -65,22 +65,25 @@ Todas las acciones están protegidas con `nonce` y verificaciones de capacidad d
 
 == Changelog ==
 
+= 1.5 =
+* Registro de historial individual por usuario.
+* Visualización del historial personal en el panel principal.
+
 = 1.4 =
-* Se añadió gráfico de resumen (Chart.js) al panel principal.
-* Se pasaron datos dinámicamente a JavaScript desde PHP.
+* Se añadió gráfico de resumen al dashboard usando Chart.js.
+* Se integró paso de datos de PHP a JavaScript con `wp_localize_script`.
 
 = 1.3 =
-* Added WordPress dashboard widget to show total events, leads, and phrases.
+* Se agregó widget al escritorio principal de WordPress con resumen de eventos, leads y frases.
 
 = 1.2 =
-* Nuevo sistema de notificaciones internas.
-* Mensajes automáticos al crear, editar o eliminar eventos, leads, frases y notas.
+* Sistema de notificaciones internas tras crear, editar o eliminar elementos.
+* Mensajes automáticos visibles en el panel.
 
 = 1.1 =
-* Nuevos shortcodes: lista_eventos, nota_aleatoria, total_leads.
+* Nuevos shortcodes: `[lista_eventos]`, `[nota_aleatoria]`, `[total_leads]`.
 * Mejora visual del panel principal.
-* Estilos admin centralizados en admin-style.css.
-* Preparado para futuras funcionalidades.
+* Estilos centralizados en `admin-style.css`.
 
 = 1.0 =
 * Versión inicial del plugin con funcionalidades completas.

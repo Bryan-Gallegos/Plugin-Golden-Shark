@@ -2,7 +2,7 @@
 /*
 Plugin Name: Golden Shark Admin Panel
 Description: Plugin de administración interno para gestionar eventos, leads y configuración desde el panel de WordPress.
-Version: 1.4
+Version: 1.5
 Author: Carlos Gallegos
 */
 

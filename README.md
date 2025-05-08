@@ -68,21 +68,26 @@ Todas las configuraciones principales (colores, mensajes y notificaciones) está
 
 ## 🗓️ Historial de cambios
 
+### v1.5
+- Registro individual de historial por usuario.
+- Visualización del historial personal en el Dashboard.
+- Preparado para futuras exportaciones de historial personal.
+
 ### v1.4
 - Se añadió gráfico de resumen al dashboard usando Chart.js.
 - Se integró paso de datos de PHP a JavaScript con `wp_localize_script`.
 
 ### v1.3
-- Se agregó un widget en el escritorio principal de WordPress mostrando resumen de eventos, leads y frases.
+- Se agregó un widget en el escritorio de WordPress con resumen de eventos, leads y frases.
 
 ### v1.2
-- Implementado sistema de notificaciones internas tras acciones clave (crear, editar, eliminar).
+- Sistema de notificaciones internas tras acciones clave (crear, editar, eliminar).
+- Mensajes de éxito automáticos por usuario.
 
 ### v1.1
-- Nuevos shortcodes: `[lista_eventos]`, `[nota_aleatoria]`, `[total_leads]`
-- Mejora visual del dashboard
-- Estilos admin centralizados en `admin-style.css`
-- Preparación para futuras extensiones como tareas y estadísticas
+- Nuevos shortcodes: `[lista_eventos]`, `[nota_aleatoria]`, `[total_leads]`.
+- Mejora visual del dashboard.
+- Estilos admin centralizados en `admin-style.css`.
 
 ### v1.0
 - Versión inicial completa y funcional del plugin Golden Shark Admin Panel.
