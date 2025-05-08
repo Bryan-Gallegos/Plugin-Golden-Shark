@@ -4,7 +4,7 @@ Donate link: https://example.com/
 Tags: administración, leads, eventos, frases, notas, panel interno
 Requires at least: 5.8
 Tested up to: 6.5
-Stable tag: 1.0
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -64,6 +64,12 @@ Todas las acciones están protegidas con `nonce` y verificaciones de capacidad d
 7. Historial de actividad.
 
 == Changelog ==
+
+= 1.1 =
+* Nuevos shortcodes: lista_eventos, nota_aleatoria, total_leads.
+* Mejora visual del panel principal.
+* Estilos admin centralizados en admin-style.css.
+* Preparado para futuras funcionalidades.
 
 = 1.0 =
 * Versión inicial del plugin con funcionalidades completas.

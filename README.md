@@ -34,10 +34,9 @@
 |------------------------|------------------------------------------------------------------------|
 | `[frase_motivacional]` | Muestra una frase aleatoria desde la base de datos                     |
 | `[formulario_lead]`    | Muestra el formulario público de leads                                 |
-| `[lista_eventos]`       | Lista todos los eventos internos guardados                             |
-| `[nota_aleatoria]`      | Muestra una nota interna aleatoria (si las notificaciones están activas) |
-| `[total_leads]`         | Muestra el total actual de leads capturados                           |
-
+| `[lista_eventos]`      | Lista todos los eventos internos guardados                             |
+| `[nota_aleatoria]`     | Muestra una nota interna aleatoria (si las notificaciones están activas) |
+| `[total_leads]`        | Muestra el total actual de leads capturados                           |
 
 ---
 
@@ -69,6 +68,12 @@ Todas las configuraciones principales (colores, mensajes y notificaciones) está
 
 ## 🗓️ Historial de cambios
 
+### v1.1
+- Nuevos shortcodes: `[lista_eventos]`, `[nota_aleatoria]`, `[total_leads]`
+- Mejora visual del dashboard
+- Estilos admin centralizados en `admin-style.css`
+- Preparación para futuras extensiones como tareas y estadísticas
+
 ### v1.0
 - Versión inicial completa y funcional del plugin Golden Shark Admin Panel.
 
@@ -83,4 +88,4 @@ Este plugin está licenciado bajo los términos de la [GPLv2 o posterior](https:
 ## ✍️ Autor
 
 Desarrollado por **Carlos Gallegos**  
-📫 [LinkedIn](https://www.linkedin.com/in/carlos-bryan-gallegos-batallanos-397223290)  
+📫 [LinkedIn](https://www.linkedin.com/in/carlos-bryan-gallegos-batallanos-397223290)
