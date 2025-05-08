@@ -68,7 +68,7 @@ Todas las configuraciones principales (colores, mensajes y notificaciones) está
 
 ## 🗓️ Historial de cambios
 
-### v1.3
+### v1.4
 - Se añadieron widgets de resumen en el escritorio principal de WordPress.
 
 ### v1.3
