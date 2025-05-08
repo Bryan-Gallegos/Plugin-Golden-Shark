@@ -37,6 +37,7 @@
 | `[lista_eventos]`      | Lista todos los eventos internos guardados                             |
 | `[nota_aleatoria]`     | Muestra una nota interna aleatoria (si las notificaciones están activas) |
 | `[total_leads]`        | Muestra el total actual de leads capturados                           |
+| `[tareas_pendientes]` | Muestra una lista de tareas internas marcadas como pendientes. |
 
 ---
 
@@ -67,6 +68,10 @@ Todas las configuraciones principales (colores, mensajes y notificaciones) está
 ---
 
 ## 🗓️ Historial de cambios
+
+### v1.7
+- Se agregó el módulo de tareas internas con edición rápida.
+- Se añadió el shortcode `[tareas_pendientes]` para listar tareas pendientes.
 
 ### v1.6
 - Nueva opción: exportación del historial individual del usuario en CSV desde el panel principal.

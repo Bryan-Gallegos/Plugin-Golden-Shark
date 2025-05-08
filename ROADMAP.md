@@ -9,15 +9,6 @@ Este documento describe el plan de evolución del plugin **Golden Shark Admin Pa
 
 ---
 
-## 🗂️ v1.7 – Módulo de tareas / pendientes
-**Objetivo**: permitir al equipo organizar y registrar tareas internas.
-- [ ] Nuevo módulo “Tareas internas”.
-- [ ] Campos: título, estado (pendiente/completado), fecha, responsable (opcional).
-- [ ] Historial de tareas y edición rápida.
-- [ ] Shortcode: `[tareas_pendientes]`.
-
----
-
 ## 📅 v1.8 – Calendario de eventos
 **Objetivo**: mostrar visualmente los eventos registrados.
 - [ ] Vista tipo calendario para eventos (con FullCalendar o similar).

@@ -4,7 +4,7 @@ Donate link: https://example.com/
 Tags: administración, leads, eventos, frases, notas, panel interno
 Requires at least: 5.8
 Tested up to: 6.5
-Stable tag: 1.6
+Stable tag: 1.7
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -48,6 +48,7 @@ Pensado para ser una herramienta **privada**, segura y personalizable para equip
 * `[lista_eventos]` – Lista todos los eventos internos registrados.
 * `[nota_aleatoria]` – Muestra una nota interna aleatoria si las notificaciones están activadas.
 * `[total_leads]` – Muestra el número total de leads registrados.
+* `[tareas_pendientes]` – Muestra en el front-end la lista de tareas pendientes.
 
 == Seguridad ==
 
@@ -64,6 +65,11 @@ Todas las acciones están protegidas con `nonce` y verificaciones de capacidad d
 7. Historial de actividad.
 
 == Changelog ==
+
+= 1.7 =
+* Se agregó el módulo de Tareas internas.
+* Soporte para edición rápida, historial y eliminación de tareas.
+* Nuevo shortcode [tareas_pendientes] para mostrar tareas pendientes.
 
 = 1.6 =
 * Nueva opción: exportar historial individual del usuario en CSV.

@@ -67,6 +67,15 @@ function golden_shark_admin_menu()
         'golden-shark-historial',
         'golden_shark_render_historial'
     );
+
+    add_submenu_page(
+        'golden-shark-dashboard',
+        'Tareas Internas',
+        'Tareas',
+        'edit_posts',
+        'golden-shark-tareas',
+        'golden_shark_render_tareas'
+    );
 }
 
 add_action('admin_menu', 'golden_shark_admin_menu');
