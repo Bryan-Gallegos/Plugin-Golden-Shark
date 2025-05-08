@@ -68,6 +68,9 @@ Todas las configuraciones principales (colores, mensajes y notificaciones) está
 
 ## 🗓️ Historial de cambios
 
+### v1.3
+- Se agregó un widget en el escritorio principal de WordPress mostrando resumen de eventos, leads y frases.
+
 ### v1.2
 - Implementado sistema de notificaciones internas tras acciones clave (crear, editar, eliminar).
 

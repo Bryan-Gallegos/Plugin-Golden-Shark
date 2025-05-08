@@ -16,7 +16,7 @@ function golden_shark_log($mensaje) {
     update_option('golden_shark_historial', $historial);
 }
 
-// 🔄 Registrar cambios de configuración (puedes añadir más opciones en el futuro)
+// 🔄 Registrar cambios de configuración
 function golden_shark_log_cambio_configuracion($option, $old_value, $value) {
     if ($old_value === $value) return;
 
@@ -53,3 +53,27 @@ function golden_shark_admin_assets($hook) {
     );
 }
 add_action('admin_enqueue_scripts', 'golden_shark_admin_assets');
+
+// 🧩 Widget de resumen en el Escritorio de WordPress
+function golden_shark_dashboard_widget() {
+    $total_eventos = count(get_option('golden_shark_eventos', []));
+    $total_leads   = count(get_option('golden_shark_leads', []));
+    $total_frases  = count(get_option('golden_shark_frases', []));
+
+    echo '<ul style="margin-left: 20px;">';
+    echo '<li>📅 <strong>' . $total_eventos . '</strong> eventos registrados</li>';
+    echo '<li>📨 <strong>' . $total_leads . '</strong> leads capturados</li>';
+    echo '<li>💬 <strong>' . $total_frases . '</strong> frases guardadas</li>';
+    echo '</ul>';
+}
+
+function golden_shark_register_widget() {
+    if (current_user_can('edit_posts')) {
+        wp_add_dashboard_widget(
+            'golden_shark_resumen_widget',
+            'Resumen - Golden Shark 🦈',
+            'golden_shark_dashboard_widget'
+        );
+    }
+}
+add_action('wp_dashboard_setup', 'golden_shark_register_widget');
