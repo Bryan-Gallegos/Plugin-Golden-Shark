@@ -8,6 +8,8 @@ function golden_shark_render_dashboard()
     wp_die('No tienes permiso para acceder a esta sección.');
   }
 
+
+
   // 🗂 Exportar historial individual del usuario (con verificación de nonce)
   if (
     isset($_POST['gs_exportar_historial_usuario']) &&
@@ -38,6 +40,52 @@ function golden_shark_render_dashboard()
   $frases = get_option('golden_shark_frases', []);
   $eventos = get_option('golden_shark_eventos', []);
   $leads = get_option('golden_shark_leads', []);
+
+  $hoy = date('Y-m-d');
+  $eventos_hoy = array_filter($eventos, fn($e) => isset($e['fecha']) && $e['fecha'] === $hoy);
+  $leads_sin_revisar = array_filter($leads, fn($l) => empty($l['revisado']) || $l['revisado'] === 'no');
+
+  $limite_eventos = intval(get_option('golden_shark_alerta_eventos_dia', 5));
+  $limite_leads = intval(get_option('golden_shark_alerta_leads_pendientes', 5));
+
+  if (count($eventos_hoy) > $limite_eventos) {
+    echo '<div class="notice notice-error"><p>⚠️ Atención: hay más de ' . $limite_eventos . ' eventos programados para hoy.</p></div>';
+  }
+
+  if (count($leads_sin_revisar) > $limite_leads) {
+    echo '<div class="notice notice-warning"><p>🔔 Atención: hay más de ' . $limite_leads . ' leads sin revisar.</p></div>';
+  }
+
+  if (!empty($leads_sin_revisar)) {
+    echo '<h3 style="margin-top:30px;">Leads sin revisar:</h3>';
+    echo '<table class="widefat striped">';
+    echo '<thead><tr><th>Nombre</th><th>Email</th><th>Fecha</th><th>Acción</th></tr></thead><tbody>';
+
+    foreach ($leads_sin_revisar as $lead) {
+      echo '<tr>';
+      echo '<td>' . esc_html($lead['nombre'] ?? '-') . '</td>';
+      echo '<td>' . esc_html($lead['email'] ?? '-') . '</td>';
+      echo '<td>' . esc_html($lead['fecha'] ?? '-') . '</td>';
+      echo '<td><a href="' . esc_url(wp_nonce_url(admin_url('admin.php?page=golden-shark-dashboard&revisar_lead=' . $index), 'revisar_lead_' . $index)) . '" class="button">Marcar como revisado</a></td>';
+      echo '</tr>';
+    }
+
+    echo '</tbody></table>';
+  }
+
+  // 📩 Marcar lead como revisado
+  if (isset($_GET['revisar_lead']) && isset($_GET['_nonce'])) {
+    $id = intval($_GET['revisar_lead']);
+    $leads = get_option('golden_shark_leads', []);
+    if (isset($leads[$id]) && wp_verify_nonce($_GET['_nonce'], 'revisar_lead_' . $id)) {
+      $leads[$id]['revisado'] = 'si';
+      update_option('golden_shark_leads', $leads);
+      golden_shark_log('Se marcó un lead como revisado.');
+      update_user_meta(get_current_user_id(), 'gs_notificacion_interna', '✅ Lead marcado como revisado.');
+      wp_redirect(admin_url('admin.php?page=golden-shark-dashboard'));
+      exit;
+    }
+  }
 
   $color_dashboard = get_option('golden_shark_color_dashboard', '#0073aa');
   $total_frases = count($frases);

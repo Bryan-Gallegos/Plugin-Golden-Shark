@@ -69,6 +69,11 @@ Todas las configuraciones principales (colores, mensajes y notificaciones) está
 
 ## 🗓️ Historial de cambios
 
+### v1.9
+- Se añadieron alertas visuales si hay más de cierto número de eventos o leads sin revisar.
+- Nueva tabla en el dashboard con los leads no revisados.
+- Preparado para añadir botón de "marcar como revisado" directamente desde el panel.
+
 ### v1.8
 - Se agregó módulo de calendario de eventos con vista tipo FullCalendar.
 - Eventos ahora tienen un campo de tipo (interno, reunión, lanzamiento).

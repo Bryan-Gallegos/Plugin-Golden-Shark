@@ -5,15 +5,7 @@ Este documento describe el plan de evolución del plugin **Golden Shark Admin Pa
 ---
 
 ## ✅ Versión actual
-**v1.8** – Calendario de eventos
-
----
-
-## 🔔 v1.9 – Sistema de alertas / notificaciones visuales
-**Objetivo**: resaltar eventos importantes o urgentes en el panel.
-- [ ] Alerta visual si hay más de X eventos hoy.
-- [ ] Alerta si hay más de Y leads sin revisar.
-- [ ] Sistema de recordatorios automáticos (en desarrollo futuro).
+**v1.9** – Sistema de alertas / notificaciones visuales
 
 ---
 

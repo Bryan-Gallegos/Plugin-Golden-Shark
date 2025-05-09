@@ -28,6 +28,8 @@ function golden_shark_register_settings()
     register_setting('golden_shark_config_group', 'golden_shark_color_dashboard');
     register_setting('golden_shark_config_group', 'golden_shark_mensaje_correo');
     register_setting('golden_shark_config_group', 'golden_shark_habilitar_notificaciones');
+    register_setting('golden_shark_config_group', 'golden_shark_alerta_eventos_dia');
+    register_setting('golden_shark_config_group', 'golden_shark_alerta_leads_pendientes');
 
     // Sección única
     add_settings_section('golden_shark_config_section', 'Configuraciones Generales', null, 'golden_shark_config');
@@ -36,6 +38,8 @@ function golden_shark_register_settings()
     add_settings_field('color_dashboard', 'Color del Dashboard', 'golden_shark_color_field', 'golden_shark_config', 'golden_shark_config_section');
     add_settings_field('mensaje_correo', 'Mensaje en Correos', 'golden_shark_mensaje_correo_field', 'golden_shark_config', 'golden_shark_config_section');
     add_settings_field('notificaciones', '¿Mostrar Notificaciones Internas?', 'golden_shark_notificaciones_field', 'golden_shark_config', 'golden_shark_config_section');
+    add_settings_field('alerta_eventos_dia', 'Límite de eventos por día', 'golden_shark_alerta_eventos_dia_field', 'golden_shark_config', 'golden_shark_config_section');
+    add_settings_field('alerta_leads_pendientes', 'Límite de leads sin revisar', 'golden_shark_alerta_leads_field', 'golden_shark_config', 'golden_shark_config_section');
 }
 add_action('admin_init', 'golden_shark_register_settings');
 
@@ -62,4 +66,16 @@ function golden_shark_notificaciones_field()
 {
     $valor = get_option('golden_shark_habilitar_notificaciones', '1');
     echo '<label><input type="checkbox" name="golden_shark_habilitar_notificaciones" value="1" ' . checked(1, $valor, false) . '> Sí, mostrar notificaciones internas</label>';
+}
+
+function golden_shark_alerta_eventos_dia_field()
+{
+    $valor = get_option('golden_shark_alerta_eventos_dia', 5);
+    echo '<input type="number" name="golden_shark_alerta_eventos_dia" value="' . esc_attr($valor) . '" class="small-text" min="1">';
+}
+
+function golden_shark_alerta_leads_field()
+{
+    $valor = get_option('golden_shark_alerta_leads_pendientes', 5);
+    echo '<input type="number" name="golden_shark_alerta_leads_pendientes" value="' . esc_attr($valor) . '" min="1" step="1" class="small-text">';
 }

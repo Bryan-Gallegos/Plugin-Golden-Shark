@@ -4,7 +4,7 @@ Donate link: https://example.com/
 Tags: administración, leads, eventos, frases, notas, panel interno
 Requires at least: 5.8
 Tested up to: 6.5
-Stable tag: 1.8
+Stable tag: 1.9
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -65,6 +65,12 @@ Todas las acciones están protegidas con `nonce` y verificaciones de capacidad d
 7. Historial de actividad.
 
 == Changelog ==
+
+= 1.9 =
+* Alertas visuales si hay más de X eventos programados para hoy.
+* Alertas si hay más de Y leads sin revisar.
+* Tabla en el dashboard con los leads no revisados.
+* Opción para marcar un lead como revisado directamente desde el panel principal.
 
 = 1.8 =
 * Nuevo módulo “Calendario de Eventos” con vista mensual.
