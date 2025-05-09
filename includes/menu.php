@@ -76,6 +76,15 @@ function golden_shark_admin_menu()
         'golden-shark-tareas',
         'golden_shark_render_tareas'
     );
+
+    add_submenu_page(
+        'golden-shark-dashboard',
+        'Calendario de Eventos',
+        'Calendario',
+        'edit_posts',
+        'golden-shark-calendar',
+        'golden_shark_render_calendar'
+    );
 }
 
 add_action('admin_menu', 'golden_shark_admin_menu');

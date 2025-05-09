@@ -69,6 +69,11 @@ Todas las configuraciones principales (colores, mensajes y notificaciones) está
 
 ## 🗓️ Historial de cambios
 
+### v1.8
+- Se agregó módulo de calendario de eventos con vista tipo FullCalendar.
+- Eventos ahora tienen un campo de tipo (interno, reunión, lanzamiento).
+- Colores personalizados por tipo de evento en el calendario.
+
 ### v1.7
 - Se agregó el módulo de tareas internas con edición rápida.
 - Se añadió el shortcode `[tareas_pendientes]` para listar tareas pendientes.

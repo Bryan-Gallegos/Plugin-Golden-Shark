@@ -5,15 +5,7 @@ Este documento describe el plan de evolución del plugin **Golden Shark Admin Pa
 ---
 
 ## ✅ Versión actual
-**v1.5** – Registro de historial individual por usuario y visualización en el dashboard.
-
----
-
-## 📅 v1.8 – Calendario de eventos
-**Objetivo**: mostrar visualmente los eventos registrados.
-- [ ] Vista tipo calendario para eventos (con FullCalendar o similar).
-- [ ] Filtro por mes o categoría.
-- [ ] Opción para cambiar color según tipo (opcional).
+**v1.8** – Calendario de eventos
 
 ---
 

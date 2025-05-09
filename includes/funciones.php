@@ -2,12 +2,14 @@
 if (!defined('ABSPATH')) exit;
 
 // 🔐 Verificar permisos del usuario
-function golden_shark_user_can($capability = 'manage_options') {
+function golden_shark_user_can($capability = 'manage_options')
+{
     return current_user_can($capability);
 }
 
 // 📝 Registrar una acción en el historial general
-function golden_shark_log($mensaje) {
+function golden_shark_log($mensaje)
+{
     $historial = get_option('golden_shark_historial', []);
     $historial[] = [
         'mensaje' => sanitize_text_field($mensaje),
@@ -17,7 +19,8 @@ function golden_shark_log($mensaje) {
 }
 
 // 🧍 Registrar una acción en el historial personal del usuario actual
-function golden_shark_log_usuario($mensaje) {
+function golden_shark_log_usuario($mensaje)
+{
     $user_id = get_current_user_id();
     if (!$user_id) return;
 
@@ -32,12 +35,13 @@ function golden_shark_log_usuario($mensaje) {
     if (count($historial) > 50) {
         $historial = array_slice($historial, -50);
     }
-    
+
     update_user_meta($user_id, 'gs_historial_usuario', $historial);
 }
 
 // 🔄 Registrar cambios de configuración
-function golden_shark_log_cambio_configuracion($option, $old_value, $value) {
+function golden_shark_log_cambio_configuracion($option, $old_value, $value)
+{
     if ($old_value === $value) return;
 
     $mensajes = [
@@ -56,7 +60,8 @@ function golden_shark_log_cambio_configuracion($option, $old_value, $value) {
 add_action('updated_option', 'golden_shark_log_cambio_configuracion', 10, 3);
 
 // 📦 Cargar estilos y scripts solo en páginas del plugin
-function golden_shark_admin_assets($hook) {
+function golden_shark_admin_assets($hook)
+{
     if (strpos($hook, 'golden-shark') === false) return;
 
     wp_enqueue_style(
@@ -64,6 +69,20 @@ function golden_shark_admin_assets($hook) {
         plugin_dir_url(__FILE__) . '../assets/css/admin-style.css',
         [],
         '1.0'
+    );
+
+    // FullCalendar (solo si está en una página del plugin)
+    wp_enqueue_style(
+        'fullcalendar-css',
+        'https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/main.min.css'
+    );
+
+    wp_enqueue_script(
+        'fullcalendar-js',
+        'https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/main.min.js',
+        [],
+        null,
+        true
     );
 
     wp_enqueue_script(
@@ -92,7 +111,8 @@ function golden_shark_admin_assets($hook) {
 add_action('admin_enqueue_scripts', 'golden_shark_admin_assets');
 
 // 🧩 Widget de resumen en el Escritorio de WordPress
-function golden_shark_dashboard_widget() {
+function golden_shark_dashboard_widget()
+{
     $total_eventos = count(get_option('golden_shark_eventos', []));
     $total_leads   = count(get_option('golden_shark_leads', []));
     $total_frases  = count(get_option('golden_shark_frases', []));
@@ -104,7 +124,8 @@ function golden_shark_dashboard_widget() {
     echo '</ul>';
 }
 
-function golden_shark_register_widget() {
+function golden_shark_register_widget()
+{
     if (current_user_can('edit_posts')) {
         wp_add_dashboard_widget(
             'golden_shark_resumen_widget',

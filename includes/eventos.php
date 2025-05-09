@@ -33,7 +33,8 @@ function golden_shark_render_eventos()
         $eventos[] = [
             'titulo' => sanitize_text_field($_POST['evento_titulo']),
             'fecha' => sanitize_text_field($_POST['evento_fecha']),
-            'lugar' => sanitize_text_field($_POST['evento_lugar'])
+            'lugar' => sanitize_text_field($_POST['evento_lugar']),
+            'tipo' => sanitize_text_field($_POST['evento_tipo'])
         ];
         update_option('golden_shark_eventos', $eventos);
         golden_shark_log('Se registró un nuevo evento: ' . $_POST['evento_titulo']);
@@ -53,7 +54,8 @@ function golden_shark_render_eventos()
             $eventos[$id] = [
                 'titulo' => sanitize_text_field($_POST['evento_titulo']),
                 'fecha' => sanitize_text_field($_POST['evento_fecha']),
-                'lugar' => sanitize_text_field($_POST['evento_lugar'])
+                'lugar' => sanitize_text_field($_POST['evento_lugar']),
+                'tipo' => sanitize_text_field($_POST['evento_tipo'])
             ];
             update_option('golden_shark_eventos', $eventos);
             golden_shark_log('Se editó el evento: ' . $_POST['evento_titulo']);
@@ -108,6 +110,16 @@ function golden_shark_render_eventos()
                             <th>Ubicación:</th>
                             <td><input type="text" name="evento_lugar" value="<?php echo esc_attr($evento['lugar']); ?>" class="regular-text" required></td>
                         </tr>
+                        <tr>
+                            <th>Tipo:</th>
+                            <td>
+                                <select name="evento_tipo">
+                                    <option value="interno" <?php selected($evento['tipo'], 'interno'); ?>>Interno</option>
+                                    <option value="reunion"> <?php selected($evento['tipo'], 'reunion'); ?>Reunión</option>
+                                    <option value="lanzamiento" <?php selected($evento['tipo'], 'lanzamiento'); ?>>Lanzamiento</option>
+                                </select>
+                            </td>
+                        </tr>
                     </table>
                     <p><input type="submit" class="button button-primary" value="Guardar cambios"></p>
                 </form>
@@ -132,6 +144,16 @@ function golden_shark_render_eventos()
                     <th>Ubicación:</th>
                     <td><input type="text" name="evento_lugar" class="regular-text" required></td>
                 </tr>
+                <tr>
+                            <th>Tipo:</th>
+                            <td>
+                                <select name="evento_tipo">
+                                    <option value="interno">Interno</option>
+                                    <option value="reunion">Reunion</option>
+                                    <option value="lanzamiento">Lanzamiento</option>
+                                </select>
+                            </td>
+                        </tr>
             </table>
             <p><input type="submit" class="button button-primary" value="Guardar evento"></p>
         </form>
