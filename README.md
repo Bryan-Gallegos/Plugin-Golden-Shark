@@ -15,6 +15,8 @@
 - 🛠️ Módulo de **configuración** para personalizar color del dashboard, mensajes y notificaciones.
 - 🕓 Registro automático en el **historial de actividad**.
 - 🔐 Protección mediante **verificación de permisos** y `nonce` para seguridad en cada acción.
+- 🌐 Panel multisitio para superadministradores con edición global de frases y configuración.
+- 🧭 Listado central de sitios en red WordPress.
 
 ---
 
@@ -68,6 +70,12 @@ Todas las configuraciones principales (colores, mensajes y notificaciones) está
 ---
 
 ## 🗓️ Historial de cambios
+
+### v2.1
+- Añadido panel exclusivo para superadministradores desde el sitio principal.
+- Edición centralizada de frases globales y configuración compartida.
+- Nueva vista: listado de sitios de la red WordPress.
+- Seguridad reforzada en accesos multisitio.
 
 ### v2.0
 - Compatibilidad con multisitio (red de sitios).

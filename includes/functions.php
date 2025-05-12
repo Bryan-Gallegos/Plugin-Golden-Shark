@@ -135,3 +135,25 @@ function golden_shark_register_widget()
     }
 }
 add_action('wp_dashboard_setup', 'golden_shark_register_widget');
+
+// 🌐 Funciones auxiliares para panel multisitio (fase 2)
+
+// Obtener frases globales
+function golden_shark_get_frases_globales() {
+    return get_site_option('golden_shark_frases', []);
+}
+
+// Guardar frases globales
+function golden_shark_set_frases_globales($frases) {
+    return update_site_option('golden_shark_frases', $frases);
+}
+
+// Obtener configuración global (opcional, alias)
+function golden_shark_get_config_global($clave, $default = '') {
+    return get_site_option($clave, $default);
+}
+
+// Guardar configuración global (opcional, alias)
+function golden_shark_set_config_global($clave, $valor) {
+    return update_site_option($clave, $valor);
+}

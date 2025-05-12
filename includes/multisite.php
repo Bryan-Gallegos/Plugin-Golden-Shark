@@ -68,3 +68,9 @@ function golden_shark_set_config($clave, $valor){
     }
     return update_option($clave, $valor);
 }
+
+//Obtener todos los sitios
+function golden_shark_get_all_sites(){
+    if(!is_multisite()) return [];
+    return get_sites(['public' => 1]);
+}

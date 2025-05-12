@@ -33,6 +33,8 @@ Pensado para ser una herramienta **privada**, segura y personalizable para equip
 * Configuración de mensaje motivacional, color del panel y más.
 * Carga de estilos y scripts personalizados.
 * Solo accesible para usuarios administradores o editores autorizados.
+* Panel multisitio exclusivo para superadministradores con edición global de frases y configuración.
+* Listado de sitios activos en la red.
 
 == Instalación ==
 
@@ -65,6 +67,12 @@ Todas las acciones están protegidas con `nonce` y verificaciones de capacidad d
 7. Historial de actividad.
 
 == Changelog ==
+
+= 2.1 =
+* Añadido panel exclusivo para superadministrador en el sitio principal.
+* Nuevas pantallas para editar frases globales y configuraciones compartidas entre sitios.
+* Listado de sitios de la red disponible en el panel.
+* Mejora en la seguridad de acceso a configuraciones globales.
 
 = 2.0 =
 * Compatibilidad con multisitio (franquicias / redes de sitios).

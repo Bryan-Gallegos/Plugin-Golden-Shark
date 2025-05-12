@@ -5,7 +5,7 @@ Este documento describe el plan de evolución del plugin **Golden Shark Admin Pa
 ---
 
 ## ✅ Versión actual
-**v2.0** – Modo multisitio y soporte para multisede
+**v2.1** – Panel multisitio central para superadmin
 
 ---
 
@@ -42,8 +42,21 @@ Este documento describe el plan de evolución del plugin **Golden Shark Admin Pa
 ## 🌐 v2.0 – Multisitio (fase 1 completada)
 - [x] Compartir frases y configuración entre sitios.
 - [x] Migración automática de frases y configuración a `site_option()`.
-- [ ] Panel central para administrar múltiples sitios (fase 2).
-- [ ] Mejoras adicionales de rendimiento y seguridad en red.
+- [x] Panel central para administrar múltiples sitios (fase 2).
+- [x] Mejoras adicionales de rendimiento y seguridad en red.
+
+---
+
+## ✅ v2.1 – Multisite Control Panel (Fase 2)
+**Objetivo:** dotar al superadministrador de una vista global centralizada.
+
+- [x] Agregar menú exclusivo “🌐 Panel Multisitio” solo visible en el sitio principal.
+- [x] Crear pantalla para editar frases globales (`frases_globales.php`).
+- [x] Crear pantalla para editar configuración global (`config_global.php`).
+- [x] Mejorar funciones de seguridad con verificación de superadmin.
+- [x] Añadir listado de sitios de la red (solo vista).
+
+🎯 Esta versión finaliza el soporte base multisitio para entornos de franquicia.
 
 ---
 
