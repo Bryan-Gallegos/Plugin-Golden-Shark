@@ -37,7 +37,7 @@ function golden_shark_render_dashboard()
     delete_user_meta(get_current_user_id(), 'gs_notificacion_interna');
   }
 
-  $frases = get_option('golden_shark_frases', []);
+  $frases = golden_shark_get_frases();
   $eventos = get_option('golden_shark_eventos', []);
   $leads = get_option('golden_shark_leads', []);
 
@@ -45,8 +45,8 @@ function golden_shark_render_dashboard()
   $eventos_hoy = array_filter($eventos, fn($e) => isset($e['fecha']) && $e['fecha'] === $hoy);
   $leads_sin_revisar = array_filter($leads, fn($l) => empty($l['revisado']) || $l['revisado'] === 'no');
 
-  $limite_eventos = intval(get_option('golden_shark_alerta_eventos_dia', 5));
-  $limite_leads = intval(get_option('golden_shark_alerta_leads_pendientes', 5));
+  $limite_eventos = intval(golden_shark_get_config('golden_shark_alerta_eventos_dia', 5));
+  $limite_leads = intval(golden_shark_get_config('golden_shark_alerta_leads_pendientes', 5));
 
   if (count($eventos_hoy) > $limite_eventos) {
     echo '<div class="notice notice-error"><p>⚠️ Atención: hay más de ' . $limite_eventos . ' eventos programados para hoy.</p></div>';
@@ -87,7 +87,7 @@ function golden_shark_render_dashboard()
     }
   }
 
-  $color_dashboard = get_option('golden_shark_color_dashboard', '#0073aa');
+  $color_dashboard = golden_shark_get_config('golden_shark_color_dashboard', '#0073aa');
   $total_frases = count($frases);
   $total_eventos = count($eventos);
   $total_leads = count($leads);

@@ -103,7 +103,7 @@ function golden_shark_admin_assets($hook)
 
     // Pasar datos al script
     wp_localize_script('golden-shark-admin-script', 'gsData', [
-        'frases'  => count(get_option('golden_shark_frases', [])),
+        'frases'  => count(golden_shark_get_frases()),
         'eventos' => count(get_option('golden_shark_eventos', [])),
         'leads'   => count(get_option('golden_shark_leads', [])),
     ]);
@@ -115,7 +115,7 @@ function golden_shark_dashboard_widget()
 {
     $total_eventos = count(get_option('golden_shark_eventos', []));
     $total_leads   = count(get_option('golden_shark_leads', []));
-    $total_frases  = count(get_option('golden_shark_frases', []));
+    $total_frases  = count(golden_shark_get_frases());
 
     echo '<ul style="margin-left: 20px;">';
     echo '<li>📅 <strong>' . $total_eventos . '</strong> eventos registrados</li>';

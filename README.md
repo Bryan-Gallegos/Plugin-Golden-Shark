@@ -69,6 +69,12 @@ Todas las configuraciones principales (colores, mensajes y notificaciones) está
 
 ## 🗓️ Historial de cambios
 
+### v2.0
+- Compatibilidad con multisitio (red de sitios).
+- Las frases motivacionales y configuraciones ahora se almacenan a nivel global.
+- Las notas internas se mantienen por sitio individual.
+- Migración automática de datos locales a `site_option()` cuando se activa multisite.
+
 ### v1.9
 - Se añadieron alertas visuales si hay más de cierto número de eventos o leads sin revisar.
 - Nueva tabla en el dashboard con los leads no revisados.

@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 // Shortcode para mostrar una frase motivacional aleatoria
 function golden_shark_shortcode_frase()
 {
-    $frases = get_option('golden_shark_frases', []);
+    $frases = golden_shark_get_frases();
     if (!empty($frases)) {
         $frase = $frases[array_rand($frases)];
         return '<div class="frase-motivacional" style="font-style: italic; padding: 10px; border-left: 4px solid #f39c12; background: #fdf8ec;">' . esc_html($frase) . '</div>';

@@ -2,7 +2,7 @@
 /*
 Plugin Name: Golden Shark Admin Panel
 Description: Plugin de administración interno para gestionar eventos, leads y configuración desde el panel de WordPress.
-Version: 1.9
+Version: 2.0
 Author: Carlos Gallegos
 */
 
@@ -20,7 +20,8 @@ $archivos = [
     'historial.php',
     'shortcodes.php',
     'tareas.php',
-    'calendar.php'
+    'calendar.php',
+    'multisite.php' 
 ];
 
 foreach ($archivos as $archivo) {

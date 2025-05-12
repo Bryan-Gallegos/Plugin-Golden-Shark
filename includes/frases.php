@@ -8,7 +8,7 @@ function golden_shark_render_frases()
         wp_die('No tienes permiso para acceder a esta sección.');
     }
 
-    $frases = get_option('golden_shark_frases', []);
+    $frases = golden_shark_get_frases();
 
     // Guardar nueva frase
     if (isset($_POST['nueva_frase_guardada'])) {
@@ -19,7 +19,7 @@ function golden_shark_render_frases()
         $nueva_frase = sanitize_text_field($_POST['nueva_frase']);
         if (!empty($nueva_frase)) {
             $frases[] = $nueva_frase;
-            update_option('golden_shark_frases', $frases);
+            golden_shark_set_frases($frases);
             golden_shark_log('Se agregó una nueva frase: "' . $nueva_frase . '"');
             update_user_meta(get_current_user_id(), 'gs_notificacion_interna', '✅ Frase motivacional guardada.');
             echo '<div class="updated"><p>Frase agregada correctamente.</p></div>';
@@ -35,7 +35,7 @@ function golden_shark_render_frases()
         $id = intval($_POST['frase_id']);
         if (isset($frases[$id])) {
             $frases[$id] = sanitize_text_field($_POST['nueva_frase']);
-            update_option('golden_shark_frases', $frases);
+            golden_shark_set_frases($frases);
             golden_shark_log('Se editó la frase en la posición ' . $id);
             update_user_meta(get_current_user_id(), 'gs_notificacion_interna', '✅ Frase actualizada.');
             echo '<div class="updated"><p>Frase actualizada correctamente.</p></div>';
@@ -55,7 +55,7 @@ function golden_shark_render_frases()
             $frase_eliminada = $frases[$i];
             unset($frases[$i]);
             $frases = array_values($frases);
-            update_option('golden_shark_frases', $frases);
+            golden_shark_set_frases($frases);
             golden_shark_log('Se eliminó la frase: "' . $frase_eliminada . '"');
             update_user_meta(get_current_user_id(), 'gs_notificacion_interna', '🗑️ Frase eliminada correctamente.');
             echo '<div class="updated"><p>Frase eliminada.</p></div>';
