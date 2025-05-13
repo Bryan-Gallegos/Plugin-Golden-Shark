@@ -71,6 +71,13 @@ Todas las configuraciones principales (colores, mensajes y notificaciones) está
 
 ## 🗓️ Historial de cambios
 
+### v2.2
+- Rediseño visual completo con interfaz moderna.
+- Filtros rápidos en listas de eventos, leads y frases.
+- Nuevos mensajes visuales con íconos y estilo WordPress.
+- Botón de “Ir al inicio” en pantallas largas.
+- Agrupación UX de módulos similares y limpieza visual.
+
 ### v2.1
 - Añadido panel exclusivo para superadministradores desde el sitio principal.
 - Edición centralizada de frases globales y configuración compartida.

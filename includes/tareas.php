@@ -2,7 +2,8 @@
 if (!defined('ABSPATH')) exit;
 
 // 🗂 MÓDULO DE TAREAS INTERNAS
-function golden_shark_render_tareas() {
+function golden_shark_render_tareas()
+{
     if (!golden_shark_user_can('edit_posts')) {
         wp_die('No tienes permiso para acceder a esta sección.');
     }
@@ -18,7 +19,7 @@ function golden_shark_render_tareas() {
             update_option('golden_shark_tareas', $tareas);
             golden_shark_log('Se eliminó una tarea interna.');
             golden_shark_log_usuario('Eliminó una tarea interna.');
-            echo '<div class="updated"><p>Tarea eliminada.</p></div>';
+            echo '<div class="notice notice-success"><p>✅ Tarea eliminada correctamente.</p></div>';
         }
     }
 
@@ -35,7 +36,7 @@ function golden_shark_render_tareas() {
         update_option('golden_shark_tareas', $tareas);
         golden_shark_log('Se registró una nueva tarea interna.');
         golden_shark_log_usuario('Registró una nueva tarea.');
-        echo '<div class="updated"><p>Tarea guardada correctamente.</p></div>';
+        echo '<div class="notice notice-success"><p>✅ Tarea guardada correctamente.</p></div>';
     }
 
     // Edición rápida
@@ -53,39 +54,52 @@ function golden_shark_render_tareas() {
             update_option('golden_shark_tareas', $tareas);
             golden_shark_log('Se actualizó una tarea interna.');
             golden_shark_log_usuario('Editó una tarea.');
-            echo '<div class="updated"><p>Tarea actualizada.</p></div>';
+            echo '<div class="notice notice-success"><p>✅ Tarea actualizada correctamente.</p></div>';
         }
     }
+?>
 
-    ?>
-    <div class="wrap">
-        <h2>Tareas internas 🗂️</h2>
+    <div class="wrap gs-container" id="top">
+        <h2>🗂️ Tareas internas</h2>
 
         <h3>Nueva tarea</h3>
         <form method="post">
             <?php wp_nonce_field('guardar_tarea_nonce', 'tarea_nonce'); ?>
             <table class="form-table">
-                <tr><th>Título:</th><td><input type="text" name="tarea_titulo" class="regular-text" required></td></tr>
-                <tr><th>Estado:</th>
+                <tr>
+                    <th><label for="tarea_titulo">Título:</label></th>
+                    <td><input type="text" id="tarea_titulo" name="tarea_titulo" required></td>
+                </tr>
+
+                <tr>
+                    <th><label for="tarea_estado">Estado:</label></th>
                     <td>
-                        <select name="tarea_estado">
+                        <select id="tarea_estado" name="tarea_estado">
                             <option value="pendiente">Pendiente</option>
                             <option value="completado">Completado</option>
                         </select>
                     </td>
                 </tr>
-                <tr><th>Fecha:</th><td><input type="date" name="tarea_fecha" required></td></tr>
-                <tr><th>Responsable:</th><td><input type="text" name="tarea_responsable" class="regular-text"></td></tr>
+
+                <tr>
+                    <th><label for="tarea_fecha">Fecha:</label></th>
+                    <td><input type="date" id="tarea_fecha" name="tarea_fecha" required></td>
+                </tr>
+
+                <tr>
+                    <th><label for="tarea_responsable">Responsable:</label></th>
+                    <td><input type="text" id="tarea_responsable" name="tarea_responsable"></td>
+                </tr>
             </table>
-            <p><input type="submit" name="nueva_tarea" value="Guardar tarea" class="button button-primary"></p>
+            <p><input type="submit" name="nueva_tarea" value="Guardar tarea"></p>
         </form>
 
         <hr>
         <h3>Tareas registradas</h3>
-        <?php if (empty($tareas)): ?>
+        <?php if (empty($tareas)) : ?>
             <p>No hay tareas registradas.</p>
-        <?php else: ?>
-            <table class="widefat fixed striped">
+        <?php else : ?>
+            <table class="widefat striped">
                 <thead>
                     <tr>
                         <th>Título</th>
@@ -96,9 +110,11 @@ function golden_shark_render_tareas() {
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($tareas as $i => $t): ?>
+                    <?php foreach ($tareas as $i => $t) : ?>
                         <tr>
                             <form method="post">
+                                <?php wp_nonce_field('editar_tarea_nonce', 'editar_tarea_nonce_field'); ?>
+                                <input type="hidden" name="tarea_id" value="<?php echo $i; ?>">
                                 <td><input type="text" name="tarea_titulo" value="<?php echo esc_attr($t['titulo']); ?>"></td>
                                 <td>
                                     <select name="tarea_estado">
@@ -109,10 +125,8 @@ function golden_shark_render_tareas() {
                                 <td><input type="date" name="tarea_fecha" value="<?php echo esc_attr($t['fecha']); ?>"></td>
                                 <td><input type="text" name="tarea_responsable" value="<?php echo esc_attr($t['responsable']); ?>"></td>
                                 <td>
-                                    <?php wp_nonce_field('editar_tarea_nonce', 'editar_tarea_nonce_field'); ?>
-                                    <input type="hidden" name="tarea_id" value="<?php echo $i; ?>">
-                                    <input type="submit" name="editar_tarea" value="Guardar" class="button">
-                                    <a href="<?php echo wp_nonce_url(admin_url('admin.php?page=golden-shark-tareas&eliminar_tarea=' . $i), 'eliminar_tarea_' . $i, '_nonce'); ?>" class="button-link-delete" onclick="return confirm('¿Eliminar esta tarea?')">Eliminar</a>
+                                    <input type="submit" name="editar_tarea" value="💾 Guardar">
+                                    <a href="<?php echo wp_nonce_url(admin_url('admin.php?page=golden-shark-tareas&eliminar_tarea=' . $i), 'eliminar_tarea_' . $i, '_nonce'); ?>" onclick="return confirm('¿Eliminar esta tarea?')" class="button button-secondary">🗑️</a>
                                 </td>
                             </form>
                         </tr>
@@ -121,11 +135,15 @@ function golden_shark_render_tareas() {
             </table>
         <?php endif; ?>
     </div>
+
+    <a href="#top" class="gs-go-top" title="Volver al inicio">⬆️</a>
+
 <?php
 }
 
 // 🔽 Shortcode: tareas pendientes
-function golden_shark_shortcode_tareas_pendientes() {
+function golden_shark_shortcode_tareas_pendientes()
+{
     $tareas = get_option('golden_shark_tareas', []);
     $pendientes = array_filter($tareas, fn($t) => $t['estado'] === 'pendiente');
 

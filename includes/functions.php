@@ -64,6 +64,14 @@ function golden_shark_admin_assets($hook)
 {
     if (strpos($hook, 'golden-shark') === false) return;
 
+    // Estilos modernos(v2.2)
+    wp_enqueue_style(
+        'golden-shark-modern-style',
+        plugin_dir_url(__FILE__) . '../assets/css/modern-style.css',
+        [],
+        '2.2'
+    );
+
     wp_enqueue_style(
         'golden-shark-admin-style',
         plugin_dir_url(__FILE__) . '../assets/css/admin-style.css',

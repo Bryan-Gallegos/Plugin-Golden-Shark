@@ -4,7 +4,7 @@ Donate link: https://example.com/
 Tags: administración, leads, eventos, frases, notas, panel interno
 Requires at least: 5.8
 Tested up to: 6.5
-Stable tag: 2.0
+Stable tag: 2.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -67,6 +67,13 @@ Todas las acciones están protegidas con `nonce` y verificaciones de capacidad d
 7. Historial de actividad.
 
 == Changelog ==
+
+= 2.2 =
+* Rediseño visual moderno en todo el panel.
+* Mensajes de acción visuales más claros y contextuales.
+* Filtros rápidos para frases, eventos y leads.
+* Nuevos estilos CSS y experiencia más intuitiva.
+* Botón “Ir al inicio” en pantallas extensas.
 
 = 2.1 =
 * Añadido panel exclusivo para superadministrador en el sitio principal.

@@ -5,7 +5,7 @@ Este documento describe el plan de evolución del plugin **Golden Shark Admin Pa
 ---
 
 ## ✅ Versión actual
-**v2.1** – Panel multisitio central para superadmin
+**v2.2** – Mejora de experiencia de usuario (UX) y visualización
 
 ---
 
@@ -62,11 +62,11 @@ Este documento describe el plan de evolución del plugin **Golden Shark Admin Pa
 
 ## 🧠 v2.2 – Mejora de experiencia de usuario (UX) y visualización  
 **Objetivo:** hacer el plugin más intuitivo y claro para cualquier administrador o editor.  
-- [ ] Rediseño visual de tablas y formularios con estilo más moderno.  
-- [ ] Mostrar mensajes de acción más descriptivos y visuales.  
-- [ ] Nuevas etiquetas o filtros rápidos en listas largas (eventos, leads, frases).  
-- [ ] Agrupar módulos similares por secciones (UX).  
-- [ ] Añadir botón “Ir al inicio” o anclajes en vistas largas.
+- [x] Rediseño visual de tablas y formularios con estilo más moderno.  
+- [x] Mostrar mensajes de acción más descriptivos y visuales.  
+- [x] Nuevas etiquetas o filtros rápidos en listas largas (eventos, leads, frases).  
+- [x] Agrupar módulos similares por secciones (UX).  
+- [x] Añadir botón “Ir al inicio” o anclajes en vistas largas.
 
 ---
 
@@ -80,4 +80,4 @@ Este documento describe el plan de evolución del plugin **Golden Shark Admin Pa
 
 ---
 
-*Última actualización: 2025-05-12*
+*Última actualización: 2025-05-13*

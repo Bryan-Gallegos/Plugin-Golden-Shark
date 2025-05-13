@@ -82,3 +82,18 @@ document.addEventListener('DOMContentLoaded', function () {
         calendar.render();
     }
 });
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const btnTop = document.querySelector('.gs-go-top');
+
+    if(btnTop){
+        window.addEventListener('scroll', () => {
+            if(window.scrollY > 300){
+                btnTop.style.display = 'block';
+            } else{
+                btnTop.style.display = 'none';
+            }
+        });
+    }
+});

@@ -1,0 +1,55 @@
+/* ESTILO MODERNO PARA EL PANEL DE GOLDENSHARK */
+
+.gs-container{
+    background: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+textarea,
+select{
+    width: 100%;
+    padding: 8px 12px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type="submit"],
+button{
+    background-color: #0073aa;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover,
+button:hover{
+    background-color: #006799;
+}
+
+table.widefat{
+    border-collapse: collapse;
+    width: 100%;
+    background: #fff;
+}
+
+table.widefat th{
+    background-color: #f1f1f1;
+    padding: 10px;
+    text-align: left;
+}
+
+table.widefat td{
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}

@@ -86,112 +86,138 @@ function golden_shark_render_eventos()
 
 
 ?>
-    <div class="wrap">
+    <div class="wrap" id="top">
         <h2>Gestión de Eventos Internos</h2>
 
         <?php if (isset($_GET['editar_evento'])):
             $id = intval($_GET['editar_evento']);
             if (isset($eventos[$id])): $evento = $eventos[$id]; ?>
-                <h3>Editar Evento</h3>
-                <form method="post">
-                    <input type="hidden" name="editar_evento_guardado" value="1">
-                    <input type="hidden" name="evento_id" value="<?php echo $id; ?>">
-                    <?php wp_nonce_field('guardar_edicion_evento_nonce', 'editar_evento_nonce'); ?>
-                    <table class="form-table">
-                        <tr>
-                            <th>Título:</th>
-                            <td><input type="text" name="evento_titulo" value="<?php echo esc_attr($evento['titulo']); ?>" class="regular-text" required></td>
-                        </tr>
-                        <tr>
-                            <th>Fecha:</th>
-                            <td><input type="date" name="evento_fecha" value="<?php echo esc_attr($evento['fecha']); ?>" required></td>
-                        </tr>
-                        <tr>
-                            <th>Ubicación:</th>
-                            <td><input type="text" name="evento_lugar" value="<?php echo esc_attr($evento['lugar']); ?>" class="regular-text" required></td>
-                        </tr>
-                        <tr>
-                            <th>Tipo:</th>
-                            <td>
-                                <select name="evento_tipo">
-                                    <option value="interno" <?php selected($evento['tipo'], 'interno'); ?>>Interno</option>
-                                    <option value="reunion"> <?php selected($evento['tipo'], 'reunion'); ?>Reunión</option>
-                                    <option value="lanzamiento" <?php selected($evento['tipo'], 'lanzamiento'); ?>>Lanzamiento</option>
-                                </select>
-                            </td>
-                        </tr>
-                    </table>
-                    <p><input type="submit" class="button button-primary" value="Guardar cambios"></p>
-                </form>
-                <hr>
+                <div class="gs-container">
+                    <h3>Editar Evento</h3>
+                    <form method="post">
+                        <input type="hidden" name="editar_evento_guardado" value="1">
+                        <input type="hidden" name="evento_id" value="<?php echo $id; ?>">
+                        <?php wp_nonce_field('guardar_edicion_evento_nonce', 'editar_evento_nonce'); ?>
+                        <table class="form-table">
+                            <tr>
+                                <th>Título:</th>
+                                <td><input type="text" name="evento_titulo" value="<?php echo esc_attr($evento['titulo']); ?>" class="regular-text" required></td>
+                            </tr>
+                            <tr>
+                                <th>Fecha:</th>
+                                <td><input type="date" name="evento_fecha" value="<?php echo esc_attr($evento['fecha']); ?>" required></td>
+                            </tr>
+                            <tr>
+                                <th>Ubicación:</th>
+                                <td><input type="text" name="evento_lugar" value="<?php echo esc_attr($evento['lugar']); ?>" class="regular-text" required></td>
+                            </tr>
+                            <tr>
+                                <th>Tipo:</th>
+                                <td>
+                                    <select name="evento_tipo">
+                                        <option value="interno" <?php selected($evento['tipo'], 'interno'); ?>>Interno</option>
+                                        <option value="reunion"> <?php selected($evento['tipo'], 'reunion'); ?>Reunión</option>
+                                        <option value="lanzamiento" <?php selected($evento['tipo'], 'lanzamiento'); ?>>Lanzamiento</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </table>
+                        <p><input type="submit" class="button button-primary" value="Guardar cambios"></p>
+                    </form>
+                    <hr>
+                </div>
         <?php endif;
         endif; ?>
 
-        <h3>Nuevo Evento</h3>
-        <form method="post">
-            <input type="hidden" name="nuevo_evento" value="1">
-            <?php wp_nonce_field('guardar_evento_nonce', 'evento_nonce'); ?>
-            <table class="form-table">
-                <tr>
-                    <th>Título:</th>
-                    <td><input type="text" name="evento_titulo" class="regular-text" required></td>
-                </tr>
-                <tr>
-                    <th>Fecha:</th>
-                    <td><input type="date" name="evento_fecha" required></td>
-                </tr>
-                <tr>
-                    <th>Ubicación:</th>
-                    <td><input type="text" name="evento_lugar" class="regular-text" required></td>
-                </tr>
-                <tr>
-                            <th>Tipo:</th>
-                            <td>
-                                <select name="evento_tipo">
-                                    <option value="interno">Interno</option>
-                                    <option value="reunion">Reunion</option>
-                                    <option value="lanzamiento">Lanzamiento</option>
-                                </select>
-                            </td>
-                        </tr>
-            </table>
-            <p><input type="submit" class="button button-primary" value="Guardar evento"></p>
-        </form>
 
-        <form method="post" style="margin-top:20px;">
-            <input type="hidden" name="exportar_csv" value="1">
-            <input type="submit" class="button button-secondary" value="Exportar eventos a CSV">
-        </form>
+        <div class="gs-container">
+            <h3>Nuevo Evento</h3>
+            <form method="post">
+                <input type="hidden" name="nuevo_evento" value="1">
+                <?php wp_nonce_field('guardar_evento_nonce', 'evento_nonce'); ?>
+                <table class="form-table">
+                    <tr>
+                        <th>Título:</th>
+                        <td><input type="text" name="evento_titulo" class="regular-text" required></td>
+                    </tr>
+                    <tr>
+                        <th>Fecha:</th>
+                        <td><input type="date" name="evento_fecha" required></td>
+                    </tr>
+                    <tr>
+                        <th>Ubicación:</th>
+                        <td><input type="text" name="evento_lugar" class="regular-text" required></td>
+                    </tr>
+                    <tr>
+                        <th>Tipo:</th>
+                        <td>
+                            <select name="evento_tipo">
+                                <option value="interno">Interno</option>
+                                <option value="reunion">Reunion</option>
+                                <option value="lanzamiento">Lanzamiento</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+                <p><input type="submit" class="button button-primary" value="Guardar evento"></p>
+            </form>
+        </div>
+
+        <div class="gs-container">
+            <form method="post" style="margin-top:20px;">
+                <input type="hidden" name="exportar_csv" value="1">
+                <input type="submit" class="button button-secondary" value="Exportar eventos a CSV">
+            </form>
+        </div>
 
         <hr>
-        <h3>Eventos Registrados:</h3>
-        <?php if (empty($eventos)) : ?>
-            <p>No hay eventos registrados.</p>
-        <?php else : ?>
-            <table class="widefat fixed">
-                <thead>
-                    <tr>
-                        <th>Título</th>
-                        <th>Fecha</th>
-                        <th>Ubicación</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($eventos as $i => $evento) : ?>
+        <div class="gs-container">
+            <form method="get" style="margin-bottom: 15px;">
+                <input type="hidden" name="page" value="golden-shark-eventos">
+                <label for="filtro_tipo"><strong>Filtrar por tipo:</strong></label>
+                <select name="tipo" id="filtro_tipo" onchange="this.form.submit();">
+                    <option value="">Todos</option>
+                    <option value="interno" <?php selected($_GET['tipo'] ?? '', 'interno'); ?>>Interno</option>
+                    <option value="reunion" <?php selected($_GET['tipo'] ?? '', 'reunion'); ?>>Reunión</option>
+                    <option value="lanzamiento" <?php selected($_GET['tipo'] ?? '', 'lanzamiento'); ?>>Lanzamiento</option>
+                </select>
+            </form>
+
+            <h3>Eventos Registrados:</h3>
+            <?php if (empty($eventos)) : ?>
+                <p>No hay eventos registrados.</p>
+            <?php else : ?>
+                <table class="widefat fixed">
+                    <thead>
                         <tr>
-                            <td><?php echo esc_html($evento['titulo']); ?></td>
-                            <td><?php echo esc_html($evento['fecha']); ?></td>
-                            <td><?php echo esc_html($evento['lugar']); ?></td>
-                            <td>
-                                <a href="<?php echo admin_url('admin.php?page=golden-shark-eventos&editar_evento=' . $i); ?>">Editar</a> |
-                                <a href="<?php echo wp_nonce_url(admin_url('admin.php?page=golden-shark-eventos&eliminar_evento=' . $i), 'eliminar_evento_' . $i, '_nonce'); ?>" onclick="return confirm('¿Eliminar este evento?');">Eliminar</a>
-                            </td>
+                            <th>Título</th>
+                            <th>Fecha</th>
+                            <th>Ubicación</th>
+                            <th>Acciones</th>
                         </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        <?php endif; ?>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $tipo_filtrado = $_GET['tipo'] ?? '';
+                        foreach ($eventos as $i => $evento) :
+                            if ($tipo_filtrado && $evento['tipo'] !== $tipo_filtrado) continue;
+                        ?>
+                            <tr>
+                                <td><?php echo esc_html($evento['titulo']); ?></td>
+                                <td><?php echo esc_html($evento['fecha']); ?></td>
+                                <td><?php echo esc_html($evento['lugar']); ?></td>
+                                <td>
+                                    <a href="<?php echo admin_url('admin.php?page=golden-shark-eventos&editar_evento=' . $i); ?>">Editar</a> |
+                                    <a href="<?php echo wp_nonce_url(admin_url('admin.php?page=golden-shark-eventos&eliminar_evento=' . $i), 'eliminar_evento_' . $i, '_nonce'); ?>" onclick="return confirm('¿Eliminar este evento?');">Eliminar</a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            <?php endif; ?>
+        </div>
+
+        <a href="#top" class="gs-go-top" title="Volver al inicio">⬆️</a>
     </div>
 <?php
 }
