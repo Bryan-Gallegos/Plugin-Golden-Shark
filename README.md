@@ -71,6 +71,14 @@ Todas las configuraciones principales (colores, mensajes y notificaciones) está
 
 ## 🗓️ Historial de cambios
 
+### v2.3
+- Tarea programada semanal para borrar frases antiguas.
+- Nuevo sistema de logs extendido con IP, navegador y origen.
+- Se agregó `logs.php` con visualización para superadmins.
+- Vista remota de sitios y edición de frases/config por sitio.
+- Historial remoto individual (`gs_historial_sitio_{ID}`).
+- Preparación para roles personalizados (`gs_editor`, `gs_supervisor`).
+
 ### v2.2
 - Rediseño visual completo con interfaz moderna.
 - Filtros rápidos en listas de eventos, leads y frases.

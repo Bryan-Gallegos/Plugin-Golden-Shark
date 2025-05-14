@@ -8,14 +8,18 @@ function golden_shark_user_can($capability = 'manage_options')
 }
 
 // 📝 Registrar una acción en el historial general
-function golden_shark_log($mensaje)
-{
-    $historial = get_option('golden_shark_historial', []);
-    $historial[] = [
-        'mensaje' => sanitize_text_field($mensaje),
-        'fecha'   => current_time('Y-m-d H:i:s')
+function golden_shark_log($mensaje, $tipo = 'info') {
+    $logs = get_option('golden_shark_logs', []);
+    $logs[] = [
+        'fecha'    => current_time('Y-m-d H:i:s'),
+        'usuario'  => wp_get_current_user()->user_login ?? 'sistema',
+        'ip'       => $_SERVER['REMOTE_ADDR'] ?? 'N/A',
+        'navegador'=> $_SERVER['HTTP_USER_AGENT'] ?? 'N/A',
+        'origen'   => $_SERVER['HTTP_REFERER'] ?? 'N/A',
+        'mensaje'  => $mensaje,
+        'tipo'     => $tipo
     ];
-    update_option('golden_shark_historial', $historial);
+    update_option('golden_shark_logs', array_slice($logs, -200)); // Limita a los últimos 200 logs
 }
 
 // 🧍 Registrar una acción en el historial personal del usuario actual
@@ -164,4 +168,18 @@ function golden_shark_get_config_global($clave, $default = '') {
 // Guardar configuración global (opcional, alias)
 function golden_shark_set_config_global($clave, $valor) {
     return update_site_option($clave, $valor);
+}
+
+// Guardar historial individual por sitio remoto
+function golden_shark_guardar_historial_sitio($sitio_id, $description){
+    if(!is_multisite()) return;
+
+    $historial = get_site_option("gs_historial_site_$site_id", []);
+    $historial[] = [
+        'fecha' => current_time('Y-m-d H:i:s'),
+        'usuario' => wp_get_current_user()->user_login ?? 'desconocido',
+        'cambios' => $description
+    ];
+
+    update_site_option("gs_historial_sitio_$site_id", array_slice($historial, -50));
 }

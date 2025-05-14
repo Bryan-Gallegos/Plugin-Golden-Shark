@@ -5,7 +5,7 @@ Este documento describe el plan de evolución del plugin **Golden Shark Admin Pa
 ---
 
 ## ✅ Versión actual
-**v2.2** – Mejora de experiencia de usuario (UX) y visualización
+**v2.3** – Automatizaciones, seguridad avanzada y multisitio inteligente 
 
 ---
 
@@ -72,11 +72,11 @@ Este documento describe el plan de evolución del plugin **Golden Shark Admin Pa
 
 ## 🤖 v2.3 – Automatizaciones, seguridad avanzada y multisitio inteligente  
 **Objetivo:** aumentar la eficiencia del sistema y reforzar su solidez.  
-- [ ] Soporte para tareas programadas (ej. borrar frases antiguas, enviar resumen diario).  
-- [ ] Logs con IP, navegador y origen para actividades críticas.  
-- [ ] Protección adicional con roles personalizados (`gs_editor`, `gs_supervisor`).  
-- [ ] Panel Multisitio con edición remota por sitio (opcional).  
-- [ ] Widgets dinámicos según tipo de usuario o contexto del sitio.
+- [x] Soporte para tareas programadas (ej. borrar frases antiguas, enviar resumen diario).  
+- [x] Logs con IP, navegador y origen para actividades críticas.  
+- [x] Protección adicional con roles personalizados (`gs_editor`, `gs_supervisor`).  
+- [x] Panel Multisitio con edición remota por sitio (opcional).  
+- [x] Widgets dinámicos según tipo de usuario o contexto del sitio.
 
 ---
 

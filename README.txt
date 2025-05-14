@@ -4,7 +4,7 @@ Donate link: https://example.com/
 Tags: administración, leads, eventos, frases, notas, panel interno
 Requires at least: 5.8
 Tested up to: 6.5
-Stable tag: 2.2
+Stable tag: 2.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -67,6 +67,14 @@ Todas las acciones están protegidas con `nonce` y verificaciones de capacidad d
 7. Historial de actividad.
 
 == Changelog ==
+
+= 2.3 =
+* Añadido soporte para tareas programadas (cron jobs).
+* Nuevo sistema de logs con IP, navegador y página de origen.
+* Pantalla de visualización de logs para superadministradores.
+* Soporte para edición remota de frases y configuración por sitio (modo multisitio).
+* Registro de historial remoto por sitio (`gs_historial_sitio_{ID}`).
+* Preparación para roles personalizados avanzados.
 
 = 2.2 =
 * Rediseño visual moderno en todo el panel.

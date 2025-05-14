@@ -106,6 +106,24 @@ function golden_shark_admin_menu()
             'golden_shark_render_sites_list'
         );
     }
+
+    add_submenu_page(
+        'golden-shark-dashboard',
+        'Logs del sistema',
+        '📜 Logs del sistema',
+        'manage_options',
+        'golden-shark-logs',
+        'golden_shark_render_logs'
+    );
+
+    add_submenu_page(
+        'golden-shark',
+        'Historial de sitios',
+        '📜 Historial Sitios',
+        'manage_network',
+        'gs-historial-sitios',
+        'golden_shark_render_historial_sitios'
+    );
 }
 add_action('admin_menu', 'golden_shark_admin_menu');
 
