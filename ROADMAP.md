@@ -80,4 +80,18 @@ Este documento describe el plan de evolución del plugin **Golden Shark Admin Pa
 
 ---
 
+## 🧩 v2.4 – Integración, extensibilidad y eficiencia operativa  
+**Objetivo:** facilitar la interoperabilidad del plugin con otros sistemas, mejorar su modularidad y acelerar tareas frecuentes.
+
+- [ ] Hooks y filtros personalizados para cada módulo (leads, eventos, frases, tareas).  
+- [ ] Soporte para cargar módulos adicionales desde la carpeta `/addons`.  
+- [ ] Documentación técnica inline (PHPDoc) en funciones clave del plugin.  
+- [ ] Webhook opcional para enviar leads automáticamente a CRM o Google Sheets.  
+- [ ] API REST básica para consultar eventos, leads y frases desde apps externas.  
+- [ ] Sistema de cache con `transients` para acelerar carga de frases y leads.  
+- [ ] Botón “Duplicar” para eventos y leads.  
+- [ ] Mejora en ordenamiento y paginación para listas largas.
+
+---
+
 *Última actualización: 2025-05-13*
