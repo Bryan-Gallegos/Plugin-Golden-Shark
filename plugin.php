@@ -2,7 +2,7 @@
 /*
 Plugin Name: Golden Shark Admin Panel
 Description: Plugin de administración interno para gestionar eventos, leads y configuración desde el panel de WordPress.
-Version: 2.3
+Version: 2.4
 Author: Carlos Gallegos
 */
 
@@ -28,7 +28,9 @@ $archivos = [
     'editar_sitio.php',
     'config_global.php',
     'frases_globales.php',
-    'sites_list.php'
+    'sites_list.php',
+    'roles.php',
+    'api.php'
 ];
 
 foreach ($archivos as $archivo) {
@@ -40,6 +42,10 @@ register_activation_hook(__FILE__, function() {
     // Programar tarea cron semanal
     if(!wp_next_scheduled('gs_cron_borrar_frases_antiguas')){
         wp_schedule_event(time(), 'weekly', 'gs_cron_borrar_frases_antiguas');
+    }
+
+    if (!wp_next_scheduled('gs_cron_enviar_resumen_diario')) {
+        wp_schedule_event(time(), 'daily', 'gs_cron_enviar_resumen_diario');
     }
 
     // Crear roles personalizados
@@ -62,6 +68,8 @@ register_activation_hook(__FILE__, function() {
 register_desactivation_hook(__FILE__, function() {
     // Eliminar tarea programada
     wp_clear_scheduled_hook('gs_cron_borrar_frases_antiguas');
+
+    wp_clear_scheduled_hook('gs_cron_enviar_resumen_diario');
 
     // Eliminar roles personalizados
     remove_role('gs_editor');

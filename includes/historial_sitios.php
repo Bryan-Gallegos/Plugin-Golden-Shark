@@ -23,7 +23,7 @@ function golden_shark_render_historial_sitios(){
     foreach($sitios as $sitio){
         $id = $sitio->blog_id;
         $info = get_blog_details($id);
-        $historial = get_site_option("gshistorial_sitio_$id", []);
+        $historial = get_site_option("gs_historial_sitio_$id", []);
 
         if(empty($historial)) continue;
 

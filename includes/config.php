@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 // ⚙️ CONFIGURACIÓN
 function golden_shark_render_config()
 {
-    if (!golden_shark_user_can('edit_posts')) {
+    if (!golden_shark_user_can('golden_shark_configuracion')) {
         wp_die('No tienes permiso para acceder a esta sección.');
     }
     ?>
@@ -30,6 +30,8 @@ function golden_shark_register_settings()
     register_setting('golden_shark_config_group', 'golden_shark_habilitar_notificaciones');
     register_setting('golden_shark_config_group', 'golden_shark_alerta_eventos_dia');
     register_setting('golden_shark_config_group', 'golden_shark_alerta_leads_pendientes');
+    register_setting('golden_shark_config_group', 'golden_shark_webhook_leads_url');
+    register_setting('golden_shark_config_group', 'golden_shark_api_key');
 
     add_settings_section('golden_shark_config_section', '⚙️ Configuraciones Generales', null, 'golden_shark_config');
 
@@ -39,6 +41,8 @@ function golden_shark_register_settings()
     add_settings_field('notificaciones', '🔔 ¿Mostrar Notificaciones Internas?', 'golden_shark_notificaciones_field', 'golden_shark_config', 'golden_shark_config_section');
     add_settings_field('alerta_eventos_dia', '📅 Alerta por número de eventos al día', 'golden_shark_alerta_eventos_dia_field', 'golden_shark_config', 'golden_shark_config_section');
     add_settings_field('alerta_leads_pendientes', '📨 Alerta por leads sin revisar', 'golden_shark_alerta_leads_field', 'golden_shark_config', 'golden_shark_config_section');
+    add_settings_field('webhook_leads_url', '🔗 Webhook para nuevos leads', 'golden_shark_webhook_url_field', 'golden_shark_config', 'golden_shark_config_section');
+    add_settings_field('api_key', '🔐 Clave API', 'golden_shark_api_key_field', 'golden_shark_config', 'golden_shark_config_section');
 }
 add_action('admin_init', 'golden_shark_register_settings');
 
@@ -77,4 +81,18 @@ function golden_shark_alerta_leads_field()
 {
     $valor = get_option('golden_shark_alerta_leads_pendientes', 5);
     echo '<input type="number" name="golden_shark_alerta_leads_pendientes" value="' . esc_attr($valor) . '" min="1">';
+}
+
+function golden_shark_webhook_url_field()
+{
+    $valor = get_option('golden_shark_webhook_leads_url', '');
+    echo '<input type="url" name="golden_shark_webhook_leads_url" value="' . esc_attr($valor) . '" class="eregular-text" placeholder="https://goldenshark.es/webhook">'; //CAMBIAR CON EL NOMBRE DE SU SERVIDOR
+    echo '<p class="description">URL a la que se enviarán automáticamente los datos del lead al registrarlo.</p>';
+}
+
+function golden_shark_api_key_field()
+{
+    $key = get_option('golden_shark_api_key', wp_generate_password(16, false));
+    echo '<input type="text" name="golden_shark_api_key" value="' . esc_attr($key) . '" class="regular-text" readonly>';
+    echo '<p class="description">Utiliza esta clave para autenticar solicitudes a la API interna.</p>';
 }

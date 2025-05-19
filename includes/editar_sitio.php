@@ -10,9 +10,12 @@ function golden_shark_render_editar_sitio()
     }
 
     $sitio_id = intval($_GET['sitio'] ?? 0);
-    if (!$sitio_id) {
-        echo '<div class="notice notice-error"><p>⚠️ Sitio no especificado.</p></div>';
+    $info = get_blog_details($sitio_id);
+    if (!$info) {
+        echo '<div class="notice notice-error"><p>⛔ El sitio con ID ' . $sitio_id . ' no existe.</p></div>';
+        return;
     }
+
 
     switch_to_blog($sitio_id);
 
@@ -26,9 +29,9 @@ function golden_shark_render_editar_sitio()
     if (isset($_POST['guardar_cambios_remotos']) && check_admin_referer('guardar_cambios_remotos')) {
         update_option('golden_shark_frases', array_map('sanitize_text_field', $_POST['frases']));
         update_option('golden_shark_color_dashboard', sanitize_hex_color($_POST['color']));
-        update_option('golden_shark_mensaje_motivacional', sanitize_ext_field($_POST['mensaje']));
+        update_option('golden_shark_mensaje_motivacional', sanitize_text_field($_POST['mensaje']));
+        update_option('golden_shark_mensaje_correo', sanitize_text_field($_POST['mensaje_correo']));
         update_option('golden_shark_habilitar_notificaciones', isset($_POST['notificaciones']) ? '1' : '0');
-        update_option('golden_shark_mensaje_correo', sanitize_ext_field($_POST['mensaje_correo']));
 
         golden_shark_log("🔧 Cambios remotos guardados para el sitio #$sitio_id", 'warning');
         golden_shark_guardar_historial_sitio($sitio_id, 'Actualizó frases y configuración desde el panel multisitio');
@@ -85,13 +88,13 @@ function golden_shark_render_editar_sitio()
 
     echo '<p><input type="submit" name="guardar_cambios_remotos" class="button button-primary" value="💾 Guardar todos los cambios"></p>';
     echo '</form>';
-    
+
     $historial = get_site_option("gs_historial_sitio_$sitio_id", []);
-    if(!empty($historial)){
+    if (!empty($historial)) {
         echo '<div class="gs-container">';
         echo '<h3>📜 Historial de cambios remotos:</h3>';
         echo '<ul style="margin-left: 20px;">';
-        foreach(array_reverse($historial) as $registro){
+        foreach (array_reverse($historial) as $registro) {
             echo '<li><strong>' . esc_html($registro['fecha']) . '</strong> - ';
             echo esc_html($registro['usuario']) . ': ';
             echo esc_html($registro['cambios']) . '</li>';
@@ -100,7 +103,7 @@ function golden_shark_render_editar_sitio()
         echo '</ul>';
         echo '</div>';
     }
-    
+
     echo '</div>';
 
     restore_current_blog();
@@ -123,7 +126,7 @@ add_action('admin_footer', function () {
 ?>
     <script>
         function agregarCampoFrase() {
-            const container = document.querySelector('.gs-container h3:contains("Frases")').parentElement;
+            const container = document.querySelector('.frases-container');
             const input = document.createElement('input');
             input.type = 'text';
             input.name = 'frases[]';

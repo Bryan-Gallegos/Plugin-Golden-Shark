@@ -2,19 +2,28 @@
 if (!defined('ABSPATH')) exit;
 
 // 🔐 Verificar permisos del usuario
-function golden_shark_user_can($capability = 'manage_options')
+// 🔐 Verificar permisos del usuario (soporte para roles personalizados)
+function golden_shark_user_can($capability = 'golden_shark_acceso_basico')
 {
-    return current_user_can($capability);
+    // Si es superadmin en multisite, siempre tiene acceso
+    if (is_multisite() && is_super_admin()) return true;
+
+    // Si el usuario tiene la capacidad directamente
+    if (current_user_can($capability)) return true;
+
+    // Fallback: administrador clásico de WP
+    return current_user_can('administrator');
 }
 
 // 📝 Registrar una acción en el historial general
-function golden_shark_log($mensaje, $tipo = 'info') {
+function golden_shark_log($mensaje, $tipo = 'info')
+{
     $logs = get_option('golden_shark_logs', []);
     $logs[] = [
         'fecha'    => current_time('Y-m-d H:i:s'),
         'usuario'  => wp_get_current_user()->user_login ?? 'sistema',
         'ip'       => $_SERVER['REMOTE_ADDR'] ?? 'N/A',
-        'navegador'=> $_SERVER['HTTP_USER_AGENT'] ?? 'N/A',
+        'navegador' => $_SERVER['HTTP_USER_AGENT'] ?? 'N/A',
         'origen'   => $_SERVER['HTTP_REFERER'] ?? 'N/A',
         'mensaje'  => $mensaje,
         'tipo'     => $tipo
@@ -125,14 +134,34 @@ add_action('admin_enqueue_scripts', 'golden_shark_admin_assets');
 // 🧩 Widget de resumen en el Escritorio de WordPress
 function golden_shark_dashboard_widget()
 {
-    $total_eventos = count(get_option('golden_shark_eventos', []));
-    $total_leads   = count(get_option('golden_shark_leads', []));
-    $total_frases  = count(golden_shark_get_frases());
+    $eventos = get_option('golden_shark_eventos', []);
+    $leads = get_option('golden_shark_leads', []);
+    $frases = golden_shark_get_frases();
+
+    $total_eventos = count($eventos);
+    $total_leads   = count($leads);
+    $total_frases  = count($frases);
+
+    $hoy = date('Y-m-d');
+    $eventos_hoy = array_filter($eventos, fn($e) => isset($e['fecha']) && $e['fecha'] === $hoy);
+    $leads_sin_revisar = array_filter($leads, fn($l) => empty($l['revisado']) || $l['revisado'] === 'no');
+
+    $limite_eventos = intval(golden_shark_get_config('golden_shark_alerta_eventos_dia', 5));
+    $limite_leads   = intval(golden_shark_get_config('golden_shark_alerta_leads_pendientes', 5));
 
     echo '<ul style="margin-left: 20px;">';
     echo '<li>📅 <strong>' . $total_eventos . '</strong> eventos registrados</li>';
     echo '<li>📨 <strong>' . $total_leads . '</strong> leads capturados</li>';
     echo '<li>💬 <strong>' . $total_frases . '</strong> frases guardadas</li>';
+
+    if (count($eventos_hoy) > $limite_eventos) {
+        echo '<li style="color: #cc000">⚠️ <strong>' . count($eventos_hoy) . '</strong> eventos programados para hoy</li>';
+    }
+
+    if (count($leads_sin_revisar) > $limite_leads) {
+        echo '<li style="color: #cc7a00;">🔔 <strong>' . count($leads_sin_revisar) . '</strong> leads sin revisar</li>';
+    }
+
     echo '</ul>';
 }
 
@@ -151,28 +180,33 @@ add_action('wp_dashboard_setup', 'golden_shark_register_widget');
 // 🌐 Funciones auxiliares para panel multisitio (fase 2)
 
 // Obtener frases globales
-function golden_shark_get_frases_globales() {
+function golden_shark_get_frases_globales()
+{
     return get_site_option('golden_shark_frases', []);
 }
 
 // Guardar frases globales
-function golden_shark_set_frases_globales($frases) {
+function golden_shark_set_frases_globales($frases)
+{
     return update_site_option('golden_shark_frases', $frases);
 }
 
 // Obtener configuración global (opcional, alias)
-function golden_shark_get_config_global($clave, $default = '') {
+function golden_shark_get_config_global($clave, $default = '')
+{
     return get_site_option($clave, $default);
 }
 
 // Guardar configuración global (opcional, alias)
-function golden_shark_set_config_global($clave, $valor) {
+function golden_shark_set_config_global($clave, $valor)
+{
     return update_site_option($clave, $valor);
 }
 
 // Guardar historial individual por sitio remoto
-function golden_shark_guardar_historial_sitio($sitio_id, $description){
-    if(!is_multisite()) return;
+function golden_shark_guardar_historial_sitio($sitio_id, $description)
+{
+    if (!is_multisite()) return;
 
     $historial = get_site_option("gs_historial_site_$site_id", []);
     $historial[] = [

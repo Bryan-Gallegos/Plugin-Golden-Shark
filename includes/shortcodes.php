@@ -20,23 +20,27 @@ function golden_shark_formulario_lead_shortcode()
     $mensaje = '';
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['gs_lead_submit'])) {
-        $nombre = sanitize_text_field($_POST['gs_lead_nombre']);
-        $correo = sanitize_email($_POST['gs_lead_correo']);
-        $mensaje_input = sanitize_textarea_field($_POST['gs_lead_mensaje']);
-        $fecha = current_time('Y-m-d H:i:s');
-
-        if ($nombre && $correo) {
-            $leads = get_option('golden_shark_leads', []);
-            $leads[] = [
-                'nombre' => $nombre,
-                'correo' => $correo,
-                'mensaje' => $mensaje_input,
-                'fecha' => $fecha
-            ];
-            update_option('golden_shark_leads', $leads);
-            $mensaje = '<div style="background:#dff0d8;padding:10px;border-left:4px solid #3c763d;margin-bottom:15px;">✅ ¡Gracias por registrarte!</div>';
+        if (!isset($_POST['gs_form_nonce_field']) || !wp_verify_nonce($_POST['gs_form_nonce_field'], 'gs_formulario_lead_nonce')) {
+            $mensaje = '<div style="background:#f2dede;padding:10px;border-left:4px solid #a94442;margin-bottom:15px;">⚠️ Error de seguridad. Recarga la página.</div>';
         } else {
-            $mensaje = '<div style="background:#f2dede;padding:10px;border-left:4px solid #a94442;margin-bottom:15px;">❌ Por favor completa los campos obligatorios.</div>';
+            $nombre = sanitize_text_field($_POST['gs_lead_nombre']);
+            $correo = sanitize_email($_POST['gs_lead_correo']);
+            $mensaje_input = sanitize_textarea_field($_POST['gs_lead_mensaje']);
+            $fecha = current_time('Y-m-d H:i:s');
+
+            if ($nombre && $correo) {
+                $leads = get_option('golden_shark_leads', []);
+                $leads[] = [
+                    'nombre' => $nombre,
+                    'correo' => $correo,
+                    'mensaje' => $mensaje_input,
+                    'fecha' => $fecha
+                ];
+                update_option('golden_shark_leads', $leads);
+                $mensaje = '<div style="background:#dff0d8;padding:10px;border-left:4px solid #3c763d;margin-bottom:15px;">✅ ¡Gracias por registrarte!</div>';
+            } else {
+                $mensaje = '<div style="background:#f2dede;padding:10px;border-left:4px solid #a94442;margin-bottom:15px;">❌ Por favor completa los campos obligatorios.</div>';
+            }
         }
     }
 
@@ -79,12 +83,12 @@ function golden_shark_shortcode_nota_aleatoria()
     $notas = get_option('golden_shark_notas', []);
     $mostrar = get_option('golden_shark_habilitar_notificaciones', '1');
 
-    if ($mostrar !== '1' || empty($notas)) return '';
+    if ($mostrar !== '1' || !is_array($notas) || empty($notas)) return '';
 
-    $nota = $notas[array_rand($notas)];
+    $nota = $notas[array_rand($notas)]; // ✅ Esto es lo que faltaba
     return '<div class="gs-nota-aleatoria" style="background:#fefefe;border-left:4px solid #666;padding:10px;margin-top:10px;"><strong>Nota interna:</strong><br>' . nl2br(esc_html($nota['contenido'])) . '</div>';
 }
-add_shortcode('nota_aleatoria', 'golden_shark_shortcode_nota_aleatoria');
+
 
 //Shortcode para el total de los leads capturados como métrica
 function golden_shark_shortcode_total_leads()
@@ -93,3 +97,31 @@ function golden_shark_shortcode_total_leads()
     return '<p>Total de leads registrados: <strong>' . count($leads) . '</strong></p>';
 }
 add_shortcode('total_leads', 'golden_shark_shortcode_total_leads');
+
+//Shortcode para mostrar el historial personal del usuario conectado
+function golden_shark_shortcode_mi_historial()
+{
+    if(!is_user_logged_in()){
+        return '<p>🔒 Debes iniciar sesión para ver tu historial</p>';
+    }
+
+    $user_id = get_current_user_id();
+    $historial = get_user_meta($user_id, 'gs_historial_usuario', true);
+
+    if(!is_array($historial) || empty($historial)){
+        return '<p>No tienes historial registrado aún.</p>';
+    }
+
+    //Ordernar del más reciente al más antiguo
+    $historial = array_reverse($historial);
+
+    ob_start();
+    echo '<ul class="gs-mi-historial" style="margin-left: 20px;">';
+    foreach($historial as $item){
+        echo '<li><strong>' . esc_html($item['fecha']) . '</strong>: ' . esc_html($item['mensaje']) . '</li>';
+    }
+    echo '</ul>';
+    return ob_get_clean();
+}
+
+add_shortcode('mi_historial', 'golden_shark_shortcode_mi_historial');

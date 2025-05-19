@@ -83,15 +83,25 @@ Este documento describe el plan de evolución del plugin **Golden Shark Admin Pa
 ## 🧩 v2.4 – Integración, extensibilidad y eficiencia operativa  
 **Objetivo:** facilitar la interoperabilidad del plugin con otros sistemas, mejorar su modularidad y acelerar tareas frecuentes.
 
-- [ ] Hooks y filtros personalizados para cada módulo (leads, eventos, frases, tareas).  
-- [ ] Soporte para cargar módulos adicionales desde la carpeta `/addons`.  
-- [ ] Documentación técnica inline (PHPDoc) en funciones clave del plugin.  
-- [ ] Webhook opcional para enviar leads automáticamente a CRM o Google Sheets.  
-- [ ] API REST básica para consultar eventos, leads y frases desde apps externas.  
-- [ ] Sistema de cache con `transients` para acelerar carga de frases y leads.  
-- [ ] Botón “Duplicar” para eventos y leads.  
-- [ ] Mejora en ordenamiento y paginación para listas largas.
+- [x] Soporte para Webhooks personalizados (alta de leads, creación de eventos, etc).
+- [x] Shortcode `[mi_historial]` para mostrar el historial personal del usuario conectado.
+- [x] Mejoras en el formulario público de leads: campos dinámicos, validaciones visuales.
+- [x] Exportación inteligente de leads y eventos con filtros.
+- [x] Nueva API interna para programadores (endpoint interno con autenticación básica).
 
 ---
 
-*Última actualización: 2025-05-13*
+## 🚀 v2.5 – Productividad y automatización avanzada
+**Obejtivo:** facilitar el trabajo en equipo, reducir tareas repetitivas y mejorar la gestión interna con funciones inteligentes.
+
+- [ ] Asistente de tareas: sugerencias automáticas de tareas según eventos o leads registrados.
+- [ ] Recordatorios por correo: enviar correos automáticos a responsables de tareas próximas (con cron interno).
+- [ ] Webhook de eventos: al registrar o editar eventos, se dispara un webhook opcional configurado.
+- [ ] Vista Kanban de tareas internas: alternativa visual al listado plano de tareas (pendiente, en progreso, completado).
+- [ ] Informe mensual automático (en PDF o CSV): resumen por email del total de leads, eventos y tareas.
+- [ ] Buscador inteligente en el historial y logs (filtro por IP, usuario, fecha o palabra clave).
+- [ ] Perfil de usuario interno: mostrar en el panel info personal del usuario (tareas asignadas, acciones recientes).
+
+---
+
+*Última actualización: 2025-05-19*

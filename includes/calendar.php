@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 // 📅 CALENDARIO DE EVENTOS
 function golden_shark_render_calendar()
 {
-    if (!golden_shark_user_can('edit_posts')) {
+    if (!golden_shark_user_can('golden_shark_acceso_basico')) {
         wp_die('No tienes permiso para acceder a esta sección');
     }
 
@@ -23,7 +23,7 @@ function golden_shark_render_calendar()
                     break;
                 case 'interno':
                 default:
-                    $color = '#2980b9',
+                    $color = '#2980b9';
                     break;
             }
         }

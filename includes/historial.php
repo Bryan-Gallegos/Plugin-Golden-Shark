@@ -3,7 +3,7 @@ if (!defined('ABSPATH')) exit;
 
 // HISTORIAL
 function golden_shark_render_historial() {
-    if (!golden_shark_user_can('edit_posts')) {
+    if (!golden_shark_user_can('golden_shark_ver_logs')) {
         wp_die('No tienes permiso para acceder a esta sección.');
     }
 

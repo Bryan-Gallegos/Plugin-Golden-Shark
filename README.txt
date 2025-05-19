@@ -4,7 +4,7 @@ Donate link: https://example.com/
 Tags: administración, leads, eventos, frases, notas, panel interno
 Requires at least: 5.8
 Tested up to: 6.5
-Stable tag: 2.3
+Stable tag: 2.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -67,6 +67,13 @@ Todas las acciones están protegidas con `nonce` y verificaciones de capacidad d
 7. Historial de actividad.
 
 == Changelog ==
+
+= 2.4 =
+* Se añadió soporte para webhooks personalizados (alta de leads, creación de eventos, etc).
+* Nuevo shortcode `[mi_historial]` para mostrar el historial personal del usuario conectado.
+* Mejoras visuales y de validación en el formulario público de leads.
+* Exportación inteligente de leads y eventos con filtros aplicables.
+* Implementación de una API interna REST con autenticación por clave privada.
 
 = 2.3 =
 * Añadido soporte para tareas programadas (cron jobs).

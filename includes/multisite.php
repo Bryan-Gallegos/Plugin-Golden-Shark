@@ -94,6 +94,7 @@ function golden_shark_render_multisite_panel() {
     foreach (golden_shark_get_all_sites() as $sitio) {
         $blog_id = $sitio->blog_id;
         $info = get_blog_details($blog_id);
+        if (!$info) continue;
         $url = esc_url($info->siteurl);
         $nombre = esc_html($info->blogname);
 

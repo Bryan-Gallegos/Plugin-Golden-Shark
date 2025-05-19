@@ -18,7 +18,11 @@ function golden_shark_render_config_global(){
         ];
 
         foreach ($campos as $clave){
-            $valor = isset($_POST[$clave]) ? sanitize_text_field($_POST[$clave]) : '';
+            if ($clave === 'golden_shark_habilitar_notificaciones') {
+                $valor = isset($_POST[$clave]) ? '1' : '0';
+            } else {
+                $valor = isset($_POST[$clave]) ? sanitize_text_field($_POST[$clave]) : '';
+            }
             golden_shark_set_config($clave, $valor);
         }
 

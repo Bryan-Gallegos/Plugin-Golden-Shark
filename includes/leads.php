@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 // 📥 LEADS
 function golden_shark_render_leads()
 {
-    if (!golden_shark_user_can('edit_posts')) {
+    if (!golden_shark_user_can('golden_shark_acceso_basico')) {
         wp_die('No tienes permiso para acceder a esta sección.');
     }
 
@@ -30,6 +30,25 @@ function golden_shark_render_leads()
             ];
             update_option('golden_shark_leads', $leads);
             golden_shark_log("Se registró un nuevo lead: $nombre ($correo)");
+            //Enviar a webhook si esta configurado
+            $webhook_url = get_option('golden_shark_webhook_leads_url', '');
+            if (!empty($webhook_url) && filter_var($webhook_url, FILTER_VALIDATE_URL)) {
+                wo_remote_post($webhook_url, [
+                    'method'    => 'POST',
+                    'timeout'   => 10,
+                    'headers'   => ['Content-Type' => 'application/json'],
+                    'body'      => json_encode([
+                        'nombre'    => $nombre,
+                        'correo'    => $correo,
+                        'mensaje'   => $mensaje,
+                        'fecha'     => $fecha,
+                        'sitio'     => get_bloginfo('name'),
+                        'url'       => get_site_url(),
+                    ]),
+                ]);
+
+                golden_shark_log("📡 Webhook enviado tras nuevo lead ($correo)");
+            }
             update_user_meta(get_current_user_id(), 'gs_notificacion_interna', '✅ Lead guardado correctamente.');
             echo '<div class="notice notice-success"><p>✅ Lead guardado correctamente.</p></div>';
         }
@@ -78,17 +97,25 @@ function golden_shark_render_leads()
 
     // Exportar leads a CSV
     if (isset($_POST['exportar_leads'])) {
+        $correo_filtro = sanitize_text_field($_POST['filtro_correo'] ?? '');
+
+        $leads_filtrados = array_filter($leads, function ($lead) use ($correo_filtro) {
+            if (empty($correo_filtro)) return true;
+            return stripos($lead['correo'], $correo_filtro) !== false;
+        });
+
         header('Content-Type: text/csv');
         header('Content-Disposition: attachment; filename="leads_golden_shark.csv"');
         $output = fopen('php://output', 'w');
         fputcsv($output, ['Nombre', 'Correo', 'Mensaje', 'Fecha']);
-        foreach ($leads as $lead) {
+        foreach ($leads_filtrados as $lead) {
             fputcsv($output, [$lead['nombre'], $lead['correo'], $lead['mensaje'], $lead['fecha']]);
         }
         fclose($output);
-        golden_shark_log('Se exportaron los leads a CSV.');
+        golden_shark_log('Se exportaron los leads filtrados a CSV.');
         exit;
     }
+
 ?>
     <div class="wrap" id="top">
         <h2>📨 Leads Capturados</h2>
@@ -146,7 +173,8 @@ function golden_shark_render_leads()
             </form>
             <form method="post" style="margin-top: 15px;">
                 <input type="hidden" name="exportar_leads" value="1">
-                <input type="submit" class="button button-secondary" value="Exportar Leads a CSV">
+                <input type="text" name="filtro_correo" placeholder="Filtrar por correo..." value="<?php echo esc_attr($_GET['correo'] ?? ''); ?>">
+                <input type="submit" class="button button-secondary" value="📤 Exportar leads filtrados">
             </form>
         </div>
 

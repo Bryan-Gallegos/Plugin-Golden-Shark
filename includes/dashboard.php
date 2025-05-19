@@ -1,8 +1,9 @@
 <?php
 if (!defined('ABSPATH')) exit;
 
-function golden_shark_render_dashboard() {
-    if (!golden_shark_user_can('edit_posts')) {
+function golden_shark_render_dashboard()
+{
+    if (!golden_shark_user_can('golden_shark_acceso_basico')) {
         wp_die('No tienes permiso para acceder a esta sección.');
     }
 
@@ -72,12 +73,20 @@ function golden_shark_render_dashboard() {
         echo '</div>';
     }
 
-    // Tarjetas resumen
-    echo '<div style="display:flex; gap:20px; margin-top:30px;">';
-    echo '<div class="gs-container"><h2>' . count($frases) . '</h2><p>Frases</p></div>';
-    echo '<div class="gs-container"><h2>' . count($eventos) . '</h2><p>Eventos</p></div>';
-    echo '<div class="gs-container"><h2>' . count($leads) . '</h2><p>Leads</p></div>';
+    // Tarjetas resumen visibles según rol
+    echo '<div class="gs-dashboard-resumen">';
+    echo '<div class="gs-card"><h3>💬 Frases</h3><p class="gs-big-number">' . count($frases) . '</p></div>';
+
+    if (current_user_can('golden_shark_configuracion')) {
+        echo '<div class="gs-card"><h3>📅 Eventos</h3><p class="gs-big-number">' . count($eventos) . '</p></div>';
+    }
+
+    if (current_user_can('golden_shark_acceso_basico')) {
+        echo '<div class="gs-card"><h3>📨 Leads</h3><p class="gs-big-number">' . count($leads) . '</p></div>';
+    }
+
     echo '</div>';
+
 
     // Resumen gráfico
     echo '<div class="gs-container" style="margin-top:30px;">';

@@ -3,7 +3,7 @@
 if(!defined('ABSPATH')) exit;
 
 function golden_shark_render_logs(){
-    if(!current_user_can('manage_options')){
+    if (!golden_shark_user_can('golden_shark_ver_logs')) {
         wp_die('Acceso restringido');
     }
 

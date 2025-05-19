@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 // 📅 EVENTOS
 function golden_shark_render_eventos()
 {
-    if (!golden_shark_user_can('edit_posts')) {
+    if (!golden_shark_user_can('golden_shark_acceso_basico')) {
         wp_die('No tienes permiso para acceder a esta sección.');
     }
 
@@ -12,15 +12,22 @@ function golden_shark_render_eventos()
 
     // Exportar CSV
     if (isset($_POST['exportar_csv'])) {
+        $tipo_filtro = sanitize_text_field($_POST['filtro_tipo'] ?? '');
+
+        $eventos_filtrados = array_filter($eventos, function ($evento) use ($tipo_filtro) {
+            if (empty($tipo_filtro)) return true;
+            return $evento['tipo'] === $tipo_filtro;
+        });
+
         header('Content-Type: text/csv');
         header('Content-Disposition: attachment; filename="eventos_golden_shark.csv"');
         $output = fopen('php://output', 'w');
         fputcsv($output, ['Título', 'Fecha', 'Ubicación']);
-        foreach ($eventos as $evento) {
+        foreach ($eventos_filtrados as $evento) {
             fputcsv($output, [$evento['titulo'], $evento['fecha'], $evento['lugar']]);
         }
         fclose($output);
-        golden_shark_log('Se exportaron los eventos a CSV.');
+        golden_shark_log('Se exportaron los eventos filtrados a CSV.');
         exit;
     }
 
@@ -166,7 +173,13 @@ function golden_shark_render_eventos()
         <div class="gs-container">
             <form method="post" style="margin-top:20px;">
                 <input type="hidden" name="exportar_csv" value="1">
-                <input type="submit" class="button button-secondary" value="Exportar eventos a CSV">
+                <select name="filtro_tipo">
+                    <option value="">Todos</option>
+                    <option value="interno" <?php selected($_GET['tipo'] ?? '', 'interno'); ?>>Interno</option>
+                    <option value="reunion" <?php selected($_GET['tipo'] ?? '', 'reunion'); ?>>Reunión</option>
+                    <option value="lanzamiento" <?php selected($_GET['tipo'] ?? '', 'lanzamiento'); ?>>Lanzamiento</option>
+                </select>
+                <input type="submit" class="button button-secondary" value="📤 Exportar eventos filtrados">
             </form>
         </div>
 

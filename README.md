@@ -40,6 +40,7 @@
 | `[nota_aleatoria]`     | Muestra una nota interna aleatoria (si las notificaciones están activas) |
 | `[total_leads]`        | Muestra el total actual de leads capturados                           |
 | `[tareas_pendientes]` | Muestra una lista de tareas internas marcadas como pendientes. |
+| `[mi_historial]`       | Muestra el historial personal del usuario conectado                    |
 
 ---
 
@@ -70,6 +71,13 @@ Todas las configuraciones principales (colores, mensajes y notificaciones) está
 ---
 
 ## 🗓️ Historial de cambios
+
+### v2.4
+- Se añadió soporte para **webhooks personalizados** para alta de leads y creación de eventos.
+- Nuevo **shortcode `[mi_historial]`** para mostrar el historial personal del usuario conectado.
+- Mejoras en el **formulario público de leads**: validación visual y campos más claros.
+- **Exportación inteligente** de leads y eventos con filtros aplicables.
+- Implementación de una **API interna REST** con autenticación por clave privada para desarrolladores.
 
 ### v2.3
 - Tarea programada semanal para borrar frases antiguas.

@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 // 🗂 MÓDULO DE TAREAS INTERNAS
 function golden_shark_render_tareas()
 {
-    if (!golden_shark_user_can('edit_posts')) {
+    if (!golden_shark_user_can('golden_shark_acceso_basico')) {
         wp_die('No tienes permiso para acceder a esta sección.');
     }
 
