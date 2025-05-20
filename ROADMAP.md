@@ -5,7 +5,7 @@ Este documento describe el plan de evolución del plugin **Golden Shark Admin Pa
 ---
 
 ## ✅ Versión actual
-**v2.3** – Automatizaciones, seguridad avanzada y multisitio inteligente 
+**v2.5** – Productividad y automatización avanzada
 
 ---
 
@@ -94,14 +94,30 @@ Este documento describe el plan de evolución del plugin **Golden Shark Admin Pa
 ## 🚀 v2.5 – Productividad y automatización avanzada
 **Obejtivo:** facilitar el trabajo en equipo, reducir tareas repetitivas y mejorar la gestión interna con funciones inteligentes.
 
-- [ ] Asistente de tareas: sugerencias automáticas de tareas según eventos o leads registrados.
-- [ ] Recordatorios por correo: enviar correos automáticos a responsables de tareas próximas (con cron interno).
-- [ ] Webhook de eventos: al registrar o editar eventos, se dispara un webhook opcional configurado.
-- [ ] Vista Kanban de tareas internas: alternativa visual al listado plano de tareas (pendiente, en progreso, completado).
-- [ ] Informe mensual automático (en PDF o CSV): resumen por email del total de leads, eventos y tareas.
-- [ ] Buscador inteligente en el historial y logs (filtro por IP, usuario, fecha o palabra clave).
-- [ ] Perfil de usuario interno: mostrar en el panel info personal del usuario (tareas asignadas, acciones recientes).
+- [x] Asistente de tareas: sugerencias automáticas de tareas según eventos o leads registrados.
+- [x] Recordatorios por correo: enviar correos automáticos a responsables de tareas próximas (con cron interno).
+- [x] Webhook de eventos: al registrar o editar eventos, se dispara un webhook opcional configurado.
+- [x] Vista Kanban de tareas internas: alternativa visual al listado plano de tareas (pendiente, en progreso, completado).
+- [x] Informe mensual automático (en PDF o CSV): resumen por email del total de leads, eventos y tareas.
+- [x] Buscador inteligente en el historial y logs (filtro por IP, usuario, fecha o palabra clave).
+- [x] Perfil de usuario interno: mostrar en el panel info personal del usuario (tareas asignadas, acciones recientes).
 
 ---
 
-*Última actualización: 2025-05-19*
+## 🧪 v2.6 - Integración avanzada y personalización por usuario
+**Objetivo:** mejorar el rendimiento interno, permitir vistaspersonalizadas y aumentar la interoperabilidad del plugin con servicios externos.
+
+- [ ] Sistema de **etiquetas** para eventos, leads y tareas (filtrado más preciso).
+- [ ] **Favoritos** por usuario: marcar frases, notas o eventos destacados.
+- [ ] Filtros combinados inteligentes en listas (tipo + fecha + etiqueta).
+- [ ] Vista resumen por usuario: tareas asignadas, eventos relevantes, historial y últimas acciones.
+- [ ] Limpieza programada de registros antiguos (leads, eventos, tareas completadas).
+- [ ] Exportación avanzada: permite elegir columnas y rango de fechas.
+- [ ] Webhook personalizado con payload ajustable (por sección).
+- [ ] Logs extendidos: guardar cambios de configuración y ejecuciones de shortcodes.
+- [ ] Soporte para traducción (`.pot`) e internacionalización.
+- [ ] Modo auditoría: ver qué usuario modificó cada campo en frases, tareas y eventos.
+
+---
+
+*Última actualización: 2025-05-20*

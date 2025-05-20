@@ -145,6 +145,15 @@ function golden_shark_admin_menu()
             'golden_shark_render_historial_sitios'
         );
     }
+
+    add_submenu_page(
+        'golden-shark', // slug del menú padre
+        'Mi perfil',     // Título de la página
+        '👤 Mi perfil',  // Título del menú
+        'read',          // Capacidad mínima
+        'golden-shark-perfil', // Slug
+        'golden_shark_render_perfil_usuario' // Callback
+    );
 }
 add_action('admin_menu', 'golden_shark_admin_menu');
 

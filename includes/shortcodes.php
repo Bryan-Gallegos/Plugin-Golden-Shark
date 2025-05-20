@@ -37,8 +37,20 @@ function golden_shark_formulario_lead_shortcode()
                     'fecha' => $fecha
                 ];
                 update_option('golden_shark_leads', $leads);
+            
+                // 🔁 Crear tarea automáticamente
+                if (function_exists('golden_shark_crear_tareas_automaticas')) {
+                    golden_shark_crear_tareas_automaticas([
+                        'tipo' => 'lead',
+                        'nombre' => $nombre,
+                        'correo' => $correo,
+                        'fecha' => $fecha
+                    ]);
+                }
+            
                 $mensaje = '<div style="background:#dff0d8;padding:10px;border-left:4px solid #3c763d;margin-bottom:15px;">✅ ¡Gracias por registrarte!</div>';
-            } else {
+            }
+             else {
                 $mensaje = '<div style="background:#f2dede;padding:10px;border-left:4px solid #a94442;margin-bottom:15px;">❌ Por favor completa los campos obligatorios.</div>';
             }
         }

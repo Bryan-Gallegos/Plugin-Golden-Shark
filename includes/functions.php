@@ -217,3 +217,9 @@ function golden_shark_guardar_historial_sitio($sitio_id, $description)
 
     update_site_option("gs_historial_sitio_$site_id", array_slice($historial, -50));
 }
+
+add_action('golden_shark_enviar_recordatorios_diarios', 'golden_shark_enviar_recordatorios_tareas');
+
+add_action('wp_login', function($user_login, $user) {
+    update_user_meta($user->ID, 'last_login', current_time('Y-m-d H:i:s'));
+}, 10, 2);

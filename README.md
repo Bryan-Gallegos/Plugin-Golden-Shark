@@ -38,9 +38,10 @@
 | `[formulario_lead]`    | Muestra el formulario público de leads                                 |
 | `[lista_eventos]`      | Lista todos los eventos internos guardados                             |
 | `[nota_aleatoria]`     | Muestra una nota interna aleatoria (si las notificaciones están activas) |
-| `[total_leads]`        | Muestra el total actual de leads capturados                           |
-| `[tareas_pendientes]` | Muestra una lista de tareas internas marcadas como pendientes. |
+| `[total_leads]`        | Muestra el total actual de leads capturados                            |
+| `[tareas_pendientes]`  | Muestra una lista de tareas internas marcadas como pendientes           |
 | `[mi_historial]`       | Muestra el historial personal del usuario conectado                    |
+| `[kanban_tareas]`      | Muestra las tareas internas en vista tipo Kanban                       |
 
 ---
 
@@ -71,6 +72,15 @@ Todas las configuraciones principales (colores, mensajes y notificaciones) está
 ---
 
 ## 🗓️ Historial de cambios
+
+### v2.5 – Productividad y automatización avanzada
+- Asistente de tareas: se crean tareas automáticamente según el tipo de evento registrado.
+- Webhook de eventos: se dispara un webhook configurado al registrar o editar un evento.
+- Recordatorios por correo: se envían correos automáticos diarios a los responsables de tareas próximas (cron interno).
+- Vista Kanban de tareas: nueva visualización con columnas para tareas pendientes, en progreso y completadas.
+- Informe mensual: se genera un resumen automático en CSV y se envía por email (leads, eventos, tareas).
+- Buscador inteligente en logs: búsqueda por IP, usuario, fecha o palabra clave.
+- Perfil del usuario: muestra tareas asignadas, historial reciente, última conexión y datos personales.
 
 ### v2.4
 - Se añadió soporte para **webhooks personalizados** para alta de leads y creación de eventos.

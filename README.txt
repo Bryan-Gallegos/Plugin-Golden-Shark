@@ -4,7 +4,7 @@ Donate link: https://example.com/
 Tags: administración, leads, eventos, frases, notas, panel interno
 Requires at least: 5.8
 Tested up to: 6.5
-Stable tag: 2.4
+Stable tag: 2.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -51,6 +51,7 @@ Pensado para ser una herramienta **privada**, segura y personalizable para equip
 * `[nota_aleatoria]` – Muestra una nota interna aleatoria si las notificaciones están activadas.
 * `[total_leads]` – Muestra el número total de leads registrados.
 * `[tareas_pendientes]` – Muestra en el front-end la lista de tareas pendientes.
+* `[kanban_tareas]` – Muestra las tareas internas en vista tipo Kanban.
 
 == Seguridad ==
 
@@ -67,6 +68,15 @@ Todas las acciones están protegidas con `nonce` y verificaciones de capacidad d
 7. Historial de actividad.
 
 == Changelog ==
+
+= 2.5 =
+* Asistente de tareas: se crean tareas automáticamente según el tipo de evento registrado.
+* Webhook de eventos: se dispara un webhook configurado al registrar o editar un evento.
+* Recordatorios por correo: se envían correos automáticos diarios a los responsables de tareas próximas (cron interno).
+* Vista Kanban de tareas: nueva visualización con columnas para tareas pendientes, en progreso y completadas.
+* Informe mensual: se genera un resumen automático en CSV y se envía por email (leads, eventos, tareas).
+* Buscador inteligente en logs: búsqueda por IP, usuario, fecha o palabra clave.
+* Perfil del usuario: muestra tareas asignadas, historial reciente, última conexión y datos personales.
 
 = 2.4 =
 * Se añadió soporte para webhooks personalizados (alta de leads, creación de eventos, etc).

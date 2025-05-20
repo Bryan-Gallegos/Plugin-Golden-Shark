@@ -47,6 +47,12 @@ function golden_shark_render_eventos()
         golden_shark_log('Se registró un nuevo evento: ' . $_POST['evento_titulo']);
         update_user_meta(get_current_user_id(), 'gs_notificacion_interna', '✅ Evento guardado correctamente.');
         echo '<div class="updated"><p>Evento guardado correctamente.</p></div>';
+        if (function_exists('golden_shark_disparar_webhook_evento')) {
+            golden_shark_disparar_webhook_evento(end($eventos));
+        }
+        if (function_exists('golden_shark_crear_tareas_automaticas')) {
+            golden_shark_crear_tareas_automaticas(end($eventos));
+        }
     }
 
 
@@ -68,6 +74,12 @@ function golden_shark_render_eventos()
             golden_shark_log('Se editó el evento: ' . $_POST['evento_titulo']);
             update_user_meta(get_current_user_id(), 'gs_notificacion_interna', '✅ Evento actualizado correctamente.');
             echo '<div class="updated"><p>Evento actualizado correctamente.</p></div>';
+            if (function_exists('golden_shark_disparar_webhook_evento')) {
+                golden_shark_disparar_webhook_evento($eventos[$id]);
+            }
+            if (function_exists('golden_shark_crear_tareas_automaticas')) {
+                golden_shark_crear_tareas_automaticas($eventos[$id]);
+            }
         }
     }
 

@@ -2,7 +2,7 @@
 /*
 Plugin Name: Golden Shark Admin Panel
 Description: Plugin de administración interno para gestionar eventos, leads y configuración desde el panel de WordPress.
-Version: 2.4
+Version: 2.5
 Author: Carlos Gallegos
 */
 
@@ -30,7 +30,11 @@ $archivos = [
     'frases_globales.php',
     'sites_list.php',
     'roles.php',
-    'api.php'
+    'api.php',
+    'webhooks.php',
+    'functions-tareas.php',
+    'kanban-tareas.php',
+    'perfil.php'
 ];
 
 foreach ($archivos as $archivo) {
@@ -46,6 +50,12 @@ register_activation_hook(__FILE__, function() {
 
     if (!wp_next_scheduled('gs_cron_enviar_resumen_diario')) {
         wp_schedule_event(time(), 'daily', 'gs_cron_enviar_resumen_diario');
+    }
+    if (!wp_next_scheduled('golden_shark_enviar_recordatorios_diarios')) {
+        wp_schedule_event(time(), 'daily', 'golden_shark_enviar_recordatorios_diarios');
+    }
+    if (!wp_next_scheduled('gs_cron_informe_mensual')) {
+        wp_schedule_event(time(), 'monthly', 'gs_cron_informe_mensual');
     }
 
     // Crear roles personalizados
@@ -70,6 +80,10 @@ register_desactivation_hook(__FILE__, function() {
     wp_clear_scheduled_hook('gs_cron_borrar_frases_antiguas');
 
     wp_clear_scheduled_hook('gs_cron_enviar_resumen_diario');
+
+    wp_clear_scheduled_hook('golden_shark_enviar_recordatorios_diarios');
+
+    wp_clear_scheduled_hook('gs_cron_informe_mensual');
 
     // Eliminar roles personalizados
     remove_role('gs_editor');

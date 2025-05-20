@@ -32,6 +32,7 @@ function golden_shark_register_settings()
     register_setting('golden_shark_config_group', 'golden_shark_alerta_leads_pendientes');
     register_setting('golden_shark_config_group', 'golden_shark_webhook_leads_url');
     register_setting('golden_shark_config_group', 'golden_shark_api_key');
+    register_setting('golden_shark_config_group', 'golden_shark_webhook_eventos_url');
 
     add_settings_section('golden_shark_config_section', '⚙️ Configuraciones Generales', null, 'golden_shark_config');
 
@@ -43,6 +44,7 @@ function golden_shark_register_settings()
     add_settings_field('alerta_leads_pendientes', '📨 Alerta por leads sin revisar', 'golden_shark_alerta_leads_field', 'golden_shark_config', 'golden_shark_config_section');
     add_settings_field('webhook_leads_url', '🔗 Webhook para nuevos leads', 'golden_shark_webhook_url_field', 'golden_shark_config', 'golden_shark_config_section');
     add_settings_field('api_key', '🔐 Clave API', 'golden_shark_api_key_field', 'golden_shark_config', 'golden_shark_config_section');
+    add_settings_field('webhook_eventos_url', '🌐 Webhook para eventos', 'golden_shark_webhook_eventos_url_field', 'golden_shark_config', 'golden_shark_config_section');
 }
 add_action('admin_init', 'golden_shark_register_settings');
 
@@ -95,4 +97,11 @@ function golden_shark_api_key_field()
     $key = get_option('golden_shark_api_key', wp_generate_password(16, false));
     echo '<input type="text" name="golden_shark_api_key" value="' . esc_attr($key) . '" class="regular-text" readonly>';
     echo '<p class="description">Utiliza esta clave para autenticar solicitudes a la API interna.</p>';
+}
+
+function golden_shark_webhook_eventos_url_field()
+{
+    $valor = get_option('golden_shark_webhook_eventos_url', '');
+    echo '<input type="url" name="golden_shark_webhook_eventos_url" value="' . esc_attr($valor) . '" class="regular-text" placeholder="https://midominio.com/webhook-eventos">';
+    echo '<p class="description">Se enviará un POST con los datos del evento cuando se registre o edite.</p>';
 }

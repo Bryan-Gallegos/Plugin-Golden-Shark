@@ -55,3 +55,40 @@ function golden_shark_enviar_resumen_diario(){
 
     golden_shark_log("📧 Resumen diario enviado a los superadmins", 'info');
 }
+
+function golden_shark_enviar_informe_mensual() {
+    $eventos = get_option('golden_shark_eventos', []);
+    $leads = get_option('golden_shark_leads', []);
+    $tareas = get_option('golden_shark_tareas', []);
+
+    $mes_actual = date('Y-m');
+
+    $eventos_mes = array_filter($eventos, fn($e) => str_starts_with($e['fecha'], $mes_actual));
+    $leads_mes = array_filter($leads, fn($l) => str_starts_with($l['fecha'], $mes_actual));
+    $tareas_mes = array_filter($tareas, fn($t) => str_starts_with($t['fecha'], $mes_actual));
+
+    $csv = fopen('php://temp', 'w+');
+    fputcsv($csv, ['Categoría', 'Cantidad']);
+    fputcsv($csv, ['Eventos', count($eventos_mes)]);
+    fputcsv($csv, ['Leads', count($leads_mes)]);
+    fputcsv($csv, ['Tareas', count($tareas_mes)]);
+
+    rewind($csv);
+    $csv_data = stream_get_contents($csv);
+    fclose($csv);
+
+    $upload_dir = wp_upload_dir();
+    $path = $upload_dir['basedir'] . '/informe_mensual.csv';
+    file_put_contents($path, $csv_data);
+
+    $to = get_option('admin_email');
+    $subject = '📈 Informe Mensual - Golden Shark';
+    $message = 'Adjunto encontrarás el resumen mensual del panel Golden Shark.';
+    $headers = ['Content-Type: text/html; charset=UTF-8'];
+    $attachments = [$path];
+
+    wp_mail($to, $subject, $message, $headers, $attachments);
+    golden_shark_log('Se envió el informe mensual automáticamente.');
+}
+
+add_action('gs_cron_informe_mensual', 'golden_shark_enviar_informe_mensual');
