@@ -80,16 +80,16 @@ function golden_shark_get_all_sites(){
 // 🧭 Vista: listado de sitios con edición remota
 function golden_shark_render_multisite_panel() {
     if (!is_super_admin()) {
-        wp_die('Acceso restringido.');
+        wp_die(__('Acceso restringido', 'golden-shark'));
     }
 
     echo '<div class="wrap">';
-    echo '<h2>🌐 Panel Multisitio</h2>';
-    echo '<p>Desde aquí puedes gestionar frases y configuración global o editar remotamente los sitios de la red.</p>';
+    echo '<h2>' . __('🌐 Panel Multisitio', 'golden-shark') . '</h2>';
+    echo '<p>' . __('Desde aquí puedes gestionar frases y configuración global o editar remotamente los sitios de la red.', 'golden-shark') . '</p>';
 
-    echo '<h3>🎛️ Edición remota por sitio</h3>';
+    echo '<h3>' . __('🎛️ Edición remota por sitio', 'golden-shark') . '</h3>';
     echo '<table class="widefat striped">';
-    echo '<thead><tr><th>Sitio</th><th>URL</th><th>Acciones</th></tr></thead><tbody>';
+    echo '<thead><tr><th>' . __('Sitio', 'golden-shark') . '</th><th>' . __('URL', 'golden-shark') . '</th><th>' . __('Acciones', 'golden-shark') . '</th></tr></thead><tbody>';
 
     foreach (golden_shark_get_all_sites() as $sitio) {
         $blog_id = $sitio->blog_id;
@@ -101,7 +101,7 @@ function golden_shark_render_multisite_panel() {
         echo '<tr>';
         echo "<td>$nombre</td>";
         echo "<td><a href=\"$url\" target=\"_blank\">$url</a></td>";
-        echo '<td><a href="' . admin_url('admin.php?page=gs-editar-sitio&sitio=' . $blog_id) . '" class="button">Editar frases / config</a></td>';
+        echo '<td><a href="' . admin_url('admin.php?page=gs-editar-sitio&sitio=' . $blog_id) . '" class="button">' . __('Editar frases / config', 'golden-shark') . '</a></td>';
         echo '</tr>';
     }
 

@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 function golden_shark_render_perfil_usuario()
 {
     if (!is_user_logged_in()) {
-        wp_die('Debes iniciar sesión para ver tu perfil.');
+        wp_die(__('Debes iniciar sesión para ver tu perfil.', 'golden-shark'));
     }
 
     $usuario = wp_get_current_user();
@@ -18,29 +18,29 @@ function golden_shark_render_perfil_usuario()
 
     ?>
     <div class="wrap gs-container">
-        <h2>👤 Mi perfil</h2>
+        <h2><?php _e('👤 Mi perfil', 'golden-shark'); ?></h2>
         <table class="form-table">
             <tr>
-                <th>Nombre:</th>
+                <th><?php _e('Nombre:', 'golden-shark'); ?></th>
                 <td><?php echo esc_html($usuario->display_name); ?></td>
             </tr>
             <tr>
-                <th>Correo:</th>
+                <th><?php _e('Correo:', 'golden-shark'); ?></th>
                 <td><?php echo esc_html($usuario->user_email); ?></td>
             </tr>
             <tr>
-                <th>Tareas asignadas:</th>
+                <th><?php _e('Tareas asignadas:', 'golden-shark'); ?></th>
                 <td><?php echo count($mis_tareas); ?></td>
             </tr>
             <tr>
-                <th>Última conexión:</th>
-                <td><?php echo $ultima_conexion ? esc_html($ultima_conexion) : 'N/A'; ?></td>
+                <th><?php _e('Última conexión:', 'golden-shark'); ?></th>
+                <td><?php echo $ultima_conexion ? esc_html($ultima_conexion) : esc_html__('N/A', 'golden-shark'); ?></td>
             </tr>
         </table>
 
-        <h3>📝 Historial reciente:</h3>
+        <h3><?php _e('📝 Historial reciente:', 'golden-shark'); ?></h3>
         <?php if (empty($historial)) : ?>
-            <p>No hay historial registrado.</p>
+            <p><?php _e('No hay historial registrado.', 'golden-shark'); ?></p>
         <?php else : ?>
             <ul style="margin-left:20px;">
                 <?php foreach (array_slice(array_reverse($historial), 0, 10) as $h) : ?>

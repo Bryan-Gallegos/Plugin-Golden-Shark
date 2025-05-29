@@ -4,7 +4,7 @@ Donate link: https://example.com/
 Tags: administración, leads, eventos, frases, notas, panel interno
 Requires at least: 5.8
 Tested up to: 6.5
-Stable tag: 2.5
+Stable tag: 2.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -68,6 +68,18 @@ Todas las acciones están protegidas con `nonce` y verificaciones de capacidad d
 7. Historial de actividad.
 
 == Changelog ==
+
+= 2.6 =
+* Sistema de etiquetas para eventos, leads y tareas.
+* Favoritos por usuario para frases, notas y eventos.
+* Filtros combinados inteligentes (tipo + fecha + etiqueta).
+* Vista resumen por usuario: historial, eventos, tareas.
+* Limpieza programada de registros antiguos.
+* Exportación avanzada con selección de columnas y rangos.
+* Webhook personalizado con payload configurable.
+* Logs extendidos: cambios de configuración y shortcodes ejecutados.
+* Soporte completo para internacionalización (.pot, .po, .mo).
+* Vista personalizada por usuario (lista o kanban) en tareas internas.
 
 = 2.5 =
 * Asistente de tareas: se crean tareas automáticamente según el tipo de evento registrado.

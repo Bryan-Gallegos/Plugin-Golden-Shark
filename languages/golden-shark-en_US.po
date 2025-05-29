@@ -1,0 +1,814 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Golden Shark Admin Panel\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-05-26 00:00+0000\n"
+"PO-Revision-Date: 2025-05-29 11:22-0500\n"
+"Last-Translator: Carlos Gallegos <carlos@ejemplo.com>\n"
+"Language-Team: English (US)\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+"X-Domain: golden-shark\n"
+
+msgid "No tienes permiso para acceder a esta sección."
+msgstr "You don't have permission to access this section."
+
+msgid "Calendario de Eventos"
+msgstr "Events Calendar"
+
+msgid "Acceso denegado. Solo el superadministrador puede ver esta acción"
+msgstr "Access denied. Only the super administrator can view this action"
+
+msgid "Se actualizaron configuraciones globales desde el panel multisite"
+msgstr "Global settings were updated from the multisite panel"
+
+msgid "✅ Configuraciones globales actualizadas correctamente."
+msgstr "✅ Global settings updated successfully."
+
+msgid "¡Sigue adelante!"
+msgstr "Keep going!"
+
+msgid "Gracias por tu mensaje. Te contactaremos pronto."
+msgstr "Thank you for your message. We'll contact you soon."
+
+msgid "🌐 Configuración Global"
+msgstr "🌐 Global Settings"
+
+msgid "Color del Dashboard"
+msgstr "Dashboard Color"
+
+msgid "Mensaje Motivacional"
+msgstr "Motivational Message"
+
+msgid "Mensaje para Correos"
+msgstr "Email Message"
+
+msgid "Mostrar Notificaciones"
+msgstr "Show Notifications"
+
+msgid "Sí, mostrar notificaciones internas"
+msgstr "Yes, show internal notifications"
+
+msgid "Guardar Configuraciones"
+msgstr "Save Settings"
+
+msgid "🧹 Se eliminaron todos los registros anteriores a hoy."
+msgstr "🧹 All records prior to today were deleted."
+
+msgid "⚙️ Configuración del Plugin"
+msgstr "⚙️ Plugin Settings"
+
+msgid "💾 Guardar configuración"
+msgstr "💾 Save settings"
+
+msgid "🧹 Limpieza de registros antiguos"
+msgstr "🧹 Old records cleanup"
+
+msgid "Este botón eliminará los"
+msgstr "This button will delete"
+
+msgid "leads antiguos"
+msgstr "old leads"
+
+msgid "eventos pasados"
+msgstr "past events"
+
+msgid "y"
+msgstr "and"
+
+msgid "tareas vencidas"
+msgstr "overdue tasks"
+
+msgid "hasta la fecha actual."
+msgstr "up to the current date."
+
+msgid "¿Seguro que deseas eliminar todos los datos antiguos? Esta acción no se puede deshacer."
+msgstr "Are you sure you want to delete all old data? This action cannot be undone."
+
+msgid "🧹 Ejecutar limpieza masiva"
+msgstr "🧹 Run mass cleanup"
+
+msgid "⚠️ Atención: hay más de %s eventos programados para hoy."
+msgstr "⚠️ Attention: there are more than %s events scheduled for today."
+
+msgid "🔔 Atención: hay más de %s leads sin revisar."
+msgstr "🔔 Attention: there are more than %s unreviewed leads."
+
+msgid "Frase motivacional del día:"
+msgstr "Motivational quote of the day:"
+
+msgid "💬 Frases"
+msgstr "💬 Quotes"
+
+msgid "📅 Eventos"
+msgstr "📅 Events"
+
+msgid "📨 Leads"
+msgstr "📨 Leads"
+
+msgid "Resumen gráfico"
+msgstr "Graphic summary"
+
+msgid "Leads sin revisar"
+msgstr "Unreviewed leads"
+
+msgid "Nombre"
+msgstr "Name"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Fecha"
+msgstr "Date"
+
+msgid "Acción"
+msgstr "Action"
+
+msgid "Marcar como revisado"
+msgstr "Mark as reviewed"
+
+msgid "Actividad reciente"
+msgstr "Recent activity"
+
+msgid "📤 Exportar historial en CSV"
+msgstr "📤 Export history to CSV"
+
+msgid "Acceso restringido solo a superadministradores"
+msgstr "Restricted access only for super administrators"
+
+msgid "⛔ El sitio con ID %s no existe."
+msgstr "⛔ Site with ID %s doesn't exist."
+
+msgid "✅ Cambios guardados en el sitio remoto."
+msgstr "✅ Changes saved on remote site."
+
+msgid "🛠️ Editar sitio remoto: %s"
+msgstr "🛠️ Edit remote site: %s"
+
+msgid "Visitar sitio"
+msgstr "Visit site"
+
+msgid "🎨 Configuración general"
+msgstr "🎨 General settings"
+
+msgid "Mensaje motivacional:"
+msgstr "Motivational message:"
+
+msgid "Mensaje en correos:"
+msgstr "Email message:"
+
+msgid "Notificaciones:"
+msgstr "Notifications:"
+
+msgid "Habilitadas"
+msgstr "Enabled"
+
+msgid "💬 Frases motivacionales"
+msgstr "💬 Motivational quotes"
+
+msgid "➕ Agregar otra frase"
+msgstr "➕ Add another quote"
+
+msgid "💾 Guardar todos los cambios"
+msgstr "💾 Save all changes"
+
+msgid "📜 Historial de cambios remotos"
+msgstr "📜 Remote changes history"
+
+msgid "🧹 Eventos anteriores a hoy eliminados correctamente."
+msgstr "🧹 Events prior to today deleted successfully."
+
+msgid "⚠️ Seguridad fallida. Token inválido."
+msgstr "⚠️ Security failed. Invalid token."
+
+msgid "✅ Evento guardado correctamente."
+msgstr "✅ Event saved successfully."
+
+msgid "✏️ Evento actualizado correctamente."
+msgstr "✏️ Event updated successfully."
+
+msgid "🗑️ Evento eliminado correctamente."
+msgstr "🗑️ Event deleted successfully."
+
+msgid "🗑️ Evento eliminado."
+msgstr "🗑️ Event deleted."
+
+msgid "Gestión de Eventos Internos"
+msgstr "Internal Events Management"
+
+msgid "Editar Evento"
+msgstr "Edit Event"
+
+msgid "Guardar cambios"
+msgstr "Save changes"
+
+msgid "Nuevo Evento"
+msgstr "New Event"
+
+msgid "Interno"
+msgstr "Internal"
+
+msgid "Reunión"
+msgstr "Meeting"
+
+msgid "Lanzamiento"
+msgstr "Launch"
+
+msgid "Ej: urgente, cliente, zona sur"
+msgstr "Ex: urgent, client, south area"
+
+msgid "Guardar evento"
+msgstr "Save event"
+
+msgid "¿Eliminar todos los eventos con fecha pasada?"
+msgstr "Delete all events with past dates?"
+
+msgid "Eventos Registrados:"
+msgstr "Registered Events:"
+
+msgid "No hay eventos registrados."
+msgstr "There are no registered events."
+
+msgid "Título"
+msgstr "Title"
+
+msgid "Ubicación"
+msgstr "Location"
+
+msgid "Acciones"
+msgstr "Actions"
+
+msgid "Etiquetas"
+msgstr "Tags"
+
+msgid "¿Eliminar este evento?"
+msgstr "Delete this event?"
+
+msgid "⛔ No tienes permiso para acceder a esta sección."
+msgstr "⛔ You don't have permission to access this section."
+
+msgid "✅ Frase global agregada correctamente."
+msgstr "✅ Global quote added successfully."
+
+msgid "✅ Frase global actualizada correctamente."
+msgstr "✅ Global quote updated successfully."
+
+msgid "🗑️ Frase global eliminada correctamente."
+msgstr "🗑️ Global quote deleted successfully."
+
+msgid "⛔ Seguridad fallida. Token inválido."
+msgstr "⛔ Security failed. Invalid token."
+
+msgid "✏️ Editar frase global"
+msgstr "✏️ Edit global quote"
+
+msgid "➕ Nueva frase global"
+msgstr "➕ New global quote"
+
+msgid "Ej. Cree en tu potencial."
+msgstr "Ex. Believe in your potential."
+
+msgid "Guardar frase"
+msgstr "Save quote"
+
+msgid "📋 Frases globales registradas:"
+msgstr "📋 Registered global quotes:"
+
+msgid "No hay frases globales registradas."
+msgstr "There are no registered global quotes."
+
+msgid "Editar"
+msgstr "Edit"
+
+msgid "Eliminar"
+msgstr "Delete"
+
+msgid "¿Eliminar esta frase global?"
+msgstr "Delete this global quote?"
+
+msgid "✅ Frase agregada correctamente."
+msgstr "✅ Quote added successfully."
+
+msgid "✏️ Frase actualizada correctamente."
+msgstr "✏️ Quote updated successfully."
+
+msgid "🗑️ Frase eliminada."
+msgstr "🗑️ Quote deleted."
+
+msgid "💬 Frases & Mensajes"
+msgstr "💬 Quotes & Messages"
+
+msgid "✏️ Editar frase"
+msgstr "✏️ Edit quote"
+
+msgid "➕ Nueva frase"
+msgstr "➕ New quote"
+
+msgid "Frase:"
+msgstr "Quote:"
+
+msgid "Ej. Cree en ti."
+msgstr "Ex. Believe in yourself."
+
+msgid "Buscar frase:"
+msgstr "Search quote:"
+
+msgid "Ej. éxito, creer, motivación..."
+msgstr "Ex. success, believe, motivation..."
+
+msgid "Buscar"
+msgstr "Search"
+
+msgid "📋 Frases guardadas:"
+msgstr "📋 Saved quotes:"
+
+msgid "No hay frases que coincidan con el filtro."
+msgstr "No quotes match the filter."
+
+msgid "¿Eliminar esta frase?"
+msgstr "Delete this quote?"
+
+msgid "Volver al inicio"
+msgstr "Back to home"
+
+msgid "Revisar logística del evento"
+msgstr "Review event logistics"
+
+msgid "Enviar recordatorio al equipo"
+msgstr "Send reminder to the team"
+
+msgid "Preparar agenda de la reunión"
+msgstr "Prepare meeting agenda"
+
+msgid "Confirmar participantes"
+msgstr "Confirm attendees"
+
+msgid "Revisar presentación final"
+msgstr "Review final presentation"
+
+msgid "Programar publicación en redes"
+msgstr "Schedule social media post"
+
+msgid "Creada automáticamente por evento"
+msgstr "Automatically created by event"
+
+msgid ""
+"Hola %s,\n"
+"\n"
+"Estas son tus tareas pendientes para hoy o mañana:\n"
+"\n"
+msgstr ""
+"Hello %s,\n"
+"\n"
+"These are your pending tasks for today or tomorrow:\n"
+"\n"
+
+msgid "Fecha:"
+msgstr "Date:"
+
+msgid "Por favor ingresa al panel para actualizarlas."
+msgstr "Please log in to the dashboard to update them."
+
+msgid "🔔 Recordatorio de tareas pendientes - Golden Shark"
+msgstr "🔔 Pending tasks reminder - Golden Shark"
+
+msgid "🔍 Shortcode [%s] ejecutado por %s en %s"
+msgstr "🔍 Shortcode [%s] executed by %s at %s"
+
+msgid "Se actualizó el mensaje motivacional"
+msgstr "Motivational message was updated"
+
+msgid "Se actualizó el color del dashboard"
+msgstr "Dashboard color was updated"
+
+msgid "Se actualizó el mensaje para correos"
+msgstr "Email message was updated"
+
+msgid "Se actualizó la opción de notificaciones internas"
+msgstr "Internal notifications option was updated"
+
+msgid "eventos registrados"
+msgstr "registered events"
+
+msgid "leads capturados"
+msgstr "captured leads"
+
+msgid "frases guardadas"
+msgstr "saved quotes"
+
+msgid "eventos programados para hoy"
+msgstr "events scheduled for today"
+
+msgid "leads sin revisar"
+msgstr "unreviewed leads"
+
+msgid "📜 Historial por sitio remoto"
+msgstr "📜 History by remote site"
+
+msgid "Este registro muestra los últimos cambios realizados en cada sitio de la web"
+msgstr "This record shows the latest changes made to each website"
+
+msgid "No hay sitios disponibles."
+msgstr "No sites available."
+
+msgid "Historial de Actividad 📜"
+msgstr "Activity History 📜"
+
+msgid "📤 Exportar historial a CSV"
+msgstr "📤 Export history to CSV"
+
+msgid "No hay actividades registradas aún."
+msgstr "No activities recorded yet."
+
+msgid "❌ Error al enviar webhook de evento:"
+msgstr "❌ Error sending event webhook:"
+
+msgid "📤 Webhook de evento enviado correctamente a %s"
+msgstr "📤 Event webhook successfully sent to %s"
+
+msgid "Vista Kanban - Tareas internas"
+msgstr "Kanban View - Internal tasks"
+
+msgid "pendiente"
+msgstr "pending"
+
+msgid "progreso"
+msgstr "in progress"
+
+msgid "completado"
+msgstr "completed"
+
+msgid "Sin tareas"
+msgstr "No tasks"
+
+msgid "Responsable:"
+msgstr "Responsible:"
+
+msgid "📨 Leads Capturados"
+msgstr "📨 Captured Leads"
+
+msgid "Editar Lead"
+msgstr "Edit Lead"
+
+msgid "➕ Nuevo Lead"
+msgstr "➕ New Lead"
+
+msgid "Nombre:"
+msgstr "Name:"
+
+msgid "Correo:"
+msgstr "Email:"
+
+msgid "Mensaje:"
+msgstr "Message:"
+
+msgid "Etiquetas:"
+msgstr "Tags:"
+
+msgid "Ej: urgente, cliente, evento"
+msgstr "Ex: urgent, client, event"
+
+msgid "Guardar lead"
+msgstr "Save lead"
+
+msgid "Exportar leads filtrados"
+msgstr "Export filtered leads"
+
+msgid "Exportación avanzada:"
+msgstr "Advanced export:"
+
+msgid "Columnas a incluir:"
+msgstr "Columns to include:"
+
+msgid "Rango de fechas:"
+msgstr "Date range:"
+
+msgid "Leads Registrados:"
+msgstr "Registered Leads:"
+
+msgid "¿Eliminar todos los leads con fecha pasada?"
+msgstr "Delete all leads with past dates?"
+
+msgid "🧹 Eliminar leads antiguos"
+msgstr "🧹 Delete old leads"
+
+msgid "¿Eliminar este lead?"
+msgstr "Delete this lead?"
+
+msgid "No hay leads registrados con ese filtro."
+msgstr "No leads found with that filter."
+
+msgid "Acceso restringido"
+msgstr "Restricted access"
+
+msgid "📜 Logs del sistema"
+msgstr "📜 System logs"
+
+msgid "Filtrar por usuario"
+msgstr "Filter by user"
+
+msgid "Filtrar por IP"
+msgstr "Filter by IP"
+
+msgid "Palabra clave"
+msgstr "Keyword"
+
+msgid "🔍 Filtrar"
+msgstr "🔍 Filter"
+
+msgid "❌ Limpiar"
+msgstr "❌ Clear"
+
+msgid "No se encontraron registros con los filtros aplicados."
+msgstr "No records found with applied filters."
+
+msgid "Usuario"
+msgstr "User"
+
+msgid "IP"
+msgstr "IP"
+
+msgid "Navegador"
+msgstr "Browser"
+
+msgid "Origen"
+msgstr "Source"
+
+msgid "Mensaje"
+msgstr "Message"
+
+msgid "Golden Shark Panel"
+msgstr "Golden Shark Panel"
+
+msgid "Golden Shark 🦈"
+msgstr "Golden Shark 🦈"
+
+msgid "Resumen"
+msgstr "Summary"
+
+msgid "👥 Accesos y Roles"
+msgstr "👥 Access and Roles"
+
+msgid "Eventos"
+msgstr "Events"
+
+msgid "Frases & Mensajes"
+msgstr "Quotes & Messages"
+
+msgid "Leads"
+msgstr "Leads"
+
+msgid "Tareas Internas"
+msgstr "Internal Tasks"
+
+msgid "Tareas"
+msgstr "Tasks"
+
+msgid "Notas Internas"
+msgstr "Internal Notes"
+
+msgid "Calendario"
+msgstr "Calendar"
+
+msgid "Historial de Actividad"
+msgstr "Activity History"
+
+msgid "Historial"
+msgstr "History"
+
+msgid "Configuración"
+msgstr "Settings"
+
+msgid "🌐 Panel Multisitio"
+msgstr "🌐 Multisite Panel"
+
+msgid "🌐 Lista de Sitios"
+msgstr "🌐 Sites List"
+
+msgid "Historial de sitios"
+msgstr "Sites history"
+
+msgid "📜 Historial Sitios"
+msgstr "📜 Sites History"
+
+msgid "Mi perfil"
+msgstr "My profile"
+
+msgid "👤 Mi perfil"
+msgstr "👤 My profile"
+
+msgid "Acceso denegado. Solo el superadministrador puede acceder."
+msgstr "Access denied. Only superadmin can access."
+
+msgid "Frases Globales"
+msgstr "Global Quotes"
+
+msgid "Configuración Global"
+msgstr "Global Settings"
+
+msgid "Frases migradas a nivel multisite"
+msgstr "Quotes migrated to multisite level"
+
+msgid "Migrada la configuración \"%s\" al modo multisitio"
+msgstr "Migrated \"%s\" setting to multisite mode"
+
+msgid "Desde aquí puedes gestionar frases y configuración global o editar remotamente los sitios de la red."
+msgstr "From here you can manage quotes and global settings or remotely edit network sites."
+
+msgid "🎛️ Edición remota por sitio"
+msgstr "🎛️ Remote editing by site"
+
+msgid "Sitio"
+msgstr "Site"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "Editar frases / config"
+msgstr "Edit quotes / config"
+
+msgid "✅ Nota guardada correctamente."
+msgstr "✅ Note saved successfully."
+
+msgid "Nota actualizada correctamente."
+msgstr "Note updated successfully."
+
+msgid "Nota eliminada correctamente."
+msgstr "Note deleted successfully."
+
+msgid "Notas Internas 🗒️"
+msgstr "Internal Notes 🗒️"
+
+msgid "Editar Nota"
+msgstr "Edit Note"
+
+msgid "Escribe aquí una nota interna..."
+msgstr "Write an internal note here..."
+
+msgid "Guardar nota"
+msgstr "Save note"
+
+msgid "Buscar por palabra clave..."
+msgstr "Search by keyword..."
+
+msgid "📤 Exportar todas las notas a CSV"
+msgstr "📤 Export all notes to CSV"
+
+msgid "Historial de Notas:"
+msgstr "Notes History:"
+
+msgid "No se encontraron notas con ese criterio."
+msgstr "No notes found with that criteria."
+
+msgid "¿Eliminar esta nota?"
+msgstr "Delete this note?"
+
+msgid "Debes iniciar sesión para ver tu perfil."
+msgstr "You must log in to view your profile."
+
+msgid "Tareas asignadas:"
+msgstr "Assigned tasks:"
+
+msgid "Última conexión:"
+msgstr "Last connection:"
+
+msgid "N/A"
+msgstr "N/A"
+
+msgid "📝 Historial reciente:"
+msgstr "📝 Recent history:"
+
+msgid "No hay historial registrado."
+msgstr "No history recorded."
+
+msgid "📊 Resumen de Actividad"
+msgstr "📊 Activity Summary"
+
+msgid "🗂️ Tareas asignadas a ti"
+msgstr "🗂️ Tasks assigned to you"
+
+msgid "No tienes tareas pendientes."
+msgstr "You have no pending tasks."
+
+msgid "📅 Eventos relevantes"
+msgstr "📅 Relevant events"
+
+msgid "No hay eventos próximos."
+msgstr "No upcoming events."
+
+msgid "📋 Tus últimas acciones"
+msgstr "📋 Your latest actions"
+
+msgid "No se encontraron logs recientes."
+msgstr "No recent logs found."
+
+msgid "⛔ Acceso denegado."
+msgstr "⛔ Access denied."
+
+msgid "✅ Capacidades actualizadas correctamente."
+msgstr "✅ Capabilities updated successfully."
+
+msgid "Activa o desactiva las capacidades específicas que tiene cada rol en tu instalación de WordPress."
+msgstr "Enable or disable specific capabilities for each role in your WordPress installation."
+
+msgid "Rol"
+msgstr "Role"
+
+msgid "💾 Guardar cambios"
+msgstr "💾 Save changes"
+
+msgid "🔑 Acceso Básico al Plugin"
+msgstr "🔑 Basic Plugin Access"
+
+msgid "⚙️ Acceso a Configuración"
+msgstr "⚙️ Settings Access"
+
+msgid "📜 Ver Logs del Sistema"
+msgstr "📜 View System Logs"
+
+msgid "No hay frases registradas aún."
+msgstr "No quotes registered yet."
+
+msgid "Error de seguridad. Recarga la página."
+msgstr "Security error. Please reload the page."
+
+msgid "¡Gracias por registrarte!"
+msgstr "Thank you for signing up!"
+
+msgid "Por favor completa los campos obligatorios."
+msgstr "Please complete required fields."
+
+msgid "Nombre*:"
+msgstr "Name*:"
+
+msgid "Correo electrónico*:"
+msgstr "Email*:"
+
+msgid "Mensaje (opcional):"
+msgstr "Message (optional):"
+
+msgid "Enviar"
+msgstr "Send"
+
+msgid "No hay eventos disponibles en este momento."
+msgstr "No events available at this time."
+
+msgid "en"
+msgstr "at"
+
+msgid "Nota interna:"
+msgstr "Internal note:"
+
+msgid "Total de leads registrados:"
+msgstr "Total registered leads:"
+
+msgid "Debes iniciar sesión para ver tu historial"
+msgstr "You must log in to view your history"
+
+msgid "No tienes historial registrado aún."
+msgstr "You have no history recorded yet."
+
+msgid "No tienes permisos para acceder a esta sección."
+msgstr "You don't have permission to access this section."
+
+msgid "🌐 Sitios en la Red"
+msgstr "🌐 Network Sites"
+
+msgid "No se encontraron sitios en la red."
+msgstr "No sites found in the network."
+
+msgid "ID"
+msgstr "ID"
+
+msgid "sin nombre"
+msgstr "unnamed"
+
+msgid "Lista"
+msgstr "List"
+
+msgid "Kanban"
+msgstr "Kanban"
+
+msgid "Pendiente"
+msgstr "Pending"
+
+msgid "Completado"
+msgstr "Completed"
+
+msgid "Etiqueta:"
+msgstr "Tag:"
+
+msgid "Desde:"
+msgstr "From:"
+
+msgid "Hasta:"
+msgstr "To:"
+
+msgid "¿Seguro que deseas eliminar todas las tareas anteriores a hoy?"
+msgstr "Are you sure you want to delete all tasks prior to today?"
+
+msgid "🧹 Tareas anteriores a hoy eliminadas."
+msgstr "🧹 Tasks prior to today deleted."

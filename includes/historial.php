@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 // HISTORIAL
 function golden_shark_render_historial() {
     if (!golden_shark_user_can('golden_shark_ver_logs')) {
-        wp_die('No tienes permiso para acceder a esta sección.');
+        wp_die(__('No tienes permiso para acceder a esta sección.', 'golden-shark'));
     }
 
     $historial = get_option('golden_shark_historial', []);
@@ -13,7 +13,7 @@ function golden_shark_render_historial() {
     // Exportar historial a CSV
     if (isset($_POST['exportar_historial_csv'])) {
         if (!isset($_POST['historial_nonce']) || !wp_verify_nonce($_POST['historial_nonce'], 'exportar_historial_nonce')) {
-            wp_die('⚠️ Seguridad fallida. Token inválido.');
+            wp_die(__('⚠️ Seguridad fallida. Token inválido.', 'golden-shark'));
         }
 
         header('Content-Type: text/csv');
@@ -30,21 +30,21 @@ function golden_shark_render_historial() {
     ?>
 
     <div class="wrap">
-        <h2>Historial de Actividad 📜</h2>
+        <h2><?php __('Historial de Actividad 📜', 'golden-shark') ?></h2>
 
         <form method="post" style="margin-bottom: 20px;">
             <?php wp_nonce_field('exportar_historial_nonce', 'historial_nonce'); ?>
-            <input type="submit" name="exportar_historial_csv" class="button button-secondary" value="📤 Exportar historial a CSV">
+            <input type="submit" name="exportar_historial_csv" class="button button-secondary" value="' . <?php esc_attr__('📤 Exportar historial a CSV', 'golden-shark') ?> . '">
         </form>
 
         <?php if (empty($historial)) : ?>
-            <p>No hay actividades registradas aún.</p>
+            <p><?php __('No hay actividades registradas aún.', 'golden-shark') ?></p>
         <?php else : ?>
             <table class="widefat fixed striped">
                 <thead>
                     <tr>
-                        <th>Fecha</th>
-                        <th>Acción</th>
+                        <th><?php __('Fecha', 'golden-shark') ?></th>
+                        <th><?php __('Acción', 'golden-shark') ?></th>
                     </tr>
                 </thead>
                 <tbody>

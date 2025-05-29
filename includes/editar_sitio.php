@@ -12,7 +12,7 @@ function golden_shark_render_editar_sitio()
     $sitio_id = intval($_GET['sitio'] ?? 0);
     $info = get_blog_details($sitio_id);
     if (!$info) {
-        echo '<div class="notice notice-error"><p>⛔ El sitio con ID ' . $sitio_id . ' no existe.</p></div>';
+        printf('<div class="notice notice-error"><p>' . __('⛔ El sitio con ID %s no existe.', 'golden-shark') . '</p></div>', $sitio_id);
         return;
     }
 
@@ -61,7 +61,7 @@ function golden_shark_render_editar_sitio()
     $url = esc_url($info->siteurl);
 
     echo '<div class="wrap">';
-    echo "<h2>🛠️ Editar sitio remoto: $nombre</h2>";
+    printf('<h2>' . __('🛠️ Editar sitio remoto: %s', 'golden-shark') . '</h2>', $nombre);
     echo "<p><a href=\"$url\" target=\"_blank\">Visitar sitio</a></p>";
 
     echo '<form method="post">';
@@ -70,29 +70,29 @@ function golden_shark_render_editar_sitio()
     echo '<div class="gs-container">';
     echo '<h3>🎨 Configuración general</h3>';
     echo '<table class="form-table">';
-    echo '<tr><th><label for="color">Color del dashboard:</label></th><td><input type="color" id="color" name="color" value="' . esc_attr($color) . '"></td></tr>';
-    echo '<tr><th><label for="mensaje">Mensaje motivacional:</label></th><td><input type="text" id="mensaje" name="mensaje" class="regular-text" value="' . esc_attr($mensaje) . '"></td></tr>';
-    echo '<tr><th><label for="mensaje_correo">Mensaje en correos:</label></th><td><textarea id="mensaje_correo" name="mensaje_correo" rows="3" class="large-text">' . esc_textarea($mensaje_correo) . '</textarea></td></tr>';
-    echo '<tr><th>Notificaciones:</th><td><label><input type="checkbox" name="notificaciones" value="1" ' . checked($notificaciones, '1', false) . '> Habilitadas</label></td></tr>';
+    echo '<tr><th><label for="color">' . __('Color del dashboard', 'golden-shark') . '</label></th><td><input type="color" id="color" name="color" value="' . esc_attr($color) . '"></td></tr>';
+    echo '<tr><th><label for="mensaje">' . __('Mensaje motivacional:', 'golden-shark') . '</label></th><td><input type="text" id="mensaje" name="mensaje" class="regular-text" value="' . esc_attr($mensaje) . '"></td></tr>';
+    echo '<tr><th><label for="mensaje_correo">' . __('Mensaje en correos:', 'golden-shark') . '</label></th><td><textarea id="mensaje_correo" name="mensaje_correo" rows="3" class="large-text">' . esc_textarea($mensaje_correo) . '</textarea></td></tr>';
+    echo '<tr><th>' . __('Notificaciones:', 'golden-shark') . '</th><td><label><input type="checkbox" name="notificaciones" value="1" ' . checked($notificaciones, '1', false) . '> ' . __('Habilitadas', 'golden-shark') . '</label></td></tr>';
     echo '</table>';
     echo '</div>';
 
     echo '<div class="gs-container">';
-    echo '<h3>💬 Frases motivacionales</h3>';
+    echo '<h3>' . __('💬 Frases motivacionales', 'golden-shark') . '</h3>';
     if (empty($frases)) $frases[] = '';
     foreach ($frases as $i => $frase) {
         echo '<p><input type="text" name="frases[]" class="widefat" value="' . esc_attr($frase) . '"></p>';
     }
-    echo '<p><button type="button" class="button" onclick="agregarCampoFrase()">➕ Agregar otra frase</button></p>';
+    echo '<p><button type="button" class="button" onclick="agregarCampoFrase()">' . __('➕ Agregar otra frase', 'golden-shark') . '</button></p>';
     echo '</div>';
 
-    echo '<p><input type="submit" name="guardar_cambios_remotos" class="button button-primary" value="💾 Guardar todos los cambios"></p>';
+    echo '<p><input type="submit" name="guardar_cambios_remotos" class="button button-primary" value="' . __('💾 Guardar todos los cambios', 'golden-shark') . '"></p>';
     echo '</form>';
 
     $historial = get_site_option("gs_historial_sitio_$sitio_id", []);
     if (!empty($historial)) {
         echo '<div class="gs-container">';
-        echo '<h3>📜 Historial de cambios remotos:</h3>';
+        echo '<h3>' . __('📜 Historial de cambios remotos', 'golden-shark') . '</h3>';
         echo '<ul style="margin-left: 20px;">';
         foreach (array_reverse($historial) as $registro) {
             echo '<li><strong>' . esc_html($registro['fecha']) . '</strong> - ';

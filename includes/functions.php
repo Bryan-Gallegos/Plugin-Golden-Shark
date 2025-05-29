@@ -31,6 +31,15 @@ function golden_shark_log($mensaje, $tipo = 'info')
     update_option('golden_shark_logs', array_slice($logs, -200)); // Limita a los últimos 200 logs
 }
 
+// 🧩 Registrar ejecución de shortcodes
+function golden_shark_log_shortcode($shortcode_name)
+{
+    $url = $_SERVER['REQUEST_URI'] ?? 'URL desconocida';
+    $usuario = is_user_logged_in() ? wp_get_current_user()->user_login : 'anónimo';
+    $mensaje = sprintf(__('🔍 Shortcode [%s] ejecutado por %s en %s', 'golden-shark'), $shortcode_name, $usuario, $url);
+    golden_shark_log($mensaje);
+}
+
 // 🧍 Registrar una acción en el historial personal del usuario actual
 function golden_shark_log_usuario($mensaje)
 {
@@ -58,10 +67,10 @@ function golden_shark_log_cambio_configuracion($option, $old_value, $value)
     if ($old_value === $value) return;
 
     $mensajes = [
-        'golden_shark_mensaje_motivacional' => 'Se actualizó el mensaje motivacional',
-        'golden_shark_color_dashboard'      => 'Se actualizó el color del dashboard',
-        'golden_shark_mensaje_correo'       => 'Se actualizó el mensaje para correos',
-        'golden_shark_habilitar_notificaciones' => 'Se actualizó la opción de notificaciones internas'
+        'golden_shark_mensaje_motivacional'      => __('Se actualizó el mensaje motivacional', 'golden-shark'),
+        'golden_shark_color_dashboard'           => __('Se actualizó el color del dashboard', 'golden-shark'),
+        'golden_shark_mensaje_correo'            => __('Se actualizó el mensaje para correos', 'golden-shark'),
+        'golden_shark_habilitar_notificaciones'  => __('Se actualizó la opción de notificaciones internas', 'golden-shark')
     ];
 
     if (isset($mensajes[$option])) {
@@ -150,16 +159,16 @@ function golden_shark_dashboard_widget()
     $limite_leads   = intval(golden_shark_get_config('golden_shark_alerta_leads_pendientes', 5));
 
     echo '<ul style="margin-left: 20px;">';
-    echo '<li>📅 <strong>' . $total_eventos . '</strong> eventos registrados</li>';
-    echo '<li>📨 <strong>' . $total_leads . '</strong> leads capturados</li>';
-    echo '<li>💬 <strong>' . $total_frases . '</strong> frases guardadas</li>';
+    echo '<li>📅 <strong>' . $total_eventos . '</strong> ' . __('eventos registrados', 'golden-shark') . '</li>';
+    echo '<li>📨 <strong>' . $total_leads . '</strong> ' . __('leads capturados', 'golden-shark') . '</li>';
+    echo '<li>💬 <strong>' . $total_frases . '</strong> ' . __('frases guardadas', 'golden-shark') . '</li>';
 
     if (count($eventos_hoy) > $limite_eventos) {
-        echo '<li style="color: #cc000">⚠️ <strong>' . count($eventos_hoy) . '</strong> eventos programados para hoy</li>';
+        echo '<li style="color: #cc000">⚠️ <strong>' . count($eventos_hoy) . '</strong> ' . __('eventos programados para hoy', 'golden-shark') . '</li>';
     }
 
     if (count($leads_sin_revisar) > $limite_leads) {
-        echo '<li style="color: #cc7a00;">🔔 <strong>' . count($leads_sin_revisar) . '</strong> leads sin revisar</li>';
+        echo '<li style="color: #cc7a00;">🔔 <strong>' . count($leads_sin_revisar) . '</strong> ' . __('leads sin revisar', 'golden-shark') . '</li>';
     }
 
     echo '</ul>';
@@ -208,14 +217,14 @@ function golden_shark_guardar_historial_sitio($sitio_id, $description)
 {
     if (!is_multisite()) return;
 
-    $historial = get_site_option("gs_historial_site_$site_id", []);
+    $historial = get_site_option("gs_historial_site_$sitio_id", []);
     $historial[] = [
         'fecha' => current_time('Y-m-d H:i:s'),
         'usuario' => wp_get_current_user()->user_login ?? 'desconocido',
         'cambios' => $description
     ];
 
-    update_site_option("gs_historial_sitio_$site_id", array_slice($historial, -50));
+    update_site_option("gs_historial_sitio_$sitio_id", array_slice($historial, -50));
 }
 
 add_action('golden_shark_enviar_recordatorios_diarios', 'golden_shark_enviar_recordatorios_tareas');
@@ -223,3 +232,22 @@ add_action('golden_shark_enviar_recordatorios_diarios', 'golden_shark_enviar_rec
 add_action('wp_login', function($user_login, $user) {
     update_user_meta($user->ID, 'last_login', current_time('Y-m-d H:i:s'));
 }, 10, 2);
+
+function golden_shark_toggle_evento_favorito($evento_id){
+    $user_id = get_current_user_id();
+    $favoritos = get_user_meta($user_id, 'gs_eventos_favoritos', true) ?: [];
+
+    if(in_array($evento_id, $favoritos)){
+        $favoritos = array_diff($favoritos, [$evento_id]);
+    } else {
+        $favoritos[] = $evento_id;
+    }
+
+    update_user_meta($user_id, 'gs_eventos_favoritos', array_values($favoritos));
+}
+
+function golden_shark_es_evento_favorito($evento_id){
+    $user_id = get_current_user_id();
+    $favoritos = get_user_meta($user_id, 'gs_eventos_favoritos', true) ?: [];
+    return in_array($evento_id, $favoritos);
+}

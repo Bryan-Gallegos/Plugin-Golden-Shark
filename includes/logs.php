@@ -5,7 +5,7 @@ if(!defined('ABSPATH')) exit;
 function golden_shark_render_logs()
 {
     if (!golden_shark_user_can('golden_shark_ver_logs')) {
-        wp_die('Acceso restringido');
+        wp_die(__('Acceso restringido', 'golden-shark'));
     }
 
     $logs = get_option('golden_shark_logs', []);
@@ -24,7 +24,7 @@ function golden_shark_render_logs()
     });
     ?>
     <div class="wrap gs-container">
-        <h2>📜 Logs del sistema</h2>
+        <h2><?php __('📜 Logs del sistema', 'golden-shark') ?></h2>
 
         <form method="get" style="margin-bottom: 20px;">
             <input type="hidden" name="page" value="golden-shark-logs">
@@ -33,21 +33,21 @@ function golden_shark_render_logs()
             <input type="date" name="filtro_fecha" value="<?php echo esc_attr($fecha_filtro); ?>" style="margin-right:10px;">
             <input type="text" name="filtro_palabra" placeholder="Palabra clave" value="<?php echo esc_attr($palabra_clave); ?>" style="margin-right:10px;">
             <input type="submit" class="button" value="🔍 Filtrar">
-            <a href="<?php echo admin_url('admin.php?page=golden-shark-logs'); ?>" class="button">❌ Limpiar</a>
+            <a href="<?php echo admin_url('admin.php?page=golden-shark-logs'); ?>" class="button"><?php __('❌ Limpiar', 'golden-shark') ?></a>
         </form>
 
         <?php if (empty($logs_filtrados)) : ?>
-            <p>No se encontraron registros con los filtros aplicados.</p>
+            <p><?php __('No se encontraron registros con los filtros aplicados.', 'golden-shark') ?></p>
         <?php else : ?>
             <table class="widefat striped">
                 <thead>
                     <tr>
-                        <th>Fecha</th>
-                        <th>Usuario</th>
-                        <th>IP</th>
-                        <th>Navegador</th>
-                        <th>Origen</th>
-                        <th>Mensaje</th>
+                        <th><?php __('Fecha', 'golden-shark') ?></th>
+                        <th><?php __('Usuario', 'golden-shark') ?></th>
+                        <th><?php __('IP', 'golden-shark') ?></th>
+                        <th><?php __('Navegador', 'golden-shark') ?></th>
+                        <th><?php __('Origen', 'golden-shark') ?></th>
+                        <th><?php __('Mensaje', 'golden-shark') ?></th>
                     </tr>
                 </thead>
                 <tbody>

@@ -73,6 +73,18 @@ Todas las configuraciones principales (colores, mensajes y notificaciones) está
 
 ## 🗓️ Historial de cambios
 
+### v2.6 - Integración avanzada y personalización del usuario
+- Sistema de **etiquetas** apra eventos, leads y tareas (filtrado más preciso).
+- **Favoritos** por usuario: marcar frases, notas o eventos destacados.
+- Filtros combinados inteligentes en listas (tipo + fecha + etiqueta).
+- Vista resumen por usuario: tareas asignadas, eventos relevantes, historial y últimas acciones.
+- Limpieza programada de registros antiguos (leads, eventos, tareas completadas).
+- Exportación avanzada: permite elegir columnasy rangos de fecha.
+- **Webhook** personalizado con payload ajustable (por sección).
+- Logs extendidos: guardar cambios de configuración y ejecuciones de shortcodes.
+- Soporte para traducción (**`.pot`**) e internacionalización.
+- Vista personalizada por usuario (lista o kanban) en el módulo de tareas.
+
 ### v2.5 – Productividad y automatización avanzada
 - Asistente de tareas: se crean tareas automáticamente según el tipo de evento registrado.
 - Webhook de eventos: se dispara un webhook configurado al registrar o editar un evento.

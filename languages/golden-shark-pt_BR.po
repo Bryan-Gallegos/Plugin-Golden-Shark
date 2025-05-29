@@ -1,0 +1,814 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Golden Shark Admin Panel\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-05-26 00:00+0000\n"
+"PO-Revision-Date: 2025-05-29 12:21-0500\n"
+"Last-Translator: Carlos Gallegos <carlos@ejemplo.com>\n"
+"Language-Team: Portuguese (BR)\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+"X-Domain: golden-shark\n"
+
+msgid "No tienes permiso para acceder a esta sección."
+msgstr "Você não tem permissão para acessar esta seção."
+
+msgid "Calendario de Eventos"
+msgstr "Calendário de Eventos"
+
+msgid "Acceso denegado. Solo el superadministrador puede ver esta acción"
+msgstr "Acesso negado. Apenas o superadministrador pode ver esta ação"
+
+msgid "Se actualizaron configuraciones globales desde el panel multisite"
+msgstr "Configurações globais foram atualizadas pelo painel multisite"
+
+msgid "✅ Configuraciones globales actualizadas correctamente."
+msgstr "✅ Configurações globais atualizadas com sucesso."
+
+msgid "¡Sigue adelante!"
+msgstr "Continue avançando!"
+
+msgid "Gracias por tu mensaje. Te contactaremos pronto."
+msgstr "Obrigado pela sua mensagem. Entraremos em contato em breve."
+
+msgid "🌐 Configuración Global"
+msgstr "🌐 Configuração Global"
+
+msgid "Color del Dashboard"
+msgstr "Cor do Painel"
+
+msgid "Mensaje Motivacional"
+msgstr "Mensagem Motivacional"
+
+msgid "Mensaje para Correos"
+msgstr "Mensagem para Emails"
+
+msgid "Mostrar Notificaciones"
+msgstr "Mostrar Notificações"
+
+msgid "Sí, mostrar notificaciones internas"
+msgstr "Sim, mostrar notificações internas"
+
+msgid "Guardar Configuraciones"
+msgstr "Salvar Configurações"
+
+msgid "🧹 Se eliminaron todos los registros anteriores a hoy."
+msgstr "🧹 Todos os registros anteriores a hoje foram excluídos."
+
+msgid "⚙️ Configuración del Plugin"
+msgstr "⚙️ Configuração do Plugin"
+
+msgid "💾 Guardar configuración"
+msgstr "💾 Salvar configuração"
+
+msgid "🧹 Limpieza de registros antiguos"
+msgstr "🧹 Limpeza de registros antigos"
+
+msgid "Este botón eliminará los"
+msgstr "Este botão excluirá os"
+
+msgid "leads antiguos"
+msgstr "leads antigos"
+
+msgid "eventos pasados"
+msgstr "eventos passados"
+
+msgid "y"
+msgstr "e"
+
+msgid "tareas vencidas"
+msgstr "tarefas vencidas"
+
+msgid "hasta la fecha actual."
+msgstr "até a data atual."
+
+msgid "¿Seguro que deseas eliminar todos los datos antiguos? Esta acción no se puede deshacer."
+msgstr "Tem certeza que deseja excluir todos os dados antigos? Esta ação não pode ser desfeita."
+
+msgid "🧹 Ejecutar limpieza masiva"
+msgstr "🧹 Executar limpeza em massa"
+
+msgid "⚠️ Atención: hay más de %s eventos programados para hoy."
+msgstr "⚠️ Atenção: há mais de %s eventos agendados para hoje."
+
+msgid "🔔 Atención: hay más de %s leads sin revisar."
+msgstr "🔔 Atenção: há mais de %s leads não revisados."
+
+msgid "Frase motivacional del día:"
+msgstr "Frase motivacional do dia:"
+
+msgid "💬 Frases"
+msgstr "💬 Frases"
+
+msgid "📅 Eventos"
+msgstr "📅 Eventos"
+
+msgid "📨 Leads"
+msgstr "📨 Leads"
+
+msgid "Resumen gráfico"
+msgstr "Resumo gráfico"
+
+msgid "Leads sin revisar"
+msgstr "Leads não revisados"
+
+msgid "Nombre"
+msgstr "Nome"
+
+msgid "Email"
+msgstr "E-mail"
+
+msgid "Fecha"
+msgstr "Data"
+
+msgid "Acción"
+msgstr "Ação"
+
+msgid "Marcar como revisado"
+msgstr "Marcar como revisado"
+
+msgid "Actividad reciente"
+msgstr "Atividade recente"
+
+msgid "📤 Exportar historial en CSV"
+msgstr "📤 Exportar histórico para CSV"
+
+msgid "Acceso restringido solo a superadministradores"
+msgstr "Acesso restrito apenas a superadministradores"
+
+msgid "⛔ El sitio con ID %s no existe."
+msgstr "⛔ Site com ID %s não existe."
+
+msgid "✅ Cambios guardados en el sitio remoto."
+msgstr "✅ Alterações salvas no site remoto."
+
+msgid "🛠️ Editar sitio remoto: %s"
+msgstr "🛠️ Editar site remoto: %s"
+
+msgid "Visitar sitio"
+msgstr "Visitar site"
+
+msgid "🎨 Configuración general"
+msgstr "🎨 Configuração geral"
+
+msgid "Mensaje motivacional:"
+msgstr "Mensagem motivacional:"
+
+msgid "Mensaje en correos:"
+msgstr "Mensagem em e-mails:"
+
+msgid "Notificaciones:"
+msgstr "Notificações:"
+
+msgid "Habilitadas"
+msgstr "Habilitadas"
+
+msgid "💬 Frases motivacionales"
+msgstr "💬 Frases motivacionais"
+
+msgid "➕ Agregar otra frase"
+msgstr "➕ Adicionar outra frase"
+
+msgid "💾 Guardar todos los cambios"
+msgstr "💾 Salvar todas as alterações"
+
+msgid "📜 Historial de cambios remotos"
+msgstr "📜 Histórico de alterações remotas"
+
+msgid "🧹 Eventos anteriores a hoy eliminados correctamente."
+msgstr "🧹 Eventos anteriores a hoje excluídos com sucesso."
+
+msgid "⚠️ Seguridad fallida. Token inválido."
+msgstr "⚠️ Falha de segurança. Token inválido."
+
+msgid "✅ Evento guardado correctamente."
+msgstr "✅ Evento salvo com sucesso."
+
+msgid "✏️ Evento actualizado correctamente."
+msgstr "✏️ Evento atualizado com sucesso."
+
+msgid "🗑️ Evento eliminado correctamente."
+msgstr "🗑️ Evento excluído com sucesso."
+
+msgid "🗑️ Evento eliminado."
+msgstr "🗑️ Evento excluído."
+
+msgid "Gestión de Eventos Internos"
+msgstr "Gerenciamento de Eventos Internos"
+
+msgid "Editar Evento"
+msgstr "Editar Evento"
+
+msgid "Guardar cambios"
+msgstr "Salvar alterações"
+
+msgid "Nuevo Evento"
+msgstr "Novo Evento"
+
+msgid "Interno"
+msgstr "Interno"
+
+msgid "Reunión"
+msgstr "Reunião"
+
+msgid "Lanzamiento"
+msgstr "Lançamento"
+
+msgid "Ej: urgente, cliente, zona sur"
+msgstr "Ex: urgente, cliente, zona sul"
+
+msgid "Guardar evento"
+msgstr "Salvar evento"
+
+msgid "¿Eliminar todos los eventos con fecha pasada?"
+msgstr "Excluir todos os eventos com datas passadas?"
+
+msgid "Eventos Registrados:"
+msgstr "Eventos Registrados:"
+
+msgid "No hay eventos registrados."
+msgstr "Não há eventos registrados."
+
+msgid "Título"
+msgstr "Título"
+
+msgid "Ubicación"
+msgstr "Localização"
+
+msgid "Acciones"
+msgstr "Ações"
+
+msgid "Etiquetas"
+msgstr "Etiquetas"
+
+msgid "¿Eliminar este evento?"
+msgstr "Excluir este evento?"
+
+msgid "⛔ No tienes permiso para acceder a esta sección."
+msgstr "⛔ Você não tem permissão para acessar esta seção."
+
+msgid "✅ Frase global agregada correctamente."
+msgstr "✅ Frase global adicionada com sucesso."
+
+msgid "✅ Frase global actualizada correctamente."
+msgstr "✅ Frase global atualizada com sucesso."
+
+msgid "🗑️ Frase global eliminada correctamente."
+msgstr "🗑️ Frase global excluída com sucesso."
+
+msgid "⛔ Seguridad fallida. Token inválido."
+msgstr "⛔ Falha de segurança. Token inválido."
+
+msgid "✏️ Editar frase global"
+msgstr "✏️ Editar frase global"
+
+msgid "➕ Nueva frase global"
+msgstr "➕ Nova frase global"
+
+msgid "Ej. Cree en tu potencial."
+msgstr "Ex. Acredite no seu potencial."
+
+msgid "Guardar frase"
+msgstr "Salvar frase"
+
+msgid "📋 Frases globales registradas:"
+msgstr "📋 Frases globais registradas:"
+
+msgid "No hay frases globales registradas."
+msgstr "Não há frases globais registradas."
+
+msgid "Editar"
+msgstr "Editar"
+
+msgid "Eliminar"
+msgstr "Excluir"
+
+msgid "¿Eliminar esta frase global?"
+msgstr "Excluir esta frase global?"
+
+msgid "✅ Frase agregada correctamente."
+msgstr "✅ Frase adicionada com sucesso."
+
+msgid "✏️ Frase actualizada correctamente."
+msgstr "✏️ Frase atualizada com sucesso."
+
+msgid "🗑️ Frase eliminada."
+msgstr "🗑️ Frase excluída."
+
+msgid "💬 Frases & Mensajes"
+msgstr "💬 Frases & Mensagens"
+
+msgid "✏️ Editar frase"
+msgstr "✏️ Editar frase"
+
+msgid "➕ Nueva frase"
+msgstr "➕ Nova frase"
+
+msgid "Frase:"
+msgstr "Frase:"
+
+msgid "Ej. Cree en ti."
+msgstr "Ex. Acredite em você."
+
+msgid "Buscar frase:"
+msgstr "Buscar frase:"
+
+msgid "Ej. éxito, creer, motivación..."
+msgstr "Ex. sucesso, acreditar, motivação..."
+
+msgid "Buscar"
+msgstr "Buscar"
+
+msgid "📋 Frases guardadas:"
+msgstr "📋 Frases salvas:"
+
+msgid "No hay frases que coincidan con el filtro."
+msgstr "Não há frases que correspondam ao filtro."
+
+msgid "¿Eliminar esta frase?"
+msgstr "Excluir esta frase?"
+
+msgid "Volver al inicio"
+msgstr "Voltar ao início"
+
+msgid "Revisar logística del evento"
+msgstr "Revisar logística do evento"
+
+msgid "Enviar recordatorio al equipo"
+msgstr "Enviar lembrete para a equipe"
+
+msgid "Preparar agenda de la reunión"
+msgstr "Preparar agenda da reunião"
+
+msgid "Confirmar participantes"
+msgstr "Confirmar participantes"
+
+msgid "Revisar presentación final"
+msgstr "Revisar apresentação final"
+
+msgid "Programar publicación en redes"
+msgstr "Agendar publicação em redes"
+
+msgid "Creada automáticamente por evento"
+msgstr "Criada automaticamente por evento"
+
+msgid ""
+"Hola %s,\n"
+"\n"
+"Estas son tus tareas pendientes para hoy o mañana:\n"
+"\n"
+msgstr ""
+"Olá %s,\n"
+"\n"
+"Estas são suas tarefas pendentes para hoje ou amanhã:\n"
+"\n"
+
+msgid "Fecha:"
+msgstr "Data:"
+
+msgid "Por favor ingresa al panel para actualizarlas."
+msgstr "Por favor acesse o painel para atualizá-las."
+
+msgid "🔔 Recordatorio de tareas pendientes - Golden Shark"
+msgstr "🔔 Lembrete de tarefas pendentes - Golden Shark"
+
+msgid "🔍 Shortcode [%s] ejecutado por %s en %s"
+msgstr "🔍 Shortcode [%s] executado por %s em %s"
+
+msgid "Se actualizó el mensaje motivacional"
+msgstr "A mensagem motivacional foi atualizada"
+
+msgid "Se actualizó el color del dashboard"
+msgstr "A cor do painel foi atualizada"
+
+msgid "Se actualizó el mensaje para correos"
+msgstr "A mensagem para e-mails foi atualizada"
+
+msgid "Se actualizó la opción de notificaciones internas"
+msgstr "A opção de notificações internas foi atualizada"
+
+msgid "eventos registrados"
+msgstr "eventos registrados"
+
+msgid "leads capturados"
+msgstr "leads capturados"
+
+msgid "frases guardadas"
+msgstr "frases salvas"
+
+msgid "eventos programados para hoy"
+msgstr "eventos agendados para hoje"
+
+msgid "leads sin revisar"
+msgstr "leads não revisados"
+
+msgid "📜 Historial por sitio remoto"
+msgstr "📜 Histórico por site remoto"
+
+msgid "Este registro muestra los últimos cambios realizados en cada sitio de la web"
+msgstr "Este registro mostra as últimas alterações feitas em cada site"
+
+msgid "No hay sitios disponibles."
+msgstr "Não há sites disponíveis."
+
+msgid "Historial de Actividad 📜"
+msgstr "Histórico de Atividade 📜"
+
+msgid "📤 Exportar historial a CSV"
+msgstr "📤 Exportar histórico para CSV"
+
+msgid "No hay actividades registradas aún."
+msgstr "Não há atividades registradas ainda."
+
+msgid "❌ Error al enviar webhook de evento:"
+msgstr "❌ Erro ao enviar webhook de evento:"
+
+msgid "📤 Webhook de evento enviado correctamente a %s"
+msgstr "📤 Webhook de evento enviado com sucesso para %s"
+
+msgid "Vista Kanban - Tareas internas"
+msgstr "Visualização Kanban - Tarefas internas"
+
+msgid "pendiente"
+msgstr "pendente"
+
+msgid "progreso"
+msgstr "em andamento"
+
+msgid "completado"
+msgstr "concluído"
+
+msgid "Sin tareas"
+msgstr "Sem tarefas"
+
+msgid "Responsable:"
+msgstr "Responsável:"
+
+msgid "📨 Leads Capturados"
+msgstr "📨 Leads Capturados"
+
+msgid "Editar Lead"
+msgstr "Editar Lead"
+
+msgid "➕ Nuevo Lead"
+msgstr "➕ Novo Lead"
+
+msgid "Nombre:"
+msgstr "Nome:"
+
+msgid "Correo:"
+msgstr "E-mail:"
+
+msgid "Mensaje:"
+msgstr "Mensagem:"
+
+msgid "Etiquetas:"
+msgstr "Etiquetas:"
+
+msgid "Ej: urgente, cliente, evento"
+msgstr "Ex: urgente, cliente, evento"
+
+msgid "Guardar lead"
+msgstr "Salvar lead"
+
+msgid "Exportar leads filtrados"
+msgstr "Exportar leads filtrados"
+
+msgid "Exportación avanzada:"
+msgstr "Exportação avançada:"
+
+msgid "Columnas a incluir:"
+msgstr "Colunas a incluir:"
+
+msgid "Rango de fechas:"
+msgstr "Intervalo de datas:"
+
+msgid "Leads Registrados:"
+msgstr "Leads Registrados:"
+
+msgid "¿Eliminar todos los leads con fecha pasada?"
+msgstr "Excluir todos os leads com datas passadas?"
+
+msgid "🧹 Eliminar leads antiguos"
+msgstr "🧹 Excluir leads antigos"
+
+msgid "¿Eliminar este lead?"
+msgstr "Excluir este lead?"
+
+msgid "No hay leads registrados con ese filtro."
+msgstr "Não há leads registrados com esse filtro."
+
+msgid "Acceso restringido"
+msgstr "Acesso restrito"
+
+msgid "📜 Logs del sistema"
+msgstr "📜 Logs do sistema"
+
+msgid "Filtrar por usuario"
+msgstr "Filtrar por usuário"
+
+msgid "Filtrar por IP"
+msgstr "Filtrar por IP"
+
+msgid "Palabra clave"
+msgstr "Palavra-chave"
+
+msgid "🔍 Filtrar"
+msgstr "🔍 Filtrar"
+
+msgid "❌ Limpiar"
+msgstr "❌ Limpar"
+
+msgid "No se encontraron registros con los filtros aplicados."
+msgstr "Nenhum registro encontrado com os filtros aplicados."
+
+msgid "Usuario"
+msgstr "Usuário"
+
+msgid "IP"
+msgstr "IP"
+
+msgid "Navegador"
+msgstr "Navegador"
+
+msgid "Origen"
+msgstr "Origem"
+
+msgid "Mensaje"
+msgstr "Mensagem"
+
+msgid "Golden Shark Panel"
+msgstr "Painel Golden Shark"
+
+msgid "Golden Shark 🦈"
+msgstr "Golden Shark 🦈"
+
+msgid "Resumen"
+msgstr "Resumo"
+
+msgid "👥 Accesos y Roles"
+msgstr "👥 Acessos e Funções"
+
+msgid "Eventos"
+msgstr "Eventos"
+
+msgid "Frases & Mensajes"
+msgstr "Citações & Mensagens"
+
+msgid "Leads"
+msgstr "Leads"
+
+msgid "Tareas Internas"
+msgstr "Tarefas Internas"
+
+msgid "Tareas"
+msgstr "Tarefas"
+
+msgid "Notas Internas"
+msgstr "Notas Internas"
+
+msgid "Calendario"
+msgstr "Calendário"
+
+msgid "Historial de Actividad"
+msgstr "Histórico de Atividades"
+
+msgid "Historial"
+msgstr "Histórico"
+
+msgid "Configuración"
+msgstr "Configurações"
+
+msgid "🌐 Panel Multisitio"
+msgstr "🌐 Painel Multisite"
+
+msgid "🌐 Lista de Sitios"
+msgstr "🌐 Lista de Sites"
+
+msgid "Historial de sitios"
+msgstr "Histórico de sites"
+
+msgid "📜 Historial Sitios"
+msgstr "📜 Histórico de Sites"
+
+msgid "Mi perfil"
+msgstr "Meu perfil"
+
+msgid "👤 Mi perfil"
+msgstr "👤 Meu perfil"
+
+msgid "Acceso denegado. Solo el superadministrador puede acceder."
+msgstr "Acesso negado. Apenas o superadministrador pode acessar."
+
+msgid "Frases Globales"
+msgstr "Citações Globais"
+
+msgid "Configuración Global"
+msgstr "Configurações Globais"
+
+msgid "Frases migradas a nivel multisite"
+msgstr "Citações migradas para nível multisite"
+
+msgid "Migrada la configuración \"%s\" al modo multisitio"
+msgstr "Configuração \"%s\" migrada para modo multisite"
+
+msgid "Desde aquí puedes gestionar frases y configuración global o editar remotamente los sitios de la red."
+msgstr "Daqui você pode gerenciar citações e configurações globais ou editar remotamente os sites da rede."
+
+msgid "🎛️ Edición remota por sitio"
+msgstr "🎛️ Edição remota por site"
+
+msgid "Sitio"
+msgstr "Site"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "Editar frases / config"
+msgstr "Editar citações / config"
+
+msgid "✅ Nota guardada correctamente."
+msgstr "✅ Nota salva com sucesso."
+
+msgid "Nota actualizada correctamente."
+msgstr "Nota atualizada com sucesso."
+
+msgid "Nota eliminada correctamente."
+msgstr "Nota excluída com sucesso."
+
+msgid "Notas Internas 🗒️"
+msgstr "Notas Internas 🗒️"
+
+msgid "Editar Nota"
+msgstr "Editar Nota"
+
+msgid "Escribe aquí una nota interna..."
+msgstr "Escreva uma nota interna aqui..."
+
+msgid "Guardar nota"
+msgstr "Salvar nota"
+
+msgid "Buscar por palabra clave..."
+msgstr "Buscar por palavra-chave..."
+
+msgid "📤 Exportar todas las notas a CSV"
+msgstr "📤 Exportar todas as notas para CSV"
+
+msgid "Historial de Notas:"
+msgstr "Histórico de Notas:"
+
+msgid "No se encontraron notas con ese criterio."
+msgstr "Nenhuma nota encontrada com esse critério."
+
+msgid "¿Eliminar esta nota?"
+msgstr "Excluir esta nota?"
+
+msgid "Debes iniciar sesión para ver tu perfil."
+msgstr "Você deve fazer login para ver seu perfil."
+
+msgid "Tareas asignadas:"
+msgstr "Tarefas atribuídas:"
+
+msgid "Última conexión:"
+msgstr "Última conexão:"
+
+msgid "N/A"
+msgstr "N/D"
+
+msgid "📝 Historial reciente:"
+msgstr "📝 Histórico recente:"
+
+msgid "No hay historial registrado."
+msgstr "Nenhum histórico registrado."
+
+msgid "📊 Resumen de Actividad"
+msgstr "📊 Resumo de Atividades"
+
+msgid "🗂️ Tareas asignadas a ti"
+msgstr "🗂️ Tarefas atribuídas a você"
+
+msgid "No tienes tareas pendientes."
+msgstr "Você não tem tarefas pendentes."
+
+msgid "📅 Eventos relevantes"
+msgstr "📅 Eventos relevantes"
+
+msgid "No hay eventos próximos."
+msgstr "Nenhum evento próximo."
+
+msgid "📋 Tus últimas acciones"
+msgstr "📋 Suas últimas ações"
+
+msgid "No se encontraron logs recientes."
+msgstr "Nenhum log recente encontrado."
+
+msgid "⛔ Acceso denegado."
+msgstr "⛔ Acesso negado."
+
+msgid "✅ Capacidades actualizadas correctamente."
+msgstr "✅ Capacidades atualizadas com sucesso."
+
+msgid "Activa o desactiva las capacidades específicas que tiene cada rol en tu instalación de WordPress."
+msgstr "Ative ou desative capacidades específicas para cada função na sua instalação do WordPress."
+
+msgid "Rol"
+msgstr "Função"
+
+msgid "💾 Guardar cambios"
+msgstr "💾 Salvar alterações"
+
+msgid "🔑 Acceso Básico al Plugin"
+msgstr "🔑 Acesso Básico ao Plugin"
+
+msgid "⚙️ Acceso a Configuración"
+msgstr "⚙️ Acesso às Configurações"
+
+msgid "📜 Ver Logs del Sistema"
+msgstr "📜 Ver Logs do Sistema"
+
+msgid "No hay frases registradas aún."
+msgstr "Nenhuma citação registrada ainda."
+
+msgid "Error de seguridad. Recarga la página."
+msgstr "Erro de segurança. Recarregue a página."
+
+msgid "¡Gracias por registrarte!"
+msgstr "Obrigado por se registrar!"
+
+msgid "Por favor completa los campos obligatorios."
+msgstr "Por favor complete os campos obrigatórios."
+
+msgid "Nombre*:"
+msgstr "Nome*:"
+
+msgid "Correo electrónico*:"
+msgstr "E-mail*:"
+
+msgid "Mensaje (opcional):"
+msgstr "Mensagem (opcional):"
+
+msgid "Enviar"
+msgstr "Enviar"
+
+msgid "No hay eventos disponibles en este momento."
+msgstr "Nenhum evento disponível no momento."
+
+msgid "en"
+msgstr "em"
+
+msgid "Nota interna:"
+msgstr "Nota interna:"
+
+msgid "Total de leads registrados:"
+msgstr "Total de leads registrados:"
+
+msgid "Debes iniciar sesión para ver tu historial"
+msgstr "Você deve fazer login para ver seu histórico"
+
+msgid "No tienes historial registrado aún."
+msgstr "Você não tem histórico registrado ainda."
+
+msgid "No tienes permisos para acceder a esta sección."
+msgstr "Você não tem permissão para acessar esta seção."
+
+msgid "🌐 Sitios en la Red"
+msgstr "🌐 Sites na Rede"
+
+msgid "No se encontraron sitios en la red."
+msgstr "Nenhum site encontrado na rede."
+
+msgid "ID"
+msgstr "ID"
+
+msgid "sin nombre"
+msgstr "sem nome"
+
+msgid "Lista"
+msgstr "Lista"
+
+msgid "Kanban"
+msgstr "Kanban"
+
+msgid "Pendiente"
+msgstr "Pendente"
+
+msgid "Completado"
+msgstr "Concluído"
+
+msgid "Etiqueta:"
+msgstr "Etiqueta:"
+
+msgid "Desde:"
+msgstr "De:"
+
+msgid "Hasta:"
+msgstr "Até:"
+
+msgid "¿Seguro que deseas eliminar todas las tareas anteriores a hoy?"
+msgstr "Tem certeza que deseja excluir todas as tarefas anteriores a hoje?"
+
+msgid "🧹 Tareas anteriores a hoy eliminadas."
+msgstr "🧹 Tarefas anteriores a hoje excluídas."

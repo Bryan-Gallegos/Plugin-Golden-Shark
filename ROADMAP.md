@@ -5,7 +5,7 @@ Este documento describe el plan de evolución del plugin **Golden Shark Admin Pa
 ---
 
 ## ✅ Versión actual
-**v2.5** – Productividad y automatización avanzada
+**v2.6** – Integración avanzada y personalización por usuario
 
 ---
 
@@ -107,17 +107,55 @@ Este documento describe el plan de evolución del plugin **Golden Shark Admin Pa
 ## 🧪 v2.6 - Integración avanzada y personalización por usuario
 **Objetivo:** mejorar el rendimiento interno, permitir vistaspersonalizadas y aumentar la interoperabilidad del plugin con servicios externos.
 
-- [ ] Sistema de **etiquetas** para eventos, leads y tareas (filtrado más preciso).
-- [ ] **Favoritos** por usuario: marcar frases, notas o eventos destacados.
-- [ ] Filtros combinados inteligentes en listas (tipo + fecha + etiqueta).
-- [ ] Vista resumen por usuario: tareas asignadas, eventos relevantes, historial y últimas acciones.
-- [ ] Limpieza programada de registros antiguos (leads, eventos, tareas completadas).
-- [ ] Exportación avanzada: permite elegir columnas y rango de fechas.
-- [ ] Webhook personalizado con payload ajustable (por sección).
-- [ ] Logs extendidos: guardar cambios de configuración y ejecuciones de shortcodes.
-- [ ] Soporte para traducción (`.pot`) e internacionalización.
-- [ ] Modo auditoría: ver qué usuario modificó cada campo en frases, tareas y eventos.
+- [x] Sistema de **etiquetas** para eventos, leads y tareas (filtrado más preciso).
+- [x] **Favoritos** por usuario: marcar frases, notas o eventos destacados.
+- [x] Filtros combinados inteligentes en listas (tipo + fecha + etiqueta).
+- [x] Vista resumen por usuario: tareas asignadas, eventos relevantes, historial y últimas acciones.
+- [x] Limpieza programada de registros antiguos (leads, eventos, tareas completadas).
+- [x] Exportación avanzada: permite elegir columnas y rango de fechas.
+- [x] Webhook personalizado con payload ajustable (por sección).
+- [x] Logs extendidos: guardar cambios de configuración y ejecuciones de shortcodes.
+- [x] Soporte para traducción (`.pot`) e internacionalización.
+- [x] Vista personalizada por usuario (lista o kanban) en el módulo de tareas.
 
 ---
 
-*Última actualización: 2025-05-20*
+## v2.7 - 
+- [ ] **Notificaciones por roles específicos** (tareas asignadas, cambios críticos).
+- [ ] **Historial de edición detallado** por objeto (evento, lead, nota).
+- [ ] **Soporte para imágenes adjuntas** en eventos y notas.
+- [ ] **Mejoras en accesibilidad y rendimiento.**
+- [ ] Panel de configuración mejorado con pestañas.
+
+---
+
+## v2.8 -
+- [ ] Integración con Google Calendar y/o Outlook (sincronización de eventos).
+- [ ] Editor visual para notas internas (soporte markdown o TinyMCE).
+- [ ] Campos personalizados en formularios de leads.
+- [ ] Filtro de búsqueda global (tipo "command palette").
+
+---
+
+## v2.9 -
+- [ ] Control avanzado de roles y permisos por módulo.
+- [ ] Bitácora de acceso al sistema con alertas de seguridad.
+- [ ] Reportes semanales programados (PDF o CSV por email).
+- [ ] Integración con servicios externos vía API REST.
+
+---
+
+# 💡 Ideas exploratorias
+- App móvil interna conectada al panel via API.
+- Asistente AI para sugerencias de tareas o gestión de leads.
+- Plugin satélite para franquicias con sincronización de bases.
+
+---
+
+# 🧠 Filosofía del Plugin
+
+Golden Shark Admin Panel busca ser un **sistema interno robusto, privado y modular**, adaptable a redes multisitio y equipos de trabajo que requieren organización, control y mejora continua.
+
+---
+
+*Última actualización: 2025-05-29*

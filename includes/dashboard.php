@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 function golden_shark_render_dashboard()
 {
     if (!golden_shark_user_can('golden_shark_acceso_basico')) {
-        wp_die('No tienes permiso para acceder a esta sección.');
+        wp_die(__('No tienes permiso para acceder a esta sección.', 'golden-shark'));
     }
 
     // Exportar historial usuario
@@ -58,31 +58,31 @@ function golden_shark_render_dashboard()
 
     // Alertas
     if (count($eventos_hoy) > $limite_eventos) {
-        echo '<div class="notice notice-error"><p>⚠️ Atención: hay más de ' . $limite_eventos . ' eventos programados para hoy.</p></div>';
+        echo '<div class="notice notice-error"><p>' . sprintf(__('⚠️ Atención: hay más de %s eventos programados para hoy.', 'golden-shark'), $limite_eventos) . '</p></div>';
     }
 
     if (count($leads_sin_revisar) > $limite_leads) {
-        echo '<div class="notice notice-warning"><p>🔔 Atención: hay más de ' . $limite_leads . ' leads sin revisar.</p></div>';
+        echo '<div class="notice notice-warning"><p>' . sprintf(__('🔔 Atención: hay más de %s leads sin revisar.', 'golden-shark'), $limite_leads) . '</p></div>';
     }
 
     // Frase motivacional
     if (!empty($frases)) {
         $frase = $frases[array_rand($frases)];
         echo '<div class="gs-container" style="border-left: 4px solid #0073aa; margin-top: 20px;">';
-        echo '<strong>Frase motivacional del día:</strong><br>' . esc_html($frase);
+        echo '<strong>' . __('Frase motivacional del día:', 'golden-shark') . '</strong><br>' . esc_html($frase);
         echo '</div>';
     }
 
     // Tarjetas resumen visibles según rol
     echo '<div class="gs-dashboard-resumen">';
-    echo '<div class="gs-card"><h3>💬 Frases</h3><p class="gs-big-number">' . count($frases) . '</p></div>';
+    echo '<div class="gs-card"><h3>' . __('💬 Frases', 'golden-shark') . '</h3><p class="gs-big-number">' . count($frases) . '</p></div>';
 
     if (current_user_can('golden_shark_configuracion')) {
-        echo '<div class="gs-card"><h3>📅 Eventos</h3><p class="gs-big-number">' . count($eventos) . '</p></div>';
+        echo '<div class="gs-card"><h3>' . __('📅 Eventos', 'golden-shark') . '</h3><p class="gs-big-number">' . count($eventos) . '</p></div>';
     }
 
     if (current_user_can('golden_shark_acceso_basico')) {
-        echo '<div class="gs-card"><h3>📨 Leads</h3><p class="gs-big-number">' . count($leads) . '</p></div>';
+        echo '<div class="gs-card"><h3>' . __('📨 Leads', 'golden-shark') . '</h3><p class="gs-big-number">' . count($leads) . '</p></div>';
     }
 
     echo '</div>';
@@ -90,21 +90,26 @@ function golden_shark_render_dashboard()
 
     // Resumen gráfico
     echo '<div class="gs-container" style="margin-top:30px;">';
-    echo '<h3>Resumen gráfico</h3>';
+    echo '<h3>' . __('Resumen gráfico', 'golden-shark') . '</h3>';
     echo '<canvas id="goldenSharkChart" width="400" height="150" style="max-width:600px;"></canvas>';
     echo '</div>';
 
     // Leads sin revisar
     if (!empty($leads_sin_revisar)) {
         echo '<div class="gs-container">';
-        echo '<h3>Leads sin revisar</h3>';
-        echo '<table class="widefat striped"><thead><tr><th>Nombre</th><th>Email</th><th>Fecha</th><th>Acción</th></tr></thead><tbody>';
+        echo '<h3>' . __('Leads sin revisar', 'golden-shark') . '</h3>';
+        echo '<table class="widefat striped"><thead><tr>';
+        echo '<th>' . __('Nombre', 'golden-shark') . '</th>';
+        echo '<th>' . __('Email', 'golden-shark') . '</th>';
+        echo '<th>' . __('Fecha', 'golden-shark') . '</th>';
+        echo '<th>' . __('Acción', 'golden-shark') . '</th>';
+        echo '</tr></thead><tbody>';
         foreach ($leads_sin_revisar as $index => $lead) {
             echo '<tr>';
             echo '<td>' . esc_html($lead['nombre'] ?? '-') . '</td>';
             echo '<td>' . esc_html($lead['email'] ?? '-') . '</td>';
             echo '<td>' . esc_html($lead['fecha'] ?? '-') . '</td>';
-            echo '<td><a class="button" href="' . esc_url(wp_nonce_url(admin_url('admin.php?page=golden-shark-dashboard&revisar_lead=' . $index), 'revisar_lead_' . $index)) . '">Marcar como revisado</a></td>';
+            echo '<td><a class="button" href="' . esc_url(wp_nonce_url(admin_url('admin.php?page=golden-shark-dashboard&revisar_lead=' . $index), 'revisar_lead_' . $index)) . '">' . __('Marcar como revisado', 'golden-shark') . '</a></td>';
             echo '</tr>';
         }
         echo '</tbody></table>';
@@ -115,7 +120,7 @@ function golden_shark_render_dashboard()
     $historial_usuario = get_user_meta(get_current_user_id(), 'gs_historial_usuario', true);
     if (!empty($historial_usuario)) {
         echo '<div class="gs-container">';
-        echo '<h3>Actividad reciente</h3>';
+        echo '<h3>' . __('Actividad reciente', 'golden-shark') . '</h3>';
         echo '<ul>';
         foreach (array_slice(array_reverse($historial_usuario), 0, 5) as $entrada) {
             echo '<li><strong>' . esc_html($entrada['fecha']) . '</strong>: ' . esc_html($entrada['accion'] ?? $entrada['mensaje']) . '</li>';
@@ -124,7 +129,7 @@ function golden_shark_render_dashboard()
         echo '<form method="post" style="margin-top:10px;">';
         wp_nonce_field('gs_exportar_historial_usuario_nonce');
         echo '<input type="hidden" name="gs_exportar_historial_usuario" value="1">';
-        echo '<input type="submit" class="button button-secondary" value="📤 Exportar historial en CSV">';
+        echo '<input type="submit" class="button button-secondary" value="' . esc_attr__('📤 Exportar historial en CSV', 'golden-shark') . '">';
         echo '</form>';
         echo '</div>';
     }

@@ -5,8 +5,8 @@ if (!defined('ABSPATH')) exit;
 function golden_shark_admin_menu()
 {
     add_menu_page(
-        'Golden Shark Panel',
-        'Golden Shark 🦈',
+        __('Golden Shark Panel', 'golden-shark'),
+        __('Golden Shark 🦈', 'golden-shark'),
         'golden_shark_acceso_basico',
         'golden-shark-dashboard',
         'golden_shark_render_dashboard',
@@ -14,12 +14,22 @@ function golden_shark_admin_menu()
         26
     );
 
+    add_menu_page(
+        __('Resumen', 'golden-shark'),
+        __('Resumen', 'golden-shark'),
+        'read',
+        'golden-shark-resumen',
+        'golden_shark_render_resumen',
+        'dashicons-chart-area',
+        3
+    );
+
     // Submenú: Accesos y Roles (solo administrador clásico)
     if (current_user_can('manage_options')) {
         add_submenu_page(
             'golden-shark-dashboard',
-            '👥 Accesos y Roles',
-            '👥 Accesos y Roles',
+            __('👥 Accesos y Roles', 'golden-shark'),
+            __('👥 Accesos y Roles', 'golden-shark'),
             'manage_options',
             'golden-shark-roles',
             'golden_shark_render_roles'
@@ -30,62 +40,68 @@ function golden_shark_admin_menu()
     if (current_user_can('golden_shark_acceso_basico')) {
         add_submenu_page(
             'golden-shark-dashboard',
-            'Eventos',
-            'Eventos',
+            __('Eventos', 'golden-shark'),
+            __('Eventos', 'golden-shark'),
             'golden_shark_acceso_basico',
             'golden-shark-eventos',
             'golden_shark_render_eventos'
         );
 
+        // Frases & Mensajes
         add_submenu_page(
             'golden-shark-dashboard',
-            'Frases & Mensajes',
-            'Frases & Mensajes',
+            __('Frases & Mensajes', 'golden-shark'),
+            __('Frases & Mensajes', 'golden-shark'),
             'golden_shark_acceso_basico',
             'golden-shark-frases',
             'golden_shark_render_frases'
         );
 
+        // Leads
         add_submenu_page(
             'golden-shark-dashboard',
-            'Leads',
-            'Leads',
+            __('Leads', 'golden-shark'),
+            __('Leads', 'golden-shark'),
             'golden_shark_acceso_basico',
             'golden-shark-leads',
             'golden_shark_render_leads'
         );
 
+        // Tareas Internas
         add_submenu_page(
             'golden-shark-dashboard',
-            'Tareas Internas',
-            'Tareas',
+            __('Tareas Internas', 'golden-shark'),
+            __('Tareas', 'golden-shark'),
             'golden_shark_acceso_basico',
             'golden-shark-tareas',
             'golden_shark_render_tareas'
         );
 
+        // Notas Internas
         add_submenu_page(
             'golden-shark-dashboard',
-            'Notas Internas',
-            'Notas Internas',
+            __('Notas Internas', 'golden-shark'),
+            __('Notas Internas', 'golden-shark'),
             'golden_shark_acceso_basico',
             'golden-shark-notas',
             'golden_shark_render_notas'
         );
 
+        // Calendario de Eventos
         add_submenu_page(
             'golden-shark-dashboard',
-            'Calendario de Eventos',
-            'Calendario',
+            __('Calendario de Eventos', 'golden-shark'),
+            __('Calendario', 'golden-shark'),
             'golden_shark_acceso_basico',
             'golden-shark-calendar',
             'golden_shark_render_calendar'
         );
 
+        // Historial de Actividad
         add_submenu_page(
             'golden-shark-dashboard',
-            'Historial de Actividad',
-            'Historial',
+            __('Historial de Actividad', 'golden-shark'),
+            __('Historial', 'golden-shark'),
             'golden_shark_acceso_basico',
             'golden-shark-historial',
             'golden_shark_render_historial'
@@ -96,8 +112,8 @@ function golden_shark_admin_menu()
     if (current_user_can('golden_shark_configuracion')) {
         add_submenu_page(
             'golden-shark-dashboard',
-            'Configuración',
-            'Configuración',
+            __('Configuración', 'golden-shark'),
+            __('Configuración', 'golden-shark'),
             'golden_shark_configuracion',
             'golden-shark-config',
             'golden_shark_render_config'
@@ -108,8 +124,8 @@ function golden_shark_admin_menu()
     if (current_user_can('golden_shark_ver_logs')) {
         add_submenu_page(
             'golden-shark-dashboard',
-            '📜 Logs del sistema',
-            '📜 Logs del sistema',
+            __('📜 Logs del sistema', 'golden-shark'),
+            __('📜 Logs del sistema', 'golden-shark'),
             'golden_shark_ver_logs',
             'golden-shark-logs',
             'golden_shark_render_logs'
@@ -120,8 +136,8 @@ function golden_shark_admin_menu()
     if (is_multisite() && is_main_site() && is_super_admin()) {
         add_submenu_page(
             'golden-shark-dashboard',
-            '🌐 Panel Multisitio',
-            '🌐 Panel Multisitio',
+            __('🌐 Panel Multisitio', 'golden-shark'),
+            __('🌐 Panel Multisitio', 'golden-shark'),
             'manage_network_options',
             'golden-shark-multisite-panel',
             'golden_shark_render_multisite_panel'
@@ -129,8 +145,8 @@ function golden_shark_admin_menu()
 
         add_submenu_page(
             'golden-shark-dashboard',
-            '🌐 Lista de Sitios',
-            'Lista de Sitios',
+            __('🌐 Lista de Sitios', 'golden-shark'),
+            __('Lista de Sitios', 'golden-shark'),
             'manage_network_options',
             'golden-shark-sites',
             'golden_shark_render_sites_list'
@@ -138,8 +154,8 @@ function golden_shark_admin_menu()
 
         add_submenu_page(
             'golden-shark',
-            'Historial de sitios',
-            '📜 Historial Sitios',
+            __('Historial de sitios', 'golden-shark'),
+            __('📜 Historial Sitios', 'golden-shark'),
             'manage_network',
             'gs-historial-sitios',
             'golden_shark_render_historial_sitios'
@@ -147,12 +163,12 @@ function golden_shark_admin_menu()
     }
 
     add_submenu_page(
-        'golden-shark', // slug del menú padre
-        'Mi perfil',     // Título de la página
-        '👤 Mi perfil',  // Título del menú
-        'read',          // Capacidad mínima
-        'golden-shark-perfil', // Slug
-        'golden_shark_render_perfil_usuario' // Callback
+        'golden-shark',
+        __('Mi perfil', 'golden-shark'),
+        __('👤 Mi perfil', 'golden-shark'),
+        'read',
+        'golden-shark-perfil',
+        'golden_shark_render_perfil_usuario'
     );
 }
 add_action('admin_menu', 'golden_shark_admin_menu');
@@ -161,16 +177,16 @@ add_action('admin_menu', 'golden_shark_admin_menu');
 function golden_shark_render_multisite_panel()
 {
     if (!is_super_admin()) {
-        wp_die('Acceso denegado. Solo el superadministrador puede acceder.');
+        wp_die(__('Acceso denegado. Solo el superadministrador puede acceder.', 'golden-shark'));
     }
 
     $tab = isset($_GET['tab']) ? sanitize_text_field($_GET['tab']) : 'frases';
 
     echo '<div class="wrap">';
-    echo '<h1>🌐 Panel Multisitio</h1>';
+    echo '<h1>' . __('🌐 Panel Multisitio', 'golden-shark') . '</h1>';
     echo '<nav class="nav-tab-wrapper">';
-    echo '<a href="?page=golden-shark-multisite-panel&tab=frases" class="nav-tab ' . ($tab === 'frases' ? 'nav-tab-active' : '') . '">Frases Globales</a>';
-    echo '<a href="?page=golden-shark-multisite-panel&tab=config" class="nav-tab ' . ($tab === 'config' ? 'nav-tab-active' : '') . '">Configuración Global</a>';
+    echo '<a href="?page=golden-shark-multisite-panel&tab=frases" class="nav-tab ' . ($tab === 'frases' ? 'nav-tab-active' : '') . '">' . __('Frases Globales', 'golden-shark') . '</a>';
+    echo '<a href="?page=golden-shark-multisite-panel&tab=config" class="nav-tab ' . ($tab === 'config' ? 'nav-tab-active' : '') . '">' . __('Configuración Global', 'golden-shark') . '</a>';
     echo '</nav>';
 
     echo '<div style="margin-top: 20px;">';

@@ -5,17 +5,17 @@ if(!defined('ABSPATH')) exit;
 // Historial global de cambios en sitios de red
 function golden_shark_render_historial_sitios(){
     if(!is_multisite() || !is_super_admin()){
-        wp_die('Aceso restringido solo a superadministradores');
+        wp_die(__('Acceso restringido solo a superadministradores', 'golden-shark'));
     }
 
     echo '<div class="wrap gs-container">';
-    echo '<h3>📜 Historial por sitio remoto</h3>';
-    echo '<p>Este registro muestra los últimos cambios realizados en cada sitio de la web</p>';
+    echo '<h3>' . __('📜 Historial por sitio remoto', 'golden-shark') . '</h3>';
+    echo '<p>' . __('Este registro muestra los últimos cambios realizados en cada sitio de la web', 'golden-shark') . '</p>';
 
     $sitios = get_sites(['public' => 1]);
 
     if(empty($sitios)){
-        echo '<p>No hay sitios disponibles.</p>';
+        echo '<p>' . __('No hay sitios disponibles.', 'golden-shark') . '</p>';
         echo '</div>';
         return;
     }

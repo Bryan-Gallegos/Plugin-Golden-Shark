@@ -14,8 +14,8 @@ function golden_shark_disparar_webhook_evento($evento)
     ]);
 
     if (is_wp_error($respuesta)) {
-        golden_shark_log('❌ Error al enviar webhook de evento: ' . $respuesta->get_error_message());
+        golden_shark_log(__('❌ Error al enviar webhook de evento:', 'golden-shark') . ' ' . $respuesta->get_error_message());
     } else {
-        golden_shark_log('📤 Webhook de evento enviado correctamente a ' . $url);
+        golden_shark_log(sprintf(__('📤 Webhook de evento enviado correctamente a %s', 'golden-shark'), $url));
     }
 }

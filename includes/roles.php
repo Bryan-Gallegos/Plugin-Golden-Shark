@@ -6,14 +6,14 @@ if (!defined('ABSPATH')) exit;
 function golden_shark_render_roles()
 {
     if (!current_user_can('manage_options')) {
-        wp_die('⛔ Acceso denegado.');
+        wp_die(__('⛔ Acceso denegado.', 'golden-shark'));
     }
 
     // Definir las capacidades disponibles en el plugin
     $capacidades = [
-        'golden_shark_acceso_basico'    => '🔑 Acceso Básico al Plugin',
-        'golden_shark_configuracion'    => '⚙️ Acceso a Configuración',
-        'golden_shark_ver_logs'         => '📜 Ver Logs del Sistema',
+        'golden_shark_acceso_basico'    => __('🔑 Acceso Básico al Plugin', 'golden-shark'),
+        'golden_shark_configuracion'    => __('⚙️ Acceso a Configuración', 'golden-shark'),
+        'golden_shark_ver_logs'         => __('📜 Ver Logs del Sistema', 'golden-shark'),
     ];
 
     // Procesar formulario
@@ -34,15 +34,15 @@ function golden_shark_render_roles()
             }
         }
 
-        echo '<div class="notice notice-success"><p>✅ Capacidades actualizadas correctamente.</p></div>';
+        echo '<div class="notice notice-success"><p>' . __('✅ Capacidades actualizadas correctamente.', 'golden-shark') . '</p></div>';
     }
 
     // Mostrar formulario
     $roles = wp_roles()->roles;
     ?>
     <div class="wrap">
-        <h1>👥 Accesos y Roles</h1>
-        <p>Activa o desactiva las capacidades específicas que tiene cada rol en tu instalación de WordPress.</p>
+        <h1><?php __('👥 Accesos y Roles', 'golden-shark') ?></h1>
+        <p><?php __('Activa o desactiva las capacidades específicas que tiene cada rol en tu instalación de WordPress.', 'golden-shark' )?></p>
 
         <form method="post">
             <?php wp_nonce_field('guardar_roles_nonce'); ?>
@@ -50,7 +50,7 @@ function golden_shark_render_roles()
             <table class="widefat striped">
                 <thead>
                     <tr>
-                        <th>Rol</th>
+                        <th><?php __('Rol', 'golden-shark') ?></th>
                         <?php foreach ($capacidades as $cap => $label): ?>
                             <th><?php echo esc_html($label); ?></th>
                         <?php endforeach; ?>
@@ -73,7 +73,7 @@ function golden_shark_render_roles()
             </table>
 
             <p style="margin-top:15px;">
-                <input type="submit" name="guardar_roles" class="button button-primary" value="💾 Guardar cambios">
+                <input type="submit" name="guardar_roles" class="button button-primary" value= <?php __('💾 Guardar cambios', 'golden-shark') ?>">
             </p>
         </form>
     </div>

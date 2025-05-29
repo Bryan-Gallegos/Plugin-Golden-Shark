@@ -5,7 +5,7 @@ if (!defined('ABSPATH')) exit;
 function golden_shark_render_notas()
 {
     if (!golden_shark_user_can('golden_shark_acceso_basico')) {
-        wp_die('No tienes permiso para acceder a esta sección.');
+        wp_die(__('No tienes permiso para acceder a esta sección.', 'golden-shark'));
     }
 
     $notas = get_option('golden_shark_notas', []);
@@ -24,13 +24,13 @@ function golden_shark_render_notas()
         update_option('golden_shark_notas', $notas);
         golden_shark_log('Se agregó una nueva nota interna.');
         update_user_meta(get_current_user_id(), 'gs_notificacion_interna', '✅ Nota guardada correctamente.');
-        $mensaje = '<div class="updated"><p>Nota guardada correctamente.</p></div>';
+        $mensaje = '<div class="updated"><p>' . __('✅ Nota guardada correctamente.', 'golden-shark') . '</p></div>';
     }
 
     // Editar nota
     if (isset($_POST['editar_nota_guardada'])) {
         if (!isset($_POST['editar_nota_nonce']) || !wp_verify_nonce($_POST['editar_nota_nonce'], 'guardar_edicion_nota_nonce')) {
-            wp_die('⚠️ Seguridad fallida. Token inválido.');
+            wp_die(__('⚠️ Seguridad fallida. Token inválido.', 'golden-shark'));
         }
 
         $id = intval($_POST['nota_id']);
@@ -39,7 +39,7 @@ function golden_shark_render_notas()
             update_option('golden_shark_notas', $notas);
             golden_shark_log('Se editó una nota interna.');
             update_user_meta(get_current_user_id(), 'gs_notificacion_interna', '✅ Nota actualizada correctamente.');
-            $mensaje = '<div class="updated"><p>Nota actualizada correctamente.</p></div>';
+            $mensaje = '<div class="updated"><p>' . __('Nota actualizada correctamente.', 'golden-shark') . '</p></div>';
         }
     }
 
@@ -47,7 +47,7 @@ function golden_shark_render_notas()
     if (isset($_GET['eliminar_nota']) && isset($_GET['_nonce'])) {
         $i = intval($_GET['eliminar_nota']);
         if (!wp_verify_nonce($_GET['_nonce'], 'eliminar_nota_' . $i)) {
-            wp_die('⚠️ Seguridad fallida. Token inválido.');
+            wp_die(__('⚠️ Seguridad fallida. Token inválido.', 'golden-shark'));
         }
         if (isset($notas[$i])) {
             unset($notas[$i]);
@@ -55,14 +55,14 @@ function golden_shark_render_notas()
             update_option('golden_shark_notas', $notas);
             golden_shark_log('Se eliminó una nota interna.');
             update_user_meta(get_current_user_id(), 'gs_notificacion_interna', '🗑️ Nota eliminada correctamente.');
-            $mensaje = '<div class="updated"><p>Nota eliminada.</p></div>';
+            $mensaje = '<div class="updated"><p>' . __('Nota eliminada correctamente.', 'golden-shark') . '</p></div>';
         }
     }
 
     // Exportar notas a CSV
     if (isset($_POST['exportar_notas_csv'])) {
         if (!isset($_POST['exportar_notas_nonce_field']) || !wp_verify_nonce($_POST['exportar_notas_nonce_field'], 'exportar_notas_nonce')) {
-            wp_die('⚠️ Seguridad fallida. Token inválido.');
+            wp_die(__('⚠️ Seguridad fallida. Token inválido.', 'golden-shark'));
         }
         header('Content-Type: text/csv');
         header('Content-Disposition: attachment; filename="notas_golden_shark.csv"');
@@ -95,19 +95,19 @@ function golden_shark_render_notas()
     }
 ?>
     <div class="wrap">
-        <h2>Notas Internas 🗒️</h2>
+        <h2><?php _e('Notas Internas 🗒️', 'golden-shark'); ?></h2>
         <?php echo $mensaje; ?>
 
         <?php if (isset($_GET['editar_nota'])):
             $id = intval($_GET['editar_nota']);
             if (isset($notas[$id])): $nota = $notas[$id]; ?>
-                <h3>Editar Nota</h3>
+                <h3><?php _e('Editar Nota', 'golden-shark'); ?></h3>
                 <form method="post">
                     <input type="hidden" name="editar_nota_guardada" value="1">
                     <input type="hidden" name="nota_id" value="<?php echo $id; ?>">
                     <?php wp_nonce_field('guardar_edicion_nota_nonce', 'editar_nota_nonce'); ?>
                     <textarea name="nota_contenido" rows="5" style="width:100%;" required><?php echo esc_textarea($nota['contenido']); ?></textarea>
-                    <p><input type="submit" class="button button-primary" value="Guardar cambios"></p>
+                    <p><input type="submit" class="button button-primary" value="<?php esc_attr_e('Guardar cambios', 'golden-shark'); ?>"></p>
                 </form>
                 <hr>
         <?php endif;
@@ -116,25 +116,25 @@ function golden_shark_render_notas()
         <form method="post">
             <input type="hidden" name="nueva_nota" value="1">
             <?php wp_nonce_field('guardar_nota_nonce', 'nota_nonce'); ?>
-            <textarea name="nota_contenido" rows="5" style="width:100%;" placeholder="Escribe aquí una nota interna..." required></textarea>
-            <p><input type="submit" class="button button-primary" value="Guardar nota"></p>
+            <textarea name="nota_contenido" rows="5" style="width:100%;" placeholder="<?php esc_attr_e('Escribe aquí una nota interna...', 'golden-shark'); ?>" required></textarea>
+            <input type="submit" class="button button-primary" value="<?php esc_attr_e('Guardar nota', 'golden-shark'); ?>">
         </form>
 
         <form method="get" style="margin-top: 15px;">
             <input type="hidden" name="page" value="golden-shark-notas">
-            <input type="text" name="buscar_nota" value="<?php echo esc_attr($busqueda); ?>" placeholder="Buscar por palabra clave..." style="width:300px;">
-            <input type="submit" class="button" value="Buscar">
+            <input type="text" name="buscar_nota" value="<?php echo esc_attr($busqueda); ?>" placeholder="<?php esc_attr_e('Buscar por palabra clave...', 'golden-shark'); ?>" style="width:300px;">
+            <input type="submit" class="button button-primary" value="<?php esc_attr_e('Buscar', 'golden-shark'); ?>">
         </form>
 
         <form method="post" style="margin-top: 10px;">
             <?php wp_nonce_field('exportar_notas_nonce', 'exportar_notas_nonce_field'); ?>
-            <input type="submit" name="exportar_notas_csv" value="📤 Exportar todas las notas a CSV" class="button button-secondary">
+            <input type="submit" name="exportar_notas_csv" value="<?php esc_attr_e('📤 Exportar todas las notas a CSV', 'golden-shark');?>" class="button button-secondary">
         </form>
 
         <hr>
-        <h3>Historial de Notas:</h3>
+        <h3><?php _e('Historial de Notas:', 'golden-shark'); ?></h3>
         <?php if (empty($notas_filtradas)) : ?>
-            <p>No se encontraron notas con ese criterio.</p>
+            <p><?php _e('No se encontraron notas con ese criterio.', 'golden-shark'); ?></p>
         <?php else : ?>
             <ul style="list-style: disc; padding-left: 20px;">
                 <?php foreach ($notas_filtradas as $nota): ?>
@@ -142,7 +142,7 @@ function golden_shark_render_notas()
                         <strong><?php echo esc_html($nota['fecha']); ?>:</strong><br>
                         <?php echo nl2br(esc_html($nota['contenido'])); ?><br>
                         <a href="<?php echo admin_url('admin.php?page=golden-shark-notas&editar_nota=' . $nota['id']); ?>">Editar</a> |
-                        <a href="<?php echo wp_nonce_url(admin_url('admin.php?page=golden-shark-notas&eliminar_nota=' . $nota['id']), 'eliminar_nota_' . $nota['id'], '_nonce'); ?>" onclick="return confirm('¿Eliminar esta nota?');">Eliminar</a>
+                        <a href="<?php echo wp_nonce_url(admin_url('admin.php?page=golden-shark-notas&eliminar_nota=' . $nota['id']), 'eliminar_nota_' . $nota['id'], '_nonce'); ?>" onclick="return confirm('<?php echo esc_js(__('¿Eliminar esta nota?', 'golden-shark')); ?>');">Eliminar</a>
                     </li>
                 <?php endforeach; ?>
             </ul>

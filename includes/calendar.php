@@ -5,7 +5,7 @@ if (!defined('ABSPATH')) exit;
 function golden_shark_render_calendar()
 {
     if (!golden_shark_user_can('golden_shark_acceso_basico')) {
-        wp_die('No tienes permiso para acceder a esta sección');
+        wp_die(__('No tienes permiso para acceder a esta sección.', 'golden-shark'));
     }
 
     $eventos = get_option('golden_shark_eventos', []);
@@ -40,7 +40,7 @@ function golden_shark_render_calendar()
     wp_add_inline_script('golden-shark-admin-script', 'var gsEventos = ' . json_encode($eventos_json) . ';', 'before');
 
     echo '<div class="wrap">';
-    echo '<h2>Calendario de Eventos 📅</h2>';
+    echo '<h2>' . __('Calendario de Eventos', 'golden-shark') .'</h2>';
     echo '<div id="gs-calendar"></div>';
     echo '</div>';
 }

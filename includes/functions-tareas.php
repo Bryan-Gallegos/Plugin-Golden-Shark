@@ -10,16 +10,16 @@ function golden_shark_crear_tareas_automaticas($evento)
 
     $tareas_predefinidas = [
         'interno' => [
-            ['titulo' => 'Revisar logística del evento', 'dias_antes' => 3],
-            ['titulo' => 'Enviar recordatorio al equipo', 'dias_antes' => 1],
+            ['titulo' => __('Revisar logística del evento', 'golden-shark'), 'dias_antes' => 3],
+            ['titulo' => __('Enviar recordatorio al equipo', 'golden-shark'), 'dias_antes' => 1],
         ],
         'reunion' => [
-            ['titulo' => 'Preparar agenda de la reunión', 'dias_antes' => 2],
-            ['titulo' => 'Confirmar participantes', 'dias_antes' => 1],
+            ['titulo' => __('Preparar agenda de la reunión', 'golden-shark'), 'dias_antes' => 2],
+            ['titulo' => __('Confirmar participantes', 'golden-shark'), 'dias_antes' => 1],
         ],
         'lanzamiento' => [
-            ['titulo' => 'Revisar presentación final', 'dias_antes' => 4],
-            ['titulo' => 'Programar publicación en redes', 'dias_antes' => 2],
+            ['titulo' => __('Revisar presentación final', 'golden-shark'), 'dias_antes' => 4],
+            ['titulo' => __('Programar publicación en redes', 'golden-shark'), 'dias_antes' => 2],
         ]
     ];
 
@@ -32,7 +32,7 @@ function golden_shark_crear_tareas_automaticas($evento)
             'fecha' => $fecha_tarea,
             'estado' => 'pendiente',
             'responsable' => get_current_user_id(),
-            'historial' => [['accion' => 'Creada automáticamente por evento', 'fecha' => current_time('Y-m-d H:i:s')]]
+            'historial' => [['accion' => __('Creada automáticamente por evento', 'golden-shark'), 'fecha' => current_time('Y-m-d H:i:s')]]
         ];
     }
 
@@ -64,13 +64,13 @@ function golden_shark_enviar_recordatorios_tareas()
         if (!$user_info || !is_email($user_info->user_email)) continue;
 
         $mensaje = "Hola " . $user_info->display_name . ",\n\n";
-        $mensaje .= "Estas son tus tareas pendientes para hoy o mañana:\n\n";
+        $mensaje = sprintf(__("Hola %s,\n\nEstas son tus tareas pendientes para hoy o mañana:\n\n", 'golden-shark'), $user_info->display_name);
 
         foreach ($tareas_usuario as $tarea) {
-            $mensaje .= "- " . $tarea['titulo'] . " (Fecha: " . $tarea['fecha'] . ")\n";
+            $mensaje .= "- " . $tarea['titulo'] . " (" . __('Fecha:', 'golden-shark') . " " . $tarea['fecha'] . ")\n";
         }
 
-        $mensaje .= "\nPor favor ingresa al panel para actualizarlas. 🦈\n\n";
+        $mensaje .= "\n" . __('Por favor ingresa al panel para actualizarlas.', 'golden-shark') . " 🦈\n\n";
         $mensaje .= get_bloginfo('name');
 
         wp_mail($user_info->user_email, '🔔 Recordatorio de tareas pendientes - Golden Shark', $mensaje);

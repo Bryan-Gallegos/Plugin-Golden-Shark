@@ -5,7 +5,7 @@ if (!defined('ABSPATH')) exit;
 function golden_shark_render_frases_globales()
 {
     if (!is_multisite() || !is_main_site() || !is_super_admin()) {
-        wp_die('⛔ No tienes permiso para acceder a esta sección.');
+        wp_die(__('⛔ No tienes permiso para acceder a esta sección.', 'golden-shark'));
     }
 
     $frases = get_site_option('golden_shark_frases', []);
@@ -18,7 +18,7 @@ function golden_shark_render_frases_globales()
             $frases[] = $nueva_frase;
             update_site_option('golden_shark_frases', $frases);
             golden_shark_log('📝 Se agregó una nueva frase global: "' . $nueva_frase . '"');
-            echo '<div class="updated"><p>✅ Frase global agregada correctamente.</p></div>';
+            echo '<div class="updated"><p>' . __('✅ Frase global agregada correctamente.', 'golden-shark') . '</p></div>';
         }
     }
 
@@ -30,7 +30,7 @@ function golden_shark_render_frases_globales()
             $frases[$id] = sanitize_text_field($_POST['nueva_frase']);
             update_site_option('golden_shark_frases', $frases);
             golden_shark_log('✏️ Se editó una frase global en la posición ' . $id);
-            echo '<div class="updated"><p>✅ Frase global actualizada correctamente.</p></div>';
+            echo '<div class="updated"><p>' . __('✅ Frase global actualizada correctamente.', 'golden-shark') . '</p></div>';
         }
     }
 
@@ -44,10 +44,10 @@ function golden_shark_render_frases_globales()
                 $frases = array_values($frases);
                 update_site_option('golden_shark_frases', $frases);
                 golden_shark_log('🗑️ Se eliminó una frase global: "' . $frase_eliminada . '"');
-                echo '<div class="updated"><p>🗑️ Frase global eliminada correctamente.</p></div>';
+                echo '<div class="updated"><p>' . __('🗑️ Frase global eliminada correctamente.', 'golden-shark') .'</p></div>';
             }
         } else {
-            wp_die('⛔ Seguridad fallida. Token inválido.');
+            wp_die(__('⛔ Seguridad fallida. Token inválido.', 'golden-shark'));
         }
     }
 
