@@ -73,6 +73,12 @@ Todas las configuraciones principales (colores, mensajes y notificaciones) está
 
 ## 🗓️ Historial de cambios
 
+### v2.8 – Sincronización externa y personalización visual
+- 📝 Editor visual para notas internas con soporte TinyMCE (más intuitivo y completo).
+- 🧩 Campos personalizados en formularios de leads: tipos `text`, `select` y `checkbox` desde la configuración.
+- 🔍 Filtro de búsqueda global tipo “command palette” disponible en todas las vistas principales.
+- 🛠️ Mejoras en experiencia de usuario para campos condicionales y visualización de datos.
+
 ### v2.7 – Notificaciones, historial y multimedia
 - Notificaciones internas por rol asignado (ej. tareas asignadas, cambios críticos).
 - Historial detallado de edición por objeto (leads, eventos, notas).

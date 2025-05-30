@@ -5,7 +5,7 @@ Este documento describe el plan de evolución del plugin **Golden Shark Admin Pa
 ---
 
 ## ✅ Versión actual
-**v2.7** – Notificaciones, historial y multimedia
+**v2.8** – Sincronización externa y personalización visual
 
 ---
 
@@ -134,10 +134,9 @@ Este documento describe el plan de evolución del plugin **Golden Shark Admin Pa
 ## 🚀 v2.8 – Sincronización externa y personalización visual
 **Objetivo:** conectar con herramientas externas y permitir mayor personalización visual en el flujo de trabajo.
 
-- [ ] Integración con Google Calendar y/o Outlook (sincronización bidireccional de eventos).
-- [ ] Editor visual para notas internas (soporte Markdown o TinyMCE).
-- [ ] Campos personalizados en formularios de leads (text, select, checkbox).
-- [ ] Filtro de búsqueda global (tipo “command palette” universal desde cualquier vista).
+- [x] Editor visual para notas internas (soporte Markdown o TinyMCE).
+- [x] Campos personalizados en formularios de leads (text, select, checkbox).
+- [x] Filtro de búsqueda global (tipo “command palette” universal desde cualquier vista).
 
 ---
 

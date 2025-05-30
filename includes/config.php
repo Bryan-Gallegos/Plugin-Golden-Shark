@@ -80,6 +80,7 @@ add_action('admin_init', function () {
         'golden_shark_api_key',
         'golden_shark_webhook_eventos_url',
         'golden_shark_webhook_campos_leads',
+        'golden_shark_leads_custom_fields',
     ];
     foreach ($opciones as $opt) register_setting('golden_shark_config_group', $opt);
 
@@ -94,6 +95,7 @@ add_action('admin_init', function () {
     add_settings_field('notificaciones', '🔔 ¿Mostrar Notificaciones Internas?', 'golden_shark_notificaciones_field', 'golden_shark_config_generales', 'golden_shark_config_section_general');
     add_settings_field('alerta_eventos_dia', '📅 Alerta por número de eventos al día', 'golden_shark_alerta_eventos_dia_field', 'golden_shark_config_generales', 'golden_shark_config_section_general');
     add_settings_field('alerta_leads_pendientes', '📨 Alerta por leads sin revisar', 'golden_shark_alerta_leads_field', 'golden_shark_config_generales', 'golden_shark_config_section_general');
+    add_settings_field('leads_custom_fields', '🧩 Campos Personalizados de Leads', 'golden_shark_leads_custom_fields_field', 'golden_shark_config_generales', 'golden_shark_config_section_general');    
 
     // Webhooks
     add_settings_field('webhook_leads_url', '🔗 Webhook para nuevos leads', 'golden_shark_webhook_url_field', 'golden_shark_config_webhooks', 'golden_shark_config_section_webhooks');
@@ -179,3 +181,9 @@ add_action('update_option', function ($option, $old_value, $value) {
         golden_shark_log_usuario($msg);
     }
 }, 10, 3);
+
+function golden_shark_leads_custom_fields_field() {
+    $valor = get_option('golden_shark_leads_custom_fields', '');
+    echo '<textarea name="golden_shark_leads_custom_fields" rows="4" cols="60" placeholder="campo1:text&#10;campo2:select&#10;campo3:checkbox">' . esc_textarea($valor) . '</textarea>';
+    echo '<p class="description">' . __('Define los campos personalizados para leads. Usa el formato: nombre:tipo. Tipos válidos: text, select, checkbox.', 'golden-shark') . '</p>';
+}

@@ -18,7 +18,7 @@ function golden_shark_render_notas()
         }
 
         $notas[] = [
-            'contenido' => sanitize_textarea_field($_POST['nota_contenido']),
+            'contenido' => wp_kses_post($_POST['nota_contenido']),
             'fecha' => current_time('Y-m-d H:i:s')
         ];
         update_option('golden_shark_notas', $notas);
@@ -37,7 +37,7 @@ function golden_shark_render_notas()
 
         $id = intval($_POST['nota_id']);
         if (isset($notas[$id])) {
-            $notas[$id]['contenido'] = sanitize_textarea_field($_POST['nota_contenido']);
+            $notas[$id]['contenido'] = wp_kses_post($_POST['nota_contenido']);
             update_option('golden_shark_notas', $notas);
             golden_shark_guardar_historial_objeto('notas', $id, __('Editado', 'golden-shark'));
             golden_shark_log('Se editó una nota interna.');
@@ -106,21 +106,37 @@ function golden_shark_render_notas()
             if (isset($notas[$id])): $nota = $notas[$id]; ?>
                 <h3><?php _e('Editar Nota', 'golden-shark'); ?></h3>
                 <form method="post">
-                    <label for="editar_nota_contenido"><?php _e('Contenido de la nota:', 'golden-shark'); ?></label>
                     <input type="hidden" name="editar_nota_guardada" value="1">
                     <input type="hidden" name="nota_id" value="<?php echo $id; ?>">
                     <?php wp_nonce_field('guardar_edicion_nota_nonce', 'editar_nota_nonce'); ?>
-                    <textarea id="editar_nota_contenido" name="nota_contenido" rows="5" style="width:100%;" required><?php echo esc_textarea($nota['contenido']); ?></textarea>
+                    <?php
+                    wp_editor($nota['contenido'], 'editar_nota_contenido', [
+                        'textarea_name' => 'nota_contenido',
+                        'textarea_rows' => 6,
+                        'media_buttons' => false,
+                        'tinymce'       => true,
+                        'quicktags'     => true
+                    ]);
+                    ?>
                     <p><input type="submit" class="button button-primary" value="<?php esc_attr_e('Guardar cambios', 'golden-shark'); ?>"></p>
                 </form>
                 <hr>
-        <?php endif; endif; ?>
+        <?php endif;
+        endif; ?>
 
         <form method="post">
             <label for="nueva_nota_contenido"><?php _e('Nueva nota:', 'golden-shark'); ?></label>
             <input type="hidden" name="nueva_nota" value="1">
             <?php wp_nonce_field('guardar_nota_nonce', 'nota_nonce'); ?>
-            <textarea id="nueva_nota_contenido" name="nota_contenido" rows="5" style="width:100%;" placeholder="<?php esc_attr_e('Escribe aquí una nota interna...', 'golden-shark'); ?>" required></textarea>
+            <?php
+            wp_editor('', 'nueva_nota_contenido', [
+                'textarea_name' => 'nota_contenido',
+                'textarea_rows' => 6,
+                'media_buttons' => false,
+                'tinymce'       => true,
+                'quicktags'     => true
+            ]);
+            ?>
             <input type="submit" class="button button-primary" value="<?php esc_attr_e('Guardar nota', 'golden-shark'); ?>">
         </form>
 
@@ -145,7 +161,7 @@ function golden_shark_render_notas()
                 <?php foreach ($notas_filtradas as $nota): ?>
                     <li style="margin-bottom: 10px;">
                         <strong><?php echo esc_html($nota['fecha']); ?>:</strong><br>
-                        <?php echo nl2br(esc_html($nota['contenido'])); ?><br>
+                        <?php echo wp_kses_post($nota['contenido']); ?><br>
                         <a href="<?php echo admin_url('admin.php?page=golden-shark-notas&editar_nota=' . $nota['id']); ?>" aria-label="<?php esc_attr_e('Editar esta nota', 'golden-shark'); ?>"><?php _e('Editar', 'golden-shark'); ?></a> |
                         <a href="<?php echo wp_nonce_url(admin_url('admin.php?page=golden-shark-notas&eliminar_nota=' . $nota['id']), 'eliminar_nota_' . $nota['id'], '_nonce'); ?>" onclick="return confirm('<?php echo esc_js(__('¿Eliminar esta nota?', 'golden-shark')); ?>');" aria-label="<?php esc_attr_e('Eliminar esta nota', 'golden-shark'); ?>"><?php _e('Eliminar', 'golden-shark'); ?></a>
                     </li>

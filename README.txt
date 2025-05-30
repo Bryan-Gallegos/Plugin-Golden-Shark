@@ -1,12 +1,12 @@
 === Golden Shark Admin Panel ===
-Contributors: carlosgallegos
-Donate link: https://example.com/
-Tags: administración, leads, eventos, frases, notas, panel interno
-Requires at least: 5.8
-Tested up to: 6.5
-Stable tag: 2.7
-License: GPLv2 or later
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Contributors: carlosgallegos  
+Donate link: https://example.com/  
+Tags: administración, leads, eventos, frases, notas, panel interno  
+Requires at least: 5.8  
+Tested up to: 6.5  
+Stable tag: 2.8  
+License: GPLv2 or later  
+License URI: https://www.gnu.org/licenses/gpl-2.0.html  
 
 Plugin de administración interna para gestionar eventos, leads, frases, notas y configuraciones desde el panel de WordPress. Diseñado para uso privado en empresas.
 
@@ -77,6 +77,12 @@ Todas las acciones están protegidas con `nonce` y verificaciones de capacidad d
 9. Panel multisitio para superadministrador.
 
 == Changelog ==
+
+= 2.8 =
+* Editor visual para notas internas con soporte TinyMCE.
+* Campos personalizados en formularios de leads (text, select, checkbox).
+* Filtro de búsqueda global tipo "command palette" en todas las vistas.
+* Mejoras de usabilidad en formularios y visualización contextual de campos.
 
 = 2.7 =
 * Notificaciones internas por rol asignado (ej. tareas asignadas, cambios críticos).
