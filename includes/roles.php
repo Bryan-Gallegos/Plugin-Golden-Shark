@@ -41,8 +41,8 @@ function golden_shark_render_roles()
     $roles = wp_roles()->roles;
     ?>
     <div class="wrap">
-        <h1><?php __('👥 Accesos y Roles', 'golden-shark') ?></h1>
-        <p><?php __('Activa o desactiva las capacidades específicas que tiene cada rol en tu instalación de WordPress.', 'golden-shark' )?></p>
+        <h1><?php echo __('👥 Accesos y Roles', 'golden-shark'); ?></h1>
+        <p><?php echo __('Activa o desactiva las capacidades específicas que tiene cada rol en tu instalación de WordPress.', 'golden-shark'); ?></p>
 
         <form method="post">
             <?php wp_nonce_field('guardar_roles_nonce'); ?>
@@ -50,7 +50,7 @@ function golden_shark_render_roles()
             <table class="widefat striped">
                 <thead>
                     <tr>
-                        <th><?php __('Rol', 'golden-shark') ?></th>
+                        <th><?php echo __('Rol', 'golden-shark'); ?></th>
                         <?php foreach ($capacidades as $cap => $label): ?>
                             <th><?php echo esc_html($label); ?></th>
                         <?php endforeach; ?>
@@ -63,8 +63,8 @@ function golden_shark_render_roles()
                             <td><strong><?php echo esc_html($rol_data['name']); ?></strong></td>
                             <?php foreach ($capacidades as $cap => $label): ?>
                                 <td style="text-align: center;">
-                                    <input type="checkbox" name="cap_<?php echo esc_attr($cap); ?>[<?php echo esc_attr($rol_slug); ?>]" 
-                                    <?php checked($rol_obj->has_cap($cap)); ?>>
+                                    <input type="checkbox" name="cap_<?php echo esc_attr($cap); ?>[<?php echo esc_attr($rol_slug); ?>]"
+                                           <?php checked($rol_obj->has_cap($cap)); ?>>
                                 </td>
                             <?php endforeach; ?>
                         </tr>
@@ -73,7 +73,8 @@ function golden_shark_render_roles()
             </table>
 
             <p style="margin-top:15px;">
-                <input type="submit" name="guardar_roles" class="button button-primary" value= <?php __('💾 Guardar cambios', 'golden-shark') ?>">
+                <input type="submit" name="guardar_roles" class="button button-primary"
+                       value="<?php echo esc_attr__('💾 Guardar cambios', 'golden-shark'); ?>">
             </p>
         </form>
     </div>

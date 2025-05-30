@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Golden Shark Admin Panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-05-26 00:00+0000\n"
-"PO-Revision-Date: 2025-05-29 11:22-0500\n"
+"PO-Revision-Date: 2025-05-30 12:19-0500\n"
 "Last-Translator: Carlos Gallegos <carlos@ejemplo.com>\n"
 "Language-Team: English (US)\n"
 "Language: en_US\n"
@@ -812,3 +812,21 @@ msgstr "Are you sure you want to delete all tasks prior to today?"
 
 msgid "🧹 Tareas anteriores a hoy eliminadas."
 msgstr "🧹 Tasks prior to today deleted."
+
+msgid "Tus notificaciones"
+msgstr "Your notifications"
+
+msgid "🗑️ Marcar todas como leídas"
+msgstr "🗑️ Mark all as read"
+
+msgid "Creado"
+msgstr "Created"
+
+msgid "editado"
+msgstr "edited"
+
+msgid "Eliminado"
+msgstr "Deleted"
+
+msgid "Imagen adjunta"
+msgstr "Attached image"

@@ -18,9 +18,10 @@ function golden_shark_render_sites_list() {
         echo '<thead><tr><th>#</th><th>' . __('Nombre', 'golden-shark') .'</th><th>' . __('URL', 'golden-shark') . '</th><th>' . __('ID', 'golden-shark') . '</th></tr></thead><tbody>';
         foreach ($sites as $index => $site) {
             $info = get_blog_details($site->blog_id);
+            $nombre = isset($info->blogname) ? $info->blogname : '(' . __('sin nombre', 'golden-shark') . ')';
             echo '<tr>';
             echo '<td>' . ($index + 1) . '</td>';
-            echo '<td>' . esc_html($info->blogname ?? '(' . __('sin nombre', 'golden-shark') . ')') . '</td>';
+            echo '<td>' . esc_html($nombre) . '</td>';
             echo '<td><a href="' . esc_url($info->siteurl) . '" target="_blank">' . esc_html($info->siteurl) . '</a></td>';
             echo '<td>' . intval($site->blog_id) . '</td>';
             echo '</tr>';

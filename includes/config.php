@@ -2,87 +2,105 @@
 if (!defined('ABSPATH')) exit;
 
 // ⚙️ CONFIGURACIÓN
-function golden_shark_render_config()
-{
+function golden_shark_render_config() {
     if (!golden_shark_user_can('golden_shark_configuracion')) {
         wp_die(__('No tienes permiso para acceder a esta sección.', 'golden-shark'));
     }
 
-    if(isset($_POST['gs_lim pieza_masiva']) && check_admin_referer('gs_limpieza_masiva_nonce', 'gs_limpieza_masiva_nonce_field')){
-        $hoy = date('Y-m-d');
+    $tab = $_GET['tab'] ?? 'generales';
 
-        // Filtrar tareas
-        $tareas = get_option('golden_shark_tareas', []);
-        $tareas = array_filter($tareas, fn($t) => $t['fecha'] >= $hoy);
-        update_option('golden_shark_tareas', array_values($tareas));
+    echo '<div class="wrap gs-container">';
+    echo '<h2>' . __('⚙️ Configuración del Plugin', 'golden-shark') . '</h2>';
 
-        // Filtrar eventos
-        $eventos = get_option('golden_shark_eventos', []);
-        $eventos = array_filter($eventos, fn($e) => substr($e['fecha'], 0, 10) >= $hoy);
-        update_option('golden_shark_eventos', array_values($eventos));
-
-        // Filtrar leads
-        $leads = get_option('golden_shark_leads', []);
-        $leads = array_filter($leads, fn($l) => substr($l['fecha'], 0, 10) >= $hoy);
-        update_option('golden_shark_leads', array_values($leads));
-
-        golden_shark_log(' 🧹 Limpieza masiva ejecutada desde Configuración.');
-        golden_shark_log_usuario('Ejecutó limpieza masiva de resistros antiguos.');
-        echo '<div class="notice notice-warning"><p>' . __('🧹 Se eliminaron todos los registros anteriores a hoy.', 'golden-shark') . '</p></div>';
+    echo '<nav class="nav-tab-wrapper">';
+    $tabs = [
+        'generales' => '⚙️ Generales',
+        'webhooks' => '🌐 Webhooks',
+        'limpieza' => '🧹 Limpieza',
+    ];
+    foreach ($tabs as $slug => $label) {
+        $active = ($tab === $slug) ? 'nav-tab-active' : '';
+        echo '<a href="?page=golden-shark-config&tab=' . $slug . '" class="nav-tab ' . $active . '">' . $label . '</a>';
     }
-?>
-    <div class="wrap gs-container">
-        <h2>⚙️ Configuración del Plugin</h2>
-        <form method="post" action="options.php">
-            <?php
+    echo '</nav><br>';
+
+    switch ($tab) {
+        case 'webhooks':
+            echo '<form method="post" action="options.php">';
             settings_fields('golden_shark_config_group');
-            do_settings_sections('golden_shark_config');
+            do_settings_sections('golden_shark_config_webhooks');
             submit_button(__('💾 Guardar configuración', 'golden-shark'));
-            ?>
-        </form>
-    </div>
-    <?php if (current_user_can('golden_shark_configuracion')): ?>
-        <hr>
-        <h3><?php _e('🧹 Limpieza de registros antiguos', 'golden-shark'); ?></h3>
-        <form method="post">
-            <?php wp_nonce_field('gs_limpieza_masiva_nonce', 'gs_limpieza_masiva_nonce_field'); ?>
-            <p><?php _e('Este botón eliminará los', 'golden-shark'); ?> <strong><?php _e('leads antiguos', 'golden-shark'); ?></strong>, <strong><?php _e('eventos pasados', 'golden-shark'); ?></strong> <?php _e('y', 'golden-shark'); ?> <strong><?php _e('tareas vencidas', 'golden-shark'); ?></strong> <?php _e('hasta la fecha actual.', 'golden-shark'); ?></p>
-            <button type="submit" name="gs_limpieza_masiva" class="button button-secondary" onclick="return confirm(<?php esc_js(__('¿Seguro que deseas eliminar todos los datos antiguos? Esta acción no se puede deshacer.', 'golden-shark')); ?>)">
-                <?php _e('🧹 Ejecutar limpieza masiva', 'golden-shark'); ?>
-            </button>
-        </form>
-    <?php endif; ?>
-<?php
+            echo '</form>';
+            break;
+
+        case 'limpieza':
+            if (isset($_POST['gs_limpieza_masiva']) && check_admin_referer('gs_limpieza_masiva_nonce', 'gs_limpieza_masiva_nonce_field')) {
+                $hoy = date('Y-m-d');
+                update_option('golden_shark_tareas', array_values(array_filter(get_option('golden_shark_tareas', []), fn($t) => $t['fecha'] >= $hoy)));
+                update_option('golden_shark_eventos', array_values(array_filter(get_option('golden_shark_eventos', []), fn($e) => substr($e['fecha'], 0, 10) >= $hoy)));
+                update_option('golden_shark_leads', array_values(array_filter(get_option('golden_shark_leads', []), fn($l) => substr($l['fecha'], 0, 10) >= $hoy)));
+                golden_shark_log('🧹 Limpieza masiva ejecutada desde Configuración.');
+                golden_shark_log_usuario('Ejecutó limpieza masiva de registros antiguos.');
+                echo '<div class="notice notice-warning"><p>' . __('🧹 Se eliminaron todos los registros anteriores a hoy.', 'golden-shark') . '</p></div>';
+            }
+
+            echo '<h3>' . __('🧹 Limpieza de registros antiguos', 'golden-shark') . '</h3>';
+            echo '<form method="post" name="form_limpieza">';
+            wp_nonce_field('gs_limpieza_masiva_nonce', 'gs_limpieza_masiva_nonce_field');
+            echo '<p>' . __('Este botón eliminará los', 'golden-shark') . ' <strong>' . __('leads antiguos', 'golden-shark') . '</strong>, <strong>' . __('eventos pasados', 'golden-shark') . '</strong> ' . __('y', 'golden-shark') . ' <strong>' . __('tareas vencidas', 'golden-shark') . '</strong> ' . __('hasta la fecha actual.', 'golden-shark') . '</p>';
+            echo '<button type="submit" name="gs_limpieza_masiva" class="button button-secondary" onclick="return confirm(\'' . esc_js(__('¿Seguro que deseas eliminar todos los datos antiguos? Esta acción no se puede deshacer.', 'golden-shark')) . '\')">';
+            _e('🧹 Ejecutar limpieza masiva', 'golden-shark');
+            echo '</button></form>';
+            break;
+
+        case 'generales':
+        default:
+            echo '<form method="post" action="options.php">';
+            settings_fields('golden_shark_config_group');
+            do_settings_sections('golden_shark_config_generales');
+            submit_button(__('💾 Guardar configuración', 'golden-shark'));
+            echo '</form>';
+            break;
+    }
+
+    echo '</div>';
 }
 
-// Registrar ajustes
-function golden_shark_register_settings()
-{
-    register_setting('golden_shark_config_group', 'golden_shark_mensaje_motivacional');
-    register_setting('golden_shark_config_group', 'golden_shark_color_dashboard');
-    register_setting('golden_shark_config_group', 'golden_shark_mensaje_correo');
-    register_setting('golden_shark_config_group', 'golden_shark_habilitar_notificaciones');
-    register_setting('golden_shark_config_group', 'golden_shark_alerta_eventos_dia');
-    register_setting('golden_shark_config_group', 'golden_shark_alerta_leads_pendientes');
-    register_setting('golden_shark_config_group', 'golden_shark_webhook_leads_url');
-    register_setting('golden_shark_config_group', 'golden_shark_api_key');
-    register_setting('golden_shark_config_group', 'golden_shark_webhook_eventos_url');
-    register_setting('golden_shark_config_group', 'golden_shark_webhook_campos_leads');
+// REGISTRO DE CAMPOS
+add_action('admin_init', function () {
+    // Registro de opciones
+    $opciones = [
+        'golden_shark_mensaje_motivacional',
+        'golden_shark_color_dashboard',
+        'golden_shark_mensaje_correo',
+        'golden_shark_habilitar_notificaciones',
+        'golden_shark_alerta_eventos_dia',
+        'golden_shark_alerta_leads_pendientes',
+        'golden_shark_webhook_leads_url',
+        'golden_shark_api_key',
+        'golden_shark_webhook_eventos_url',
+        'golden_shark_webhook_campos_leads',
+    ];
+    foreach ($opciones as $opt) register_setting('golden_shark_config_group', $opt);
 
-    add_settings_section('golden_shark_config_section', '⚙️ Configuraciones Generales', null, 'golden_shark_config');
+    // Secciones
+    add_settings_section('golden_shark_config_section_general', '⚙️ Configuraciones Generales', null, 'golden_shark_config_generales');
+    add_settings_section('golden_shark_config_section_webhooks', '🌐 Webhooks y API', null, 'golden_shark_config_webhooks');
 
-    add_settings_field('mensaje_motivacional', '💬 Mensaje Motivacional Diario', 'golden_shark_mensaje_field', 'golden_shark_config', 'golden_shark_config_section');
-    add_settings_field('color_dashboard', '🎨 Color del Dashboard', 'golden_shark_color_field', 'golden_shark_config', 'golden_shark_config_section');
-    add_settings_field('mensaje_correo', '📩 Mensaje Automático en Correos', 'golden_shark_mensaje_correo_field', 'golden_shark_config', 'golden_shark_config_section');
-    add_settings_field('notificaciones', '🔔 ¿Mostrar Notificaciones Internas?', 'golden_shark_notificaciones_field', 'golden_shark_config', 'golden_shark_config_section');
-    add_settings_field('alerta_eventos_dia', '📅 Alerta por número de eventos al día', 'golden_shark_alerta_eventos_dia_field', 'golden_shark_config', 'golden_shark_config_section');
-    add_settings_field('alerta_leads_pendientes', '📨 Alerta por leads sin revisar', 'golden_shark_alerta_leads_field', 'golden_shark_config', 'golden_shark_config_section');
-    add_settings_field('webhook_leads_url', '🔗 Webhook para nuevos leads', 'golden_shark_webhook_url_field', 'golden_shark_config', 'golden_shark_config_section');
-    add_settings_field('api_key', '🔐 Clave API', 'golden_shark_api_key_field', 'golden_shark_config', 'golden_shark_config_section');
-    add_settings_field('webhook_eventos_url', '🌐 Webhook para eventos', 'golden_shark_webhook_eventos_url_field', 'golden_shark_config', 'golden_shark_config_section');
-    add_settings_field('webhook_campos_leads', '📦 Campos del webhook (leads)', 'golden_shark_webhook_campos_leads_field', 'golden_shark_config', 'golden_shark_config_section');
-}
-add_action('admin_init', 'golden_shark_register_settings');
+    // Campos generales
+    add_settings_field('mensaje_motivacional', '💬 Mensaje Motivacional Diario', 'golden_shark_mensaje_field', 'golden_shark_config_generales', 'golden_shark_config_section_general');
+    add_settings_field('color_dashboard', '🎨 Color del Dashboard', 'golden_shark_color_field', 'golden_shark_config_generales', 'golden_shark_config_section_general');
+    add_settings_field('mensaje_correo', '📩 Mensaje Automático en Correos', 'golden_shark_mensaje_correo_field', 'golden_shark_config_generales', 'golden_shark_config_section_general');
+    add_settings_field('notificaciones', '🔔 ¿Mostrar Notificaciones Internas?', 'golden_shark_notificaciones_field', 'golden_shark_config_generales', 'golden_shark_config_section_general');
+    add_settings_field('alerta_eventos_dia', '📅 Alerta por número de eventos al día', 'golden_shark_alerta_eventos_dia_field', 'golden_shark_config_generales', 'golden_shark_config_section_general');
+    add_settings_field('alerta_leads_pendientes', '📨 Alerta por leads sin revisar', 'golden_shark_alerta_leads_field', 'golden_shark_config_generales', 'golden_shark_config_section_general');
+
+    // Webhooks
+    add_settings_field('webhook_leads_url', '🔗 Webhook para nuevos leads', 'golden_shark_webhook_url_field', 'golden_shark_config_webhooks', 'golden_shark_config_section_webhooks');
+    add_settings_field('api_key', '🔐 Clave API', 'golden_shark_api_key_field', 'golden_shark_config_webhooks', 'golden_shark_config_section_webhooks');
+    add_settings_field('webhook_eventos_url', '🌐 Webhook para eventos', 'golden_shark_webhook_eventos_url_field', 'golden_shark_config_webhooks', 'golden_shark_config_section_webhooks');
+    add_settings_field('webhook_campos_leads', '📦 Campos del webhook (leads)', 'golden_shark_webhook_campos_leads_field', 'golden_shark_config_webhooks', 'golden_shark_config_section_webhooks');
+});
 
 // Campos individuales con estilos aplicados automáticamente
 function golden_shark_mensaje_field()
@@ -146,15 +164,15 @@ function golden_shark_webhook_campos_leads_field()
 {
     $campos = get_option('golden_shark_webhook_campos_leads', ['nombre', 'correo', 'mensaje']);
     $todos = ['nombre', 'correo', 'mensaje', 'fecha', 'etiquetas'];
-    foreach ($todos as $campo){
+    foreach ($todos as $campo) {
         echo '<label><input type="checkbox" name="golden_shark_webhook_campos_leads[]" value="' . esc_attr($campo) . '" ' . checked(in_array($campo, $campos), true, false) . '> ' . ucfirst($campo) . '</label><br>';
     }
     echo '<p class="description">Selecciona los campos que deseas incluir en el webhook de leads.</p>';
 }
 
-add_action('update_option', function($option, $old_value, $value){
+add_action('update_option', function ($option, $old_value, $value) {
     // Solo para opciones del plugin Golden Shark
-    if (strpos($option, 'golden_shark_') === 0 && $old_value !== $value){
+    if (strpos($option, 'golden_shark_') === 0 && $old_value !== $value) {
         $usuario = wp_get_current_user()->user_login;
         $msg = "⚙️ Configuración actualizada: $option (por $usuario)";
         golden_shark_log($msg);

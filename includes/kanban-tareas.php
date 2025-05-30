@@ -1,11 +1,11 @@
 <?php
 
-if(!defined('ABSPATH')) exit;
+if (!defined('ABSPATH')) exit;
 
 // Vista Kanban de Tareas
-function golden_shark_render_kanban(){
-    if(!golden_shark_user_can('golden_shark_acceso_basico')){
-        wp_die(__('No tienes permiso para acceder a esta sección.', 'golden-shark'));
+function golden_shark_render_kanban() {
+    if (!golden_shark_user_can('golden_shark_acceso_basico')) {
+        wp_die(__('⛔ No tienes permiso para acceder a esta sección.', 'golden-shark'));
     }
 
     $tareas = get_option('golden_shark_tareas', []);
@@ -13,46 +13,61 @@ function golden_shark_render_kanban(){
     $progreso = [];
     $completadas = [];
 
-    foreach($tareas as $i => $tarea){
+    foreach ($tareas as $i => $tarea) {
         $tarea['id'] = $i;
-        switch ($tarea['estado']){
+        switch ($tarea['estado']) {
             case 'completado': $completadas[] = $tarea; break;
             case 'progreso': $progreso[] = $tarea; break;
             default: $pendientes[] = $tarea; break;
         }
     }
 
+    $estados = [
+        'pendiente' => __('Pendiente', 'golden-shark'),
+        'progreso' => __('En progreso', 'golden-shark'),
+        'completado' => __('Completado', 'golden-shark')
+    ];
     ?>
-    <div class="wrap">
-        <h2><?php _e('Vista Kanban - Tareas internas', 'golden-shark'); ?></h2>
-        <div id="gs-kanban" style="display: flex; gap: 20px;">
+
+    <div class="wrap gs-container">
+        <h2><?php echo esc_html__('📌 Vista Kanban - Tareas internas', 'golden-shark'); ?></h2>
+
+        <div id="gs-kanban" style="display: flex; gap: 20px; margin-top: 20px;">
             <?php foreach (['pendiente' => $pendientes, 'progreso' => $progreso, 'completado' => $completadas] as $estado => $lista): ?>
-                <div style="flex: 1; background: #f9f9f9; padding: 10px; border: 1px solid #ccc;">
-                    <h3 style="text-align: center;"><?php echo ucfirst(__($estado, 'golden-shark')); ?></h3>
+                <div class="gs-kanban-col" style="flex: 1; background: #f9f9f9; padding: 10px; border: 1px solid #ccc;">
+                    <h3 style="text-align: center;"><?php echo esc_html($estados[$estado]); ?></h3>
+
                     <?php if (empty($lista)): ?>
-                        <p style="text-align: center;"><?php _e('Sin tareas', 'golden-shark'); ?></p>
+                        <p style="text-align: center;"><?php echo esc_html__('Sin tareas', 'golden-shark'); ?></p>
                     <?php else: ?>
                         <?php foreach ($lista as $t): ?>
-                            <div style="background: white; margin-bottom: 10px; padding: 10px; border: 1px solid #ddd;">
+                            <div class="gs-kanban-card" style="background: white; margin-bottom: 10px; padding: 10px; border: 1px solid #ddd;">
                                 <strong><?php echo esc_html($t['titulo']); ?></strong><br>
-                                <small><?php _e('Fecha:', 'golden-shark'); ?> <?php echo esc_html($t['fecha']); ?></small><br>
-                                <small><?php _e('Responsable:', 'golden-shark'); ?> <?php echo get_userdata($t['responsable'])->display_name ?? 'N/A'; ?></small>
+                                <small><?php echo esc_html__('📅 Fecha:', 'golden-shark') . ' ' . esc_html($t['fecha']); ?></small><br>
+                                <small>
+                                    <?php
+                                    $user = get_userdata($t['responsable'] ?? 0);
+                                    $nombre = $user ? $user->display_name : __('No asignado', 'golden-shark');
+                                    echo esc_html__('👤 Responsable:', 'golden-shark') . ' ' . esc_html($nombre);
+                                    ?>
+                                </small>
                             </div>
-                        <?php endforeach ?>
+                        <?php endforeach; ?>
                     <?php endif; ?>
                 </div>
             <?php endforeach; ?>
         </div>
     </div>
-    <?php
+
+<?php
 }
 
-//Registrar en el menú (opcional si no se añade desde otro lado)
-function golden_shark_add_kanban_menu(){
+// Registrar en el menú (si aún no está integrado desde multisite.php o menú principal)
+function golden_shark_add_kanban_menu() {
     add_submenu_page(
         'golden-shark-panel',
-        'Vista Kanban',
-        'Kanban',
+        __('Vista Kanban', 'golden-shark'),
+        __('Kanban', 'golden-shark'),
         'golden_shark_acceso_basico',
         'golden-shark-kanban',
         'golden_shark_render_kanban'

@@ -2,7 +2,7 @@
 /*
 Plugin Name: Golden Shark Admin Panel
 Description: Plugin de administración interno para gestionar eventos, leads y configuración desde el panel de WordPress.
-Version: 2.6
+Version: 2.7
 Author: Carlos Gallegos
 Text Domain: golden-shark
 Domain Path: /languages
@@ -37,7 +37,8 @@ $archivos = [
     'functions-tareas.php',
     'kanban-tareas.php',
     'perfil.php',
-    'resumen.php'
+    'resumen.php',
+    'notificaciones.php'
 ];
 
 foreach ($archivos as $archivo) {

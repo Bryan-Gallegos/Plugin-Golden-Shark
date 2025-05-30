@@ -73,6 +73,15 @@ Todas las configuraciones principales (colores, mensajes y notificaciones) está
 
 ## 🗓️ Historial de cambios
 
+### v2.7 – Notificaciones, historial y multimedia
+- Notificaciones internas por rol asignado (ej. tareas asignadas, cambios críticos).
+- Historial detallado de edición por objeto (leads, eventos, notas).
+- Soporte para imágenes adjuntas en eventos y leads.
+- Mejora de accesibilidad: etiquetas `aria`, navegación por teclado, roles en tablas.
+- Optimización de rendimiento en vistas largas y formularios.
+- Panel de configuración mejorado con pestañas: Generales, Webhooks y Limpieza.
+- Registro de cambios de configuración en los logs del sistema.
+
 ### v2.6 - Integración avanzada y personalización del usuario
 - Sistema de **etiquetas** apra eventos, leads y tareas (filtrado más preciso).
 - **Favoritos** por usuario: marcar frases, notas o eventos destacados.

@@ -788,3 +788,21 @@ msgstr ""
 
 msgid "🧹 Tareas anteriores a hoy eliminadas."
 msgstr ""
+
+msgid "Tus notificaciones"
+msgstr ""
+
+msgid "🗑️ Marcar todas como leídas"
+msgstr ""
+
+msgid "Creado"
+msgstr ""
+
+msgid "editado"
+msgstr ""
+
+msgid "Eliminado"
+msgstr ""
+
+msgid "Imagen adjunta"
+msgstr ""

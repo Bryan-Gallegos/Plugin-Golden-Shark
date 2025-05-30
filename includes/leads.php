@@ -34,6 +34,14 @@ function golden_shark_render_leads()
         $mensaje = sanitize_textarea_field($_POST['lead_mensaje']);
         $fecha = current_time('Y-m-d H:i:s');
 
+        $imagen_url = '';
+        if (!empty($_FILES['lead_imagen']['tmp_name'])) {
+            $upload = wp_handle_upload($_FILES['lead_imagen'], ['test_form' => false]);
+            if (!isset($upload['error'])) {
+                $imagen_url = esc_url_raw($upload['url']);
+            }
+        }
+
         if ($nombre && $correo) {
             $leads[] = [
                 'nombre' => $nombre,
@@ -41,8 +49,11 @@ function golden_shark_render_leads()
                 'mensaje' => $mensaje,
                 'fecha' => $fecha,
                 'etiquetas' => array_map('trim', explode(',', sanitize_text_field($_POST['lead_etiquetas']))),
+                'imagen' => $imagen_url,
             ];
             update_option('golden_shark_leads', $leads);
+            $lead_id = array_key_last($leads);
+            golden_shark_guardar_historial_objeto('leads', $lead_id, __('Creado', 'golden-shark'));
             golden_shark_log("Se registró un nuevo lead: $nombre ($correo)");
             // Enviar a webhook si está configurado
             $webhook_url = get_option('golden_shark_webhook_leads_url', '');
@@ -104,6 +115,7 @@ function golden_shark_render_leads()
             unset($leads[$id]);
             $leads = array_values($leads);
             update_option('golden_shark_leads', $leads);
+            golden_shark_guardar_historial_objeto('leads', $id, __('Eliminado', 'golden-shark'));
             golden_shark_log("Se eliminó el lead: {$lead_eliminado['nombre']} ({$lead_eliminado['correo']})");
             update_user_meta(get_current_user_id(), 'gs_notificacion_interna', __('🗑️ Lead eliminado correctamente.', 'golden-shark'));
             echo '<div class="notice notice-error"><p>' . __('🗑️ Lead eliminado.', 'golden-shark') . '</p></div>';
@@ -118,14 +130,29 @@ function golden_shark_render_leads()
 
         $id = intval($_POST['lead_id']);
         if (isset($leads[$id])) {
+            $imagen_url = $leads[$id]['imagen'] ?? '';
+
+            if (!empty($_POST['eliminar_imagen'])) {
+                $imagen_url = '';
+            }
+
+            if (!empty($_FILES['lead_imagen']['tmp_name'])) {
+                $upload = wp_handle_upload($_FILES['lead_imagen'], ['test_form' => false]);
+                if (!isset($upload['error'])) {
+                    $imagen_url = esc_url_raw($upload['url']);
+                }
+            }
+
             $leads[$id] = [
                 'nombre' => sanitize_text_field($_POST['lead_nombre']),
                 'correo' => sanitize_email($_POST['lead_correo']),
                 'mensaje' => sanitize_textarea_field($_POST['lead_mensaje']),
                 'fecha' => $leads[$id]['fecha'],
                 'etiquetas' => array_map('trim', explode(',', sanitize_text_field($_POST['lead_etiquetas']))),
+                'imagen' => $imagen_url,
             ];
             update_option('golden_shark_leads', $leads);
+            golden_shark_registrar_historial_objeto('lead', $id, __('editado', 'golden-shark'), get_current_user_id());
             golden_shark_log("Se editó el lead: {$_POST['lead_nombre']} ({$_POST['lead_correo']})");
             update_user_meta(get_current_user_id(), 'gs_notificacion_interna', __('✅ Lead actualizado correctamente.', 'golden-shark'));
             echo '<div class="notice notice-info"><p>' . __('✏️ Lead actualizado correctamente.', 'golden-shark') . '</p></div>';
@@ -216,7 +243,7 @@ function golden_shark_render_leads()
                 $id = intval($_GET['editar_lead']);
                 if (isset($leads[$id])): $lead = $leads[$id]; ?>
                     <h3><?php _e('Editar Lead', 'golden-shark'); ?></h3>
-                    <form method="post">
+                    <form method="post" enctype="multipart/form-data">
                         <input type="hidden" name="editar_lead_guardado" value="1">
                         <input type="hidden" name="lead_id" value="<?php echo $id; ?>">
                         <?php wp_nonce_field('guardar_edicion_lead_nonce', 'editar_lead_nonce'); ?>
@@ -237,6 +264,16 @@ function golden_shark_render_leads()
                                 <th><label for="lead_etiquetas"><?php _e('Etiquetas:', 'golden-shark'); ?></label></th>
                                 <td><input type="text" name="lead_etiquetas" value="<?php echo esc_attr(implode(', ', $lead['etiquetas'] ?? [])); ?>" class="regular-text"></td>
                             </tr>
+                            <tr>
+                                <th><?php _e('Imagen adjunta', 'golden-shark'); ?>:</th>
+                                <td>
+                                    <?php if (!empty($lead['imagen'])): ?>
+                                        <img src="<?php echo esc_url($lead['imagen']); ?>" style="max-width:100px;height:auto;"><br>
+                                        <label><input type="checkbox" name="eliminar_imagen"> <?php _e('Eliminar imagen actual', 'golden-shark'); ?></label><br>
+                                    <?php endif; ?>
+                                    <input type="file" name="lead_imagen" accept="image/*">
+                                </td>
+                            </tr>
                         </table>
                         <p><input type="submit" class="button button-primary" value="<?php esc_attr_e('Guardar cambios', 'golden-shark'); ?>"></p>
                     </form>
@@ -247,7 +284,7 @@ function golden_shark_render_leads()
 
         <div class="gs-container">
             <h3><?php _e('➕ Nuevo Lead', 'golden-shark'); ?></h3>
-            <form method="post">
+            <form method="post" enctype="multipart/form-data">
                 <input type="hidden" name="nuevo_lead" value="1">
                 <?php wp_nonce_field('guardar_lead_nonce', 'lead_nonce'); ?>
                 <table class="form-table">
@@ -267,9 +304,14 @@ function golden_shark_render_leads()
                         <th><label for="lead_etiquetas"><?php _e('Etiquetas:', 'golden-shark'); ?></label></th>
                         <td><input type="text" name="lead_etiquetas" placeholder="Ej: urgente, cliente, evento" class="regular-text"></td>
                     </tr>
+                    <tr>
+                        <th><?php _e('Imagen adjunta', 'golden-shark') ?>:</th>
+                        <td><input type="file" name="lead_imagen" accept="image/*"></td>
+                    </tr>
                 </table>
                 <p><input type="submit" class="button button-primary" value="<?php esc_attr_e('Guardar lead', 'golden-shark'); ?>"></p>
             </form>
+
             <form method="post" style="margin-top: 15px;">
                 <input type="hidden" name="exportar_leads" value="1">
                 <input type="text" name="filtro_correo" placeholder="Correo..." value="<?php echo esc_attr($_GET['correo'] ?? ''); ?>">
@@ -283,11 +325,11 @@ function golden_shark_render_leads()
                 <strong><?php _e('Exportación avanzada:', 'golden-shark'); ?></strong><br><br>
 
                 <label><strong><?php _e('Columnas a incluir:', 'golden-shark'); ?></strong></label><br>
-                <label><input type="checkbox" name="columnas[]" value="nombre" checked> Nombre</label>
-                <label><input type="checkbox" name="columnas[]" value="correo" checked> Correo</label>
-                <label><input type="checkbox" name="columnas[]" value="mensaje"> Mensaje</label>
-                <label><input type="checkbox" name="columnas[]" value="fecha" checked> Fecha</label>
-                <label><input type="checkbox" name="columnas[]" value="etiquetas"> Etiquetas</label>
+                <label><input type="checkbox" name="columnas[]" value="nombre" checked><?php __('Nombre', 'golden-shark') ?></label>
+                <label><input type="checkbox" name="columnas[]" value="correo" checked><?php __('Correo', 'golden-shark') ?></label>
+                <label><input type="checkbox" name="columnas[]" value="mensaje"><?php __('Mensaje', 'golden-shark') ?></label>
+                <label><input type="checkbox" name="columnas[]" value="fecha" checked><?php __('Fecha', 'golden-shark') ?></label>
+                <label><input type="checkbox" name="columnas[]" value="etiquetas"><?php __('Etiquetas', 'golden-shark') ?></label>
 
                 <br><br>
                 <label><strong><?php _e('Rango de fechas:', 'golden-shark'); ?></strong></label><br>
@@ -303,16 +345,16 @@ function golden_shark_render_leads()
             <form method="get" style="margin-bottom: 20px;" class="gs-filtros-leads">
                 <input type="hidden" name="page" value="golden-shark-leads">
 
-                <label for="filtro_correo"><strong>Correo:</strong></label>
+                <label for="filtro_correo"><strong><?php __('Correo', 'golden-shark') ?>:</strong></label>
                 <input type="text" name="correo" id="filtro_correo" placeholder="ej. gmail.com" value="<?php echo esc_attr($_GET['correo'] ?? ''); ?>">
 
-                <label for="filtro_etiqueta"><strong>Etiqueta:</strong></label>
+                <label for="filtro_etiqueta"><strong><?php __('Etiqueta', 'golden-shark') ?>:</strong></label>
                 <input type="text" name="etiqueta" id="filtro_etiqueta" placeholder="cliente, evento, vip..." value="<?php echo esc_attr($_GET['etiqueta'] ?? ''); ?>">
 
-                <label for="fecha_inicio"><strong>Desde:</strong></label>
+                <label for="fecha_inicio"><strong><?php __('Desde', 'golden-shark') ?>:</strong></label>
                 <input type="date" name="fecha_inicio" id="fecha_inicio" value="<?php echo esc_attr($_GET['fecha_inicio'] ?? ''); ?>">
 
-                <label for="fecha_fin"><strong>Hasta:</strong></label>
+                <label for="fecha_fin"><strong><?php __('Hasta', 'golden-shark') ?>:</strong></label>
                 <input type="date" name="fecha_fin" id="fecha_fin" value="<?php echo esc_attr($_GET['fecha_fin'] ?? ''); ?>">
 
                 <input type="submit" class="button" value="Filtrar Leads">

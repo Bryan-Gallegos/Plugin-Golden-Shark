@@ -4,7 +4,7 @@ Donate link: https://example.com/
 Tags: administración, leads, eventos, frases, notas, panel interno
 Requires at least: 5.8
 Tested up to: 6.5
-Stable tag: 2.6
+Stable tag: 2.7
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -20,6 +20,9 @@ Golden Shark Admin Panel es un plugin de administración exclusivo que permite a
 - Notas internas del equipo.
 - Historial de actividad con registro automático.
 - Panel de configuración para personalizar colores, mensajes y notificaciones.
+- Tareas internas con estados, responsable y vista Kanban.
+- Shortcodes útiles para front-end y automatizaciones.
+- Soporte completo para multisitio y roles personalizados.
 
 Pensado para ser una herramienta **privada**, segura y personalizable para equipos de trabajo o franquicias.
 
@@ -29,12 +32,15 @@ Pensado para ser una herramienta **privada**, segura y personalizable para equip
 * Registro de leads y formulario público mediante shortcode.
 * Base de frases motivacionales con shortcode.
 * Notas internas con buscador, edición y exportación.
-* Historial de cambios automatizado.
-* Configuración de mensaje motivacional, color del panel y más.
+* Historial de cambios automatizado por objeto y usuario.
+* Configuración de mensaje motivacional, color del panel y notificaciones.
+* Soporte para tareas internas con vista de lista o Kanban.
+* Shortcodes para mostrar historial, tareas, eventos y frases.
 * Carga de estilos y scripts personalizados.
-* Solo accesible para usuarios administradores o editores autorizados.
-* Panel multisitio exclusivo para superadministradores con edición global de frases y configuración.
-* Listado de sitios activos en la red.
+* Soporte para adjuntar imágenes en leads y eventos.
+* Soporte completo para multisitio: configuración global y edición remota.
+* Panel exclusivo para superadministradores con vista de red.
+* Roles personalizados (`golden_shark_acceso_basico`, `golden_shark_configuracion`, etc).
 
 == Instalación ==
 
@@ -52,10 +58,11 @@ Pensado para ser una herramienta **privada**, segura y personalizable para equip
 * `[total_leads]` – Muestra el número total de leads registrados.
 * `[tareas_pendientes]` – Muestra en el front-end la lista de tareas pendientes.
 * `[kanban_tareas]` – Muestra las tareas internas en vista tipo Kanban.
+* `[mi_historial]` – Muestra el historial personal del usuario conectado.
 
 == Seguridad ==
 
-Todas las acciones están protegidas con `nonce` y verificaciones de capacidad de usuario. Solo administradores o editores (según permisos) pueden acceder a cada sección.
+Todas las acciones están protegidas con `nonce` y verificaciones de capacidad de usuario. Solo administradores o editores (según permisos) pueden acceder a cada sección. Soporte para roles personalizados.
 
 == Capturas de pantalla ==
 
@@ -66,8 +73,19 @@ Todas las acciones están protegidas con `nonce` y verificaciones de capacidad d
 5. Notas internas con buscador.
 6. Configuraciones del plugin.
 7. Historial de actividad.
+8. Tareas internas con vista tipo Kanban.
+9. Panel multisitio para superadministrador.
 
 == Changelog ==
+
+= 2.7 =
+* Notificaciones internas por rol asignado (ej. tareas asignadas, cambios críticos).
+* Historial detallado de edición por objeto (leads, eventos, notas).
+* Soporte para imágenes adjuntas en eventos y leads.
+* Mejora de accesibilidad: etiquetas `aria`, navegación por teclado, roles en tablas.
+* Optimización de rendimiento en vistas largas y formularios.
+* Panel de configuración dividido por pestañas: generales, webhooks y limpieza.
+* Registro de cambios de configuración en los logs.
 
 = 2.6 =
 * Sistema de etiquetas para eventos, leads y tareas.

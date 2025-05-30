@@ -53,12 +53,12 @@ function golden_shark_render_frases_globales()
 
     ?>
     <div class="wrap">
-        <h1>🌐 Frases Motivacionales Globales</h1>
+        <h1><?php __('🌐 Frases Motivacionales Globales', 'golden-shark') ?></h1>
 
         <?php if (isset($_GET['editar'])):
             $id = intval($_GET['editar']);
             if (isset($frases[$id])): ?>
-                <h3>✏️ Editar frase global</h3>
+                <h3><?php __('✏️ Editar frase global', 'golden-shark') ?></h3>
                 <form method="post">
                     <input type="hidden" name="editar_frase_guardada" value="1">
                     <input type="hidden" name="frase_id" value="<?php echo $id; ?>">
@@ -70,7 +70,7 @@ function golden_shark_render_frases_globales()
         <?php endif;
         endif; ?>
 
-        <h3>➕ Nueva frase global</h3>
+        <h3><?php __('➕ Nueva frase global', 'golden-shark') ?></h3>
         <form method="post">
             <input type="hidden" name="nueva_frase_guardada" value="1">
             <?php wp_nonce_field('guardar_frase_global_nonce'); ?>
@@ -79,16 +79,16 @@ function golden_shark_render_frases_globales()
         </form>
 
         <hr>
-        <h3>📋 Frases globales registradas:</h3>
+        <h3><?php __('📋 Frases globales registradas', 'golden-shark') ?>:</h3>
         <?php if (empty($frases)) : ?>
-            <p>No hay frases globales registradas.</p>
+            <p><?php __('No hay frases globales registradas', 'golden-shark') ?>.</p>
         <?php else : ?>
             <ul>
                 <?php foreach ($frases as $i => $f): ?>
                     <li>
                         <?php echo esc_html($f); ?> -
-                        <a href="<?php echo admin_url('admin.php?page=golden-shark-multisite-panel&editar=' . $i); ?>">Editar</a> |
-                        <a href="<?php echo wp_nonce_url(admin_url('admin.php?page=golden-shark-multisite-panel&eliminar=' . $i), 'eliminar_frase_global_' . $i, '_nonce'); ?>" onclick="return confirm('¿Eliminar esta frase global?');">Eliminar</a>
+                        <a href="<?php echo admin_url('admin.php?page=golden-shark-multisite-panel&editar=' . $i); ?>"><?php __('Editar', 'golden-shark') ?></a> |
+                        <a href="<?php echo wp_nonce_url(admin_url('admin.php?page=golden-shark-multisite-panel&eliminar=' . $i), 'eliminar_frase_global_' . $i, '_nonce'); ?>" onclick="return confirm('¿Eliminar esta frase global?');"><?php __('Eliminar', 'golden-shark') ?></a>
                     </li>
                 <?php endforeach; ?>
             </ul>

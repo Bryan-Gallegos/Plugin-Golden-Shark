@@ -78,14 +78,25 @@ function golden_shark_render_eventos()
             wp_die(__('⚠️ Seguridad fallida. Token inválido.', 'golden-shark'));
         }
 
+        $imagen_url = '';
+        if (!empty($_FILES['evento_imagen']['tmp_name'])) {
+            $upload = wp_handle_upload($_FILES['evento_imagen'], ['test_form' => false]);
+            if (!isset($upload['error'])) {
+                $imagen_url = esc_url_raw($upload['url']);
+            }
+        }
+
         $eventos[] = [
             'titulo' => sanitize_text_field($_POST['evento_titulo']),
             'fecha' => sanitize_text_field($_POST['evento_fecha']),
             'lugar' => sanitize_text_field($_POST['evento_lugar']),
             'tipo' => sanitize_text_field($_POST['evento_tipo']),
-            'etiquetas' => array_map('trim', explode(',', sanitize_text_field($_POST['evento_etiquetas'])))
+            'etiquetas' => array_map('trim', explode(',', sanitize_text_field($_POST['evento_etiquetas']))),
+            'imagen' => $imagen_url
         ];
         update_option('golden_shark_eventos', $eventos);
+        $evento_id = array_key_last($eventos);
+        golden_shark_guardar_historial_objeto('eventos', $evento_id, __('Creado', 'golden-shark'));
         golden_shark_log('Se registró un nuevo evento: ' . $_POST['evento_titulo']);
         update_user_meta(get_current_user_id(), 'gs_notificacion_interna', __('✅ Evento guardado correctamente.', 'golden-shark'));
         echo '<div class="updated"><p>' . __('✅ Evento guardado correctamente.', 'golden-shark') . '</p></div>';
@@ -106,14 +117,30 @@ function golden_shark_render_eventos()
 
         $id = intval($_POST['evento_id']);
         if (isset($eventos[$id])) {
+
+            $imagen_url = $eventos[$id]['imagen'] ?? '';
+
+            if (!empty($_POST['eliminar_imagen'])) {
+                $imagen_url = '';
+            }
+
+            if (!empty($_FILES['evento_imagen']['tmp_name'])) {
+                $upload = wp_handle_upload($_FILES['evento_imagen'], ['test_form' => false]);
+                if (!isset($upload['error'])) {
+                    $imagen_url = esc_url_raw($upload['url']);
+                }
+            }
+
             $eventos[$id] = [
                 'titulo' => sanitize_text_field($_POST['evento_titulo']),
                 'fecha' => sanitize_text_field($_POST['evento_fecha']),
                 'lugar' => sanitize_text_field($_POST['evento_lugar']),
                 'tipo' => sanitize_text_field($_POST['evento_tipo']),
-                'etiquetas' => array_map('trim', explode(',', sanitize_text_field($_POST['evento_etiquetas'])))
+                'etiquetas' => array_map('trim', explode(',', sanitize_text_field($_POST['evento_etiquetas']))),
+                'imagen' => $imagen_url
             ];
             update_option('golden_shark_eventos', $eventos);
+            golden_shark_guardar_historial_objeto('eventos', $id, __('Editado', 'golden-shark'));
             golden_shark_log('Se editó el evento: ' . $_POST['evento_titulo']);
             update_user_meta(get_current_user_id(), 'gs_notificacion_interna', __('✅ Evento actualizado correctamente.', 'golden-shark'));
             echo '<div class="updated"><p>' . __('✏️ Evento actualizado correctamente.', 'golden-shark') . '</p></div>';
@@ -140,6 +167,7 @@ function golden_shark_render_eventos()
             unset($eventos[$id]);
             $eventos = array_values($eventos);
             update_option('golden_shark_eventos', $eventos);
+            golden_shark_guardar_historial_objeto('eventos', $id, __('Eliminado', 'golden-shark'));
             golden_shark_log('Se eliminó un evento con ID: ' . $id);
             update_user_meta(get_current_user_id(), 'gs_notificacion_interna', __('🗑️ Evento eliminado correctamente.', 'golden-shark'));
             echo '<div class="updated"><p>' . __('🗑️ Evento eliminado.', 'golden-shark') . '</p></div>';
@@ -156,36 +184,46 @@ function golden_shark_render_eventos()
             if (isset($eventos[$id])): $evento = $eventos[$id]; ?>
                 <div class="gs-container">
                     <h3><?php _e('Editar Evento', 'golden-shark'); ?></h3>
-                    <form method="post">
+                    <form method="post" enctype="multipart/form-data">
                         <input type="hidden" name="editar_evento_guardado" value="1">
                         <input type="hidden" name="evento_id" value="<?php echo $id; ?>">
                         <?php wp_nonce_field('guardar_edicion_evento_nonce', 'editar_evento_nonce'); ?>
                         <table class="form-table">
                             <tr>
-                                <th>Título:</th>
+                                <th><?php __('Título', 'golden-shark') ?>:</th>
                                 <td><input type="text" name="evento_titulo" value="<?php echo esc_attr($evento['titulo']); ?>" class="regular-text" required></td>
                             </tr>
                             <tr>
-                                <th>Fecha:</th>
+                                <th><?php __('Fecha', 'golden-shark') ?>:</th>
                                 <td><input type="date" name="evento_fecha" value="<?php echo esc_attr($evento['fecha']); ?>" required></td>
                             </tr>
                             <tr>
-                                <th>Ubicación:</th>
+                                <th><?php __('Ubicación', 'golden-shark') ?>:</th>
                                 <td><input type="text" name="evento_lugar" value="<?php echo esc_attr($evento['lugar']); ?>" class="regular-text" required></td>
                             </tr>
                             <tr>
-                                <th>Tipo:</th>
+                                <th><?php __('Tipo', 'golden-shark') ?>:</th>
                                 <td>
                                     <select name="evento_tipo">
-                                        <option value="interno" <?php selected($evento['tipo'], 'interno'); ?>>Interno</option>
-                                        <option value="reunion"> <?php selected($evento['tipo'], 'reunion'); ?>Reunión</option>
-                                        <option value="lanzamiento" <?php selected($evento['tipo'], 'lanzamiento'); ?>>Lanzamiento</option>
+                                        <option value="interno" <?php slected($evento['tipo'], 'interno'); ?>><?php __('Interno', 'golden-shark') ?></option>
+                                        <option value="reunion"> <?php selected($evento['tipo'], 'reunion'); ?><?php __('Reunión', 'golden-shark') ?></option>
+                                        <option value="lanzamiento" <?php selected($evento['tipo'], 'lanzamiento'); ?>><?php __('Lanzamiento', 'golden-shark') ?></option>
                                     </select>
                                 </td>
                             </tr>
                             <tr>
-                                <th>Etiquetas:</th>
+                                <th><?php __('Etiquetas', 'golden-shark') ?>:</th>
                                 <td><input type="text" name="evento_etiquetas" value="<?php echo esc_attr(implode(', ', $evento['etiquetas'] ?? [])); ?>" class="regular-text"></td>
+                            </tr>
+                            <tr>
+                                <th><?php __('Imagen adjunta', 'golden-shark'); ?>:</th>
+                                <td>
+                                    <?php if (!empty($evento['imagen'])): ?>
+                                        <img src="<?php echo esc_url($evento['imagen']); ?>" style="max-width:100px;height:auto;"><br>
+                                        <label><input type="checkbox" name="eliminar_imagen"> <?php _e('Eliminar imagen actual', 'golden-shark'); ?></label><br>
+                                    <?php endif; ?>
+                                    <input type="file" name="evento_imagen" accept="image/*">
+                                </td>
                             </tr>
                         </table>
                         <p><input type="submit" class="button button-primary" value="<?php esc_attr_e('Guardar cambios', 'golden-shark'); ?>"></p>
@@ -198,24 +236,24 @@ function golden_shark_render_eventos()
 
         <div class="gs-container">
             <h3><?php _e('Nuevo Evento', 'golden-shark'); ?></h3>
-            <form method="post">
+            <form method="post" enctype="multipart/form-data">
                 <input type="hidden" name="nuevo_evento" value="1">
                 <?php wp_nonce_field('guardar_evento_nonce', 'evento_nonce'); ?>
                 <table class="form-table">
                     <tr>
-                        <th>Título:</th>
+                        <th><?php __('Título', 'golden-shark') ?>:</th>
                         <td><input type="text" name="evento_titulo" class="regular-text" required></td>
                     </tr>
                     <tr>
-                        <th>Fecha:</th>
+                        <th><?php __('Fecha', 'golden-shark') ?>:</th>
                         <td><input type="date" name="evento_fecha" required></td>
                     </tr>
                     <tr>
-                        <th>Ubicación:</th>
+                        <th><?php __('Ubicación', 'golden-shark') ?>:</th>
                         <td><input type="text" name="evento_lugar" class="regular-text" required></td>
                     </tr>
                     <tr>
-                        <th>Tipo:</th>
+                        <th><?php __('Tipo', 'golden-shark') ?>:</th>
                         <td>
                             <select name="evento_tipo">
                                 <option value="interno"><?php _e('Interno', 'golden-shark'); ?></option>
@@ -225,8 +263,12 @@ function golden_shark_render_eventos()
                         </td>
                     </tr>
                     <tr>
-                        <th>Etiquetas:</th>
+                        <th><?php __('Etiquetas', 'golden-shark') ?>:</th>
                         <td><input type="text" name="evento_etiquetas" placeholder="<?php esc_attr_e('Ej: urgente, cliente, zona sur', 'golden-shark'); ?>" class="regular-text"></td>
+                    </tr>
+                    <tr>
+                        <th><?php __('Imagen adjunta', 'golden-shark') ?>:</th>
+                        <td><input type="file" name="evento_imagen" accept="image/*"></td>
                     </tr>
                 </table>
                 <p><input type="submit" class="button button-primary" value="<?php esc_attr_e('Guardar evento', 'golden-shark'); ?>"></p>
@@ -238,10 +280,10 @@ function golden_shark_render_eventos()
                 <input type="hidden" name="exportar_csv" value="1">
 
                 <select name="filtro_tipo">
-                    <option value="">Todos</option>
-                    <option value="interno" <?php selected($_GET['tipo'] ?? '', 'interno'); ?>>Interno</option>
-                    <option value="reunion" <?php selected($_GET['tipo'] ?? '', 'reunion'); ?>>Reunión</option>
-                    <option value="lanzamiento" <?php selected($_GET['tipo'] ?? '', 'lanzamiento'); ?>>Lanzamiento</option>
+                    <option value=""><?php __('Todos','golden-shark') ?></option>
+                    <option value="interno" <?php selected($_GET['tipo'] ?? '', 'interno'); ?>><?php __('Interno', 'golden-shark') ?></option>
+                    <option value="reunion" <?php selected($_GET['tipo'] ?? '', 'reunion'); ?>><?php __('Reunión', 'golden-shark') ?></option>
+                    <option value="lanzamiento" <?php selected($_GET['tipo'] ?? '', 'lanzamiento'); ?>><?php __('Lanzamiento', 'golden-shark') ?></option>
                 </select>
 
                 <input type="text" name="filtro_etiqueta" placeholder="Etiqueta..." value="<?php echo esc_attr($_GET['etiqueta'] ?? ''); ?>">
@@ -258,21 +300,21 @@ function golden_shark_render_eventos()
             <form method="get" style="margin-bottom: 20px;" class="gs-filtros-eventos">
                 <input type="hidden" name="page" value="golden-shark-eventos">
 
-                <label for="filtro_tipo"><strong>Tipo:</strong></label>
+                <label for="filtro_tipo"><strong><?php __('Tipo','golden-shark') ?>:</strong></label>
                 <select name="tipo" id="filtro_tipo">
-                    <option value="">Todos</option>
-                    <option value="interno" <?php selected($_GET['tipo'] ?? '', 'interno'); ?>>Interno</option>
-                    <option value="reunion" <?php selected($_GET['tipo'] ?? '', 'reunion'); ?>>Reunión</option>
-                    <option value="lanzamiento" <?php selected($_GET['tipo'] ?? '', 'lanzamiento'); ?>>Lanzamiento</option>
+                    <option value=""><?php __('Todos', 'golden-shark') ?></option>
+                    <option value="interno" <?php selected($_GET['tipo'] ?? '', 'interno'); ?>><?php __('Interno', 'golden-shark') ?></option>
+                    <option value="reunion" <?php selected($_GET['tipo'] ?? '', 'reunion'); ?>><?php __('Reunión', 'golden-shark') ?></option>
+                    <option value="lanzamiento" <?php selected($_GET['tipo'] ?? '', 'lanzamiento'); ?>><?php __('Lanzamiento', 'golden-shark') ?></option>
                 </select>
 
-                <label for="filtro_etiqueta"><strong>Etiqueta:</strong></label>
+                <label for="filtro_etiqueta"><strong><?php __('Etiqueta', 'golden-shark') ?>:</strong></label>
                 <input type="text" name="etiqueta" id="filtro_etiqueta" value="<?php echo esc_attr($_GET['etiqueta'] ?? ''); ?>" placeholder="Ej: urgente, marketing">
 
-                <label for="filtro_fecha_inicio"><strong>Desde:</strong></label>
+                <label for="filtro_fecha_inicio"><strong><?php __('Desde', 'golden-shark') ?>:</strong></label>
                 <input type="date" name="fecha_inicio" id="filtro_fecha_inicio" value="<?php echo esc_attr($_GET['fecha_inicio'] ?? ''); ?>">
 
-                <label for="filtro_fecha_fin"><strong>Hasta:</strong></label>
+                <label for="filtro_fecha_fin"><strong><?php __('Hasta', 'golden-shark') ?>:</strong></label>
                 <input type="date" name="fecha_fin" id="filtro_fecha_fin" value="<?php echo esc_attr($_GET['fecha_fin'] ?? ''); ?>">
 
                 <input type="submit" class="button" value="Filtrar eventos">
@@ -283,7 +325,7 @@ function golden_shark_render_eventos()
                 <form method="post" style="margin-bottom: 20px;">
                     <input type="hidden" name="eliminar_eventos_antiguos" value="1">
                     <button type="submit" class="button button-secondary" onclick="return confirm('<?php echo esc_js(__('¿Eliminar todos los eventos con fecha pasada?', 'golden-shark')); ?>')">
-                        🧹 Eliminar eventos antiguos
+                        <?php __('🧹 Eliminar eventos antiguos', 'golden-shark') ?>
                     </button>
                 </form>
             <?php endif; ?>
@@ -329,8 +371,8 @@ function golden_shark_render_eventos()
                                     <a href="<?php echo $fav_url; ?>" title="Marcar como favorito">
                                         <?php echo $is_fav ? '⭐' : '☆'; ?>
                                     </a> |
-                                    <a href="<?php echo admin_url('admin.php?page=golden-shark-eventos&editar_evento=' . $i); ?>">Editar</a> |
-                                    <a href="<?php echo wp_nonce_url(admin_url('admin.php?page=golden-shark-eventos&eliminar_evento=' . $i), 'eliminar_evento_' . $i, '_nonce'); ?>" onclick="return confirm('<?php echo esc_js(__('¿Eliminar este evento?', 'golden-shark')); ?>');">Eliminar</a>
+                                    <a href="<?php echo admin_url('admin.php?page=golden-shark-eventos&editar_evento=' . $i); ?>"><?php __('Editar', 'golden-shark') ?></a> |
+                                    <a href="<?php echo wp_nonce_url(admin_url('admin.php?page=golden-shark-eventos&eliminar_evento=' . $i), 'eliminar_evento_' . $i, '_nonce'); ?>" onclick="return confirm('<?php echo esc_js(__('¿Eliminar este evento?', 'golden-shark')); ?>');"><?php __('Eliminar', 'golden-shark') ?></a>
                                 </td>
                                 <td>
                                     <?php
