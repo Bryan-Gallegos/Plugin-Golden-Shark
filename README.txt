@@ -4,7 +4,7 @@ Donate link: https://example.com/
 Tags: administración, leads, eventos, frases, notas, panel interno  
 Requires at least: 5.8  
 Tested up to: 6.5  
-Stable tag: 2.8  
+Stable tag: 2.9  
 License: GPLv2 or later  
 License URI: https://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -41,6 +41,9 @@ Pensado para ser una herramienta **privada**, segura y personalizable para equip
 * Soporte completo para multisitio: configuración global y edición remota.
 * Panel exclusivo para superadministradores con vista de red.
 * Roles personalizados (`golden_shark_acceso_basico`, `golden_shark_configuracion`, etc).
+* API interna REST para integrar leads y eventos desde servicios externos.
+* Reportes automáticos en CSV por email (semanales).
+* Bitácora de accesos y acciones críticas con logs detallados.
 
 == Instalación ==
 
@@ -77,6 +80,14 @@ Todas las acciones están protegidas con `nonce` y verificaciones de capacidad d
 9. Panel multisitio para superadministrador.
 
 == Changelog ==
+
+= 2.9 =
+* Control avanzado de roles y permisos por módulo.
+* Bitácora de acceso con logs detallados por usuario y objeto.
+* Reportes automáticos en CSV enviados semanalmente por email.
+* API REST interna para registrar leads y consultar eventos (con autenticación por clave).
+* Mejora de validación y seguridad en los formularios del panel.
+* Logs más claros y precisos en la bitácora de actividad.
 
 = 2.8 =
 * Editor visual para notas internas con soporte TinyMCE.

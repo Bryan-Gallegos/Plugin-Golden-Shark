@@ -6,6 +6,7 @@ if (!defined('ABSPATH')) exit;
 function golden_shark_render_config_global()
 {
     if (!is_super_admin()) {
+        golden_shark_log('❌ Acceso denegado al panel global de configuración. Usuario: ' . wp_get_current_user()->user_login);
         wp_die(__('Acceso denegado. Solo el superadministrador puede ver esta acción', 'golden-shark'));
     }
 
@@ -18,16 +19,23 @@ function golden_shark_render_config_global()
             'golden_shark_habilitar_notificaciones'
         ];
 
+        $resumen_cambios = [];
+
         foreach ($campos as $clave) {
             if ($clave === 'golden_shark_habilitar_notificaciones') {
                 $valor = isset($_POST[$clave]) ? '1' : '0';
             } else {
                 $valor = isset($_POST[$clave]) ? sanitize_text_field($_POST[$clave]) : '';
             }
+
             golden_shark_set_config($clave, $valor);
+            $resumen_cambios[] = "$clave = $valor";
         }
 
-        golden_shark_log(__('Se actualizaron configuraciones globales desde el panel multisite', 'golden-shark'));
+        $usuario = wp_get_current_user();
+        $log_msg = '⚙️ Configuración global actualizada por ' . $usuario->user_login . ' (' . implode(', ', $usuario->roles) . '): ' . implode(' | ', $resumen_cambios);
+        golden_shark_log($log_msg);
+
         echo '<div class="updated"><p>' . __('✅ Configuraciones globales actualizadas correctamente.', 'golden-shark') . '</p></div>';
     }
 

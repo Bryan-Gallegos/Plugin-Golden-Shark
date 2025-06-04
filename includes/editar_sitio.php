@@ -46,7 +46,7 @@ function golden_shark_render_editar_sitio()
             golden_shark_log("Se guardaron " . count($_POST['frases']) . " frases motivacionales en el sitio #$sitio_id", 'info');
         }
 
-        echo '<div class="notice notice-success"><p>✅ Cambios guardados en el sitio remoto.</p></div>';
+        echo '<div class="notice notice-success"><p>' . __('✅ Cambios guardados en el sitio remoto.', 'golden-shark') . '</p></div>';
 
         // Recargar valores actualizados
         $frases = get_option('golden_shark_frases', []);
@@ -80,9 +80,11 @@ function golden_shark_render_editar_sitio()
     echo '<div class="gs-container">';
     echo '<h3>' . __('💬 Frases motivacionales', 'golden-shark') . '</h3>';
     if (empty($frases)) $frases[] = '';
+    echo '<div class="frases-container">';
     foreach ($frases as $i => $frase) {
         echo '<p><input type="text" name="frases[]" class="widefat" value="' . esc_attr($frase) . '"></p>';
     }
+    echo '</div>';
     echo '<p><button type="button" class="button" onclick="agregarCampoFrase()">' . __('➕ Agregar otra frase', 'golden-shark') . '</button></p>';
     echo '</div>';
 

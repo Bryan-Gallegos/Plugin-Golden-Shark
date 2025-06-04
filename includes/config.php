@@ -7,6 +7,9 @@ function golden_shark_render_config() {
         wp_die(__('No tienes permiso para acceder a esta sección.', 'golden-shark'));
     }
 
+    $usuario = wp_get_current_user();
+    golden_shark_log("🔐 Acceso a configuración ($tab) por {$usuario->user_login} (" . implode(', ', $usuario->roles) . ")");
+
     $tab = $_GET['tab'] ?? 'generales';
 
     echo '<div class="wrap gs-container">';
@@ -173,12 +176,16 @@ function golden_shark_webhook_campos_leads_field()
 }
 
 add_action('update_option', function ($option, $old_value, $value) {
-    // Solo para opciones del plugin Golden Shark
     if (strpos($option, 'golden_shark_') === 0 && $old_value !== $value) {
         $usuario = wp_get_current_user()->user_login;
-        $msg = "⚙️ Configuración actualizada: $option (por $usuario)";
+        $msg = "⚙️ Configuración modificada: $option → nuevo valor: " . json_encode($value) . " (por $usuario)";
         golden_shark_log($msg);
         golden_shark_log_usuario($msg);
+
+        // 🚨 Alerta si se desactiva la notificación interna
+        if ($option === 'golden_shark_habilitar_notificaciones' && $value !== '1') {
+            golden_shark_log("🚨 Alerta: notificaciones internas desactivadas por $usuario");
+        }
     }
 }, 10, 3);
 

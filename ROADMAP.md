@@ -5,7 +5,7 @@ Este documento describe el plan de evolución del plugin **Golden Shark Admin Pa
 ---
 
 ## ✅ Versión actual
-**v2.8** – Sincronización externa y personalización visual
+**v2.9** – Seguridad y reportes avanzados
 
 ---
 
@@ -143,10 +143,10 @@ Este documento describe el plan de evolución del plugin **Golden Shark Admin Pa
 ## 🧠 v2.9 – Seguridad y reportes avanzados
 **Objetivo:** monitorear con más precisión, prevenir fallos humanos y generar reportes automáticos útiles.
 
-- [ ] Control avanzado de roles y permisos por módulo.
-- [ ] Bitácora de acceso al sistema con alertas de seguridad.
-- [ ] Reportes semanales programados (PDF o CSV por email).
-- [ ] Integración con servicios externos vía API REST.
+- [x] Control avanzado de roles y permisos por módulo.
+- [x] Bitácora de acceso al sistema con alertas de seguridad.
+- [x] Reportes semanales programados (PDF o CSV por email).
+- [X] Integración con servicios externos vía API REST.
 
 ---
 

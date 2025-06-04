@@ -1,6 +1,6 @@
 # 📡 API Interna – Golden Shark Admin Panel
 
-**Última actualización:** 2025-05-19
+**Última actualización:** 2025-05-30
 
 Esta API interna permite a desarrolladores y sistemas externos interactuar con el plugin **Golden Shark Admin Panel** mediante una clave de autenticación privada.
 
@@ -44,6 +44,34 @@ X-GS-API-Key: TU_CLAVE_API
 ### 🔄 Respuesta esperada:
 ```json
 { "success": true }
+```
+
+---
+
+## 📨 GET /wp-json/golden-shark/v1/leads
+
+Devuelve la lista completa de leads registrados.
+
+### ✅ Ejemplo de solicitud:
+
+**URL:** `/wp-json/golden-shark/v1/leads`  
+**Método:** `GET`  
+**Headers:**
+```
+X-GS-API-Key: TU_CLAVE_API
+```
+
+### 🔄 Respuesta esperada:
+```json
+[
+  {
+    "nombre": "Carlos Gómez",
+    "correo": "carlos@example.com",
+    "mensaje": "Estoy interesado en un evento",
+    "fecha": "2025-05-30 10:15:00"
+  },
+  ...
+]
 ```
 
 ---

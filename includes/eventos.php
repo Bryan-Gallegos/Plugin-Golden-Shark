@@ -205,7 +205,7 @@ function golden_shark_render_eventos()
                                 <th><?php __('Tipo', 'golden-shark') ?>:</th>
                                 <td>
                                     <select name="evento_tipo">
-                                        <option value="interno" <?php slected($evento['tipo'], 'interno'); ?>><?php __('Interno', 'golden-shark') ?></option>
+                                        <option value="interno" <?php selected($evento['tipo'], 'interno'); ?>><?php __('Interno', 'golden-shark') ?></option>
                                         <option value="reunion"> <?php selected($evento['tipo'], 'reunion'); ?><?php __('Reunión', 'golden-shark') ?></option>
                                         <option value="lanzamiento" <?php selected($evento['tipo'], 'lanzamiento'); ?>><?php __('Lanzamiento', 'golden-shark') ?></option>
                                     </select>
@@ -241,7 +241,7 @@ function golden_shark_render_eventos()
                 <?php wp_nonce_field('guardar_evento_nonce', 'evento_nonce'); ?>
                 <table class="form-table">
                     <tr>
-                        <th><?php __('Título', 'golden-shark') ?>:</th>
+                        <th><?php _e('Título', 'golden-shark'); ?>:</th>
                         <td><input type="text" name="evento_titulo" class="regular-text" required></td>
                     </tr>
                     <tr>
@@ -371,7 +371,7 @@ function golden_shark_render_eventos()
                                     <a href="<?php echo $fav_url; ?>" title="Marcar como favorito">
                                         <?php echo $is_fav ? '⭐' : '☆'; ?>
                                     </a> |
-                                    <a href="<?php echo admin_url('admin.php?page=golden-shark-eventos&editar_evento=' . $i); ?>"><?php __('Editar', 'golden-shark') ?></a> |
+                                    <a href="<?php echo admin_url('admin.php?page=golden-shark-eventos&editar_evento=' . $i); ?>"><?php _e('Editar', 'golden-shark'); ?></a> |
                                     <a href="<?php echo wp_nonce_url(admin_url('admin.php?page=golden-shark-eventos&eliminar_evento=' . $i), 'eliminar_evento_' . $i, '_nonce'); ?>" onclick="return confirm('<?php echo esc_js(__('¿Eliminar este evento?', 'golden-shark')); ?>');"><?php __('Eliminar', 'golden-shark') ?></a>
                                 </td>
                                 <td>

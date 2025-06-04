@@ -2,7 +2,7 @@
 /*
 Plugin Name: Golden Shark Admin Panel
 Description: Plugin de administración interno para gestionar eventos, leads y configuración desde el panel de WordPress.
-Version: 2.8
+Version: 2.9
 Author: Carlos Gallegos
 Text Domain: golden-shark
 Domain Path: /languages
@@ -38,7 +38,9 @@ $archivos = [
     'kanban-tareas.php',
     'perfil.php',
     'resumen.php',
-    'notificaciones.php'
+    'notificaciones.php',
+    'capabilities.php',
+    'cron-reportes.php',
 ];
 
 foreach ($archivos as $archivo) {
@@ -61,6 +63,9 @@ register_activation_hook(__FILE__, function() {
     if (!wp_next_scheduled('gs_cron_informe_mensual')) {
         wp_schedule_event(time(), 'monthly', 'gs_cron_informe_mensual');
     }
+    if (!wp_next_scheduled('gs_cron_reporte_semanal')) {
+        wp_schedule_event(time(), 'weekly', 'gs_cron_reporte_semanal');
+    }
 
     // Crear roles personalizados
     add_role('gs_editor', 'GS Editor', [
@@ -76,6 +81,8 @@ register_activation_hook(__FILE__, function() {
         'golden_shark_configuracion' => true,
         'golden_shark_ver_logs' => true
     ]);
+
+    golden_shark_register_capacidades_personalizadas();
 });
 
 add_action('plugins_loaded', 'golden_shark_load_textdomain');
@@ -93,7 +100,11 @@ register_deactivation_hook(__FILE__, function() {
 
     wp_clear_scheduled_hook('gs_cron_informe_mensual');
 
+    wp_clear_scheduled_hook('gs_cron_reporte_semanal');
+
     // Eliminar roles personalizados
     remove_role('gs_editor');
     remove_role('gs_supervisor');
 });
+
+require_once plugin_dir_path(__FILE__) . 'includes/capabilities.php';

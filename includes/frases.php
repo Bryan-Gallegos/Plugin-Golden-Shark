@@ -64,7 +64,7 @@ function golden_shark_render_frases()
     $frases_filtradas = array_filter($frases, fn($f) => empty($buscar) || stripos($f, $buscar) !== false);
 ?>
     <div class="wrap" id="top">
-        <h2><?php __('💬 Frases & Mensajes', 'golden-shark') ?></h2>
+        <h2><?php _e('💬 Frases & Mensajes', 'golden-shark'); ?></h2>
 
         <section class="gs-container" aria-labelledby="editar-frase">
             <?php if (isset($_GET['editar'])) :

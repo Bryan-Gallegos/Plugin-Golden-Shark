@@ -53,7 +53,7 @@ function golden_shark_render_frases_globales()
 
     ?>
     <div class="wrap">
-        <h1><?php __('🌐 Frases Motivacionales Globales', 'golden-shark') ?></h1>
+        <h1><?php _e('🌐 Frases Motivacionales Globales', 'golden-shark'); ?></h1>
 
         <?php if (isset($_GET['editar'])):
             $id = intval($_GET['editar']);

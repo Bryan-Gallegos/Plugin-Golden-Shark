@@ -1,10 +1,13 @@
 <?php
 if (!defined('ABSPATH')) exit;
 
-// HISTORIAL
+/**
+ * Renderiza el historial general de actividad.
+ * Solo accesible para usuarios con permiso golden_shark_ver_logs.
+ */
 function golden_shark_render_historial() {
     if (!golden_shark_user_can('golden_shark_ver_logs')) {
-        wp_die(__('No tienes permiso para acceder a esta sección.', 'golden-shark'));
+        wp_die(__('⛔ No tienes permiso para acceder a esta sección.', 'golden-shark'));
     }
 
     $historial = get_option('golden_shark_historial', []);
@@ -23,6 +26,7 @@ function golden_shark_render_historial() {
             fputcsv($output, [$item['fecha'], $item['mensaje']]);
         }
         fclose($output);
+
         golden_shark_log('🗂️ Se exportó el historial de actividad.');
         exit;
     }
@@ -31,7 +35,7 @@ function golden_shark_render_historial() {
     <div class="wrap gs-container" id="gs-historial">
         <h2><?php echo esc_html__('📜 Historial de Actividad', 'golden-shark'); ?></h2>
 
-        <form method="post" style="margin-bottom: 20px;">
+        <form method="post" style="margin-bottom: 20px;" aria-label="Exportar historial">
             <?php wp_nonce_field('exportar_historial_nonce', 'historial_nonce'); ?>
             <input type="submit" name="exportar_historial_csv" class="button button-secondary" value="<?php echo esc_attr__('📤 Exportar historial a CSV', 'golden-shark'); ?>">
         </form>
@@ -40,11 +44,11 @@ function golden_shark_render_historial() {
             <p><?php echo esc_html__('No hay actividades registradas aún.', 'golden-shark'); ?></p>
         <?php else : 
             $historial_limitado = array_slice(array_reverse($historial), 0, 100); ?>
-            <table class="widefat fixed striped">
+            <table class="widefat fixed striped" aria-describedby="tabla-historial">
                 <thead>
                     <tr>
-                        <th><?php echo esc_html__('Fecha', 'golden-shark'); ?></th>
-                        <th><?php echo esc_html__('Acción', 'golden-shark'); ?></th>
+                        <th scope="col"><?php echo esc_html__('📅 Fecha', 'golden-shark'); ?></th>
+                        <th scope="col"><?php echo esc_html__('📝 Acción', 'golden-shark'); ?></th>
                     </tr>
                 </thead>
                 <tbody>

@@ -1,8 +1,9 @@
 <?php
-
 if (!defined('ABSPATH')) exit;
 
-// Vista Kanban de Tareas
+/**
+ * Renderiza la vista tipo Kanban de las tareas internas.
+ */
 function golden_shark_render_kanban() {
     if (!golden_shark_user_can('golden_shark_acceso_basico')) {
         wp_die(__('⛔ No tienes permiso para acceder a esta sección.', 'golden-shark'));
@@ -23,9 +24,9 @@ function golden_shark_render_kanban() {
     }
 
     $estados = [
-        'pendiente' => __('Pendiente', 'golden-shark'),
-        'progreso' => __('En progreso', 'golden-shark'),
-        'completado' => __('Completado', 'golden-shark')
+        'pendiente'   => __('📋 Pendiente', 'golden-shark'),
+        'progreso'    => __('🔧 En progreso', 'golden-shark'),
+        'completado'  => __('✅ Completado', 'golden-shark')
     ];
     ?>
 
@@ -34,14 +35,14 @@ function golden_shark_render_kanban() {
 
         <div id="gs-kanban" style="display: flex; gap: 20px; margin-top: 20px;">
             <?php foreach (['pendiente' => $pendientes, 'progreso' => $progreso, 'completado' => $completadas] as $estado => $lista): ?>
-                <div class="gs-kanban-col" style="flex: 1; background: #f9f9f9; padding: 10px; border: 1px solid #ccc;">
+                <div class="gs-kanban-col" style="flex: 1; background: #f9f9f9; padding: 10px; border: 1px solid #ccc;" aria-label="<?php echo esc_attr($estados[$estado]); ?>">
                     <h3 style="text-align: center;"><?php echo esc_html($estados[$estado]); ?></h3>
 
-                    <?php if (empty($lista)): ?>
-                        <p style="text-align: center;"><?php echo esc_html__('Sin tareas', 'golden-shark'); ?></p>
-                    <?php else: ?>
+                    <?php if (empty($lista)) : ?>
+                        <p style="text-align: center;"><?php echo esc_html__('Sin tareas en esta columna', 'golden-shark'); ?></p>
+                    <?php else : ?>
                         <?php foreach ($lista as $t): ?>
-                            <div class="gs-kanban-card" style="background: white; margin-bottom: 10px; padding: 10px; border: 1px solid #ddd;">
+                            <div class="gs-kanban-card" style="background: white; margin-bottom: 10px; padding: 10px; border: 1px solid #ddd;" role="region" aria-label="<?php echo esc_attr($t['titulo']); ?>">
                                 <strong><?php echo esc_html($t['titulo']); ?></strong><br>
                                 <small><?php echo esc_html__('📅 Fecha:', 'golden-shark') . ' ' . esc_html($t['fecha']); ?></small><br>
                                 <small>
@@ -58,11 +59,12 @@ function golden_shark_render_kanban() {
             <?php endforeach; ?>
         </div>
     </div>
-
 <?php
 }
 
-// Registrar en el menú (si aún no está integrado desde multisite.php o menú principal)
+/**
+ * Agrega la vista Kanban como submenú del panel principal.
+ */
 function golden_shark_add_kanban_menu() {
     add_submenu_page(
         'golden-shark-panel',

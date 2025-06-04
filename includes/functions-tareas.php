@@ -10,7 +10,6 @@ function golden_shark_crear_tareas_automaticas($evento)
 
     $tipo = sanitize_text_field($evento['tipo']);
     $fecha_evento = strtotime(sanitize_text_field($evento['fecha']));
-
     if (!$tipo || !$fecha_evento) return;
 
     $tareas_predefinidas = apply_filters('golden_shark_tareas_predefinidas', [
@@ -34,13 +33,13 @@ function golden_shark_crear_tareas_automaticas($evento)
         $fecha_tarea = date('Y-m-d', strtotime("-{$tarea['dias_antes']} days", $fecha_evento));
 
         $tareas_actuales[] = [
-            'titulo' => sanitize_text_field($tarea['titulo']),
-            'fecha' => $fecha_tarea,
-            'estado' => 'pendiente',
+            'titulo'      => sanitize_text_field($tarea['titulo']),
+            'fecha'       => $fecha_tarea,
+            'estado'      => 'pendiente',
             'responsable' => get_current_user_id(),
-            'historial' => [[
+            'historial'   => [[
                 'accion' => __('Creada automáticamente por evento', 'golden-shark'),
-                'fecha' => current_time('Y-m-d H:i:s')
+                'fecha'  => current_time('Y-m-d H:i:s')
             ]]
         ];
     }
@@ -62,7 +61,6 @@ function golden_shark_enviar_recordatorios_tareas()
 
     foreach ($tareas as $tarea) {
         if (($tarea['estado'] ?? '') !== 'pendiente') continue;
-
         if (in_array($tarea['fecha'], [$hoy, $maniana])) {
             $uid = $tarea['responsable'] ?? 0;
             if ($uid) {
@@ -94,3 +92,6 @@ function golden_shark_enviar_recordatorios_tareas()
         );
     }
 }
+
+// 🕒 Cron Hook (asegúrate de llamarlo al inicializar el plugin o en el activador)
+add_action('golden_shark_enviar_recordatorios_diarios', 'golden_shark_enviar_recordatorios_tareas');
