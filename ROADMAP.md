@@ -134,9 +134,9 @@ Este documento describe el plan de evolución del plugin **Golden Shark Admin Pa
 ## 🚀 v2.8 – Sincronización externa y personalización visual
 **Objetivo:** conectar con herramientas externas y permitir mayor personalización visual en el flujo de trabajo.
 
-- [x] Editor visual para notas internas (soporte Markdown o TinyMCE).
-- [x] Campos personalizados en formularios de leads (text, select, checkbox).
-- [x] Filtro de búsqueda global (tipo “command palette” universal desde cualquier vista).
+- [x] Añadir editor visual para notas internas (TinyMCE o Markdown).
+- [x] Permitir campos personalizados en formularios de leads (text, select, checkbox).
+- [x] Añadir filtro de búsqueda global tipo “command palette” desde cualquier vista.
 
 ---
 
@@ -150,10 +150,11 @@ Este documento describe el plan de evolución del plugin **Golden Shark Admin Pa
 
 ---
 
-# 💡 Ideas exploratorias
-- App móvil interna conectada al panel vía API.
-- Asistente AI para sugerencias de tareas o gestión de leads.
-- Plugin satélite para franquicias con sincronización de bases.
+### 📌 v3.0 (en evaluación)
+- Soporte para adjuntar documentos internos (PDF, Word).
+- Mejorar permisos con condiciones por tipo de contenido.
+- Sincronización externa con Google Sheets o Notion.
+- Editor visual de reportes personalizados (tipo dashboard).
 
 ---
 
@@ -163,4 +164,4 @@ Golden Shark Admin Panel busca ser un **sistema interno robusto, privado y modul
 
 ---
 
-*Última actualización: 2025-05-30*
+*Última actualización: 2025-06-03*
