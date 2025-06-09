@@ -4,7 +4,7 @@ Donate link: https://example.com/
 Tags: administración, leads, eventos, frases, notas, panel interno  
 Requires at least: 5.8  
 Tested up to: 6.5  
-Stable tag: 2.9  
+Stable tag: 3.0  
 License: GPLv2 or later  
 License URI: https://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -80,6 +80,13 @@ Todas las acciones están protegidas con `nonce` y verificaciones de capacidad d
 9. Panel multisitio para superadministrador.
 
 == Changelog ==
+
+= 3.0 =
+* Soporte para adjuntar documentos internos (PDF, Word) en eventos.
+* Permisos avanzados condicionales por tipo de contenido (eventos, leads, configuración).
+* Nuevo editor visual de reportes tipo dashboard con métricas internas personalizables.
+* Validación estricta en subida de archivos según extensión y tipo MIME.
+* Mejora de seguridad en interacciones multisitio y logs de actividad extendidos.
 
 = 2.9 =
 * Control avanzado de roles y permisos por módulo.

@@ -35,6 +35,8 @@ function golden_shark_render_leads()
         $fecha = current_time('Y-m-d H:i:s');
 
         $imagen_url = '';
+        $documento_url = '';
+
         if (!empty($_FILES['lead_imagen']['tmp_name'])) {
             $upload = wp_handle_upload($_FILES['lead_imagen'], ['test_form' => false]);
             if (!isset($upload['error'])) {
@@ -42,14 +44,22 @@ function golden_shark_render_leads()
             }
         }
 
+        if (!empty($_FILES['lead_documento']['tmp_name'])) {
+            $upload = wp_handle_upload($_FILES['lead_documento'], ['test_form' => false]);
+            if (!isset($upload['error'])) {
+                $documento_url = esc_url_raw($upload['url']);
+            }
+        }
+
         if ($nombre && $correo) {
             $leads[] = [
-                'nombre' => $nombre,
-                'correo' => $correo,
-                'mensaje' => $mensaje,
-                'fecha' => $fecha,
+                'nombre'    => $nombre,
+                'correo'    => $correo,
+                'mensaje'   => $mensaje,
+                'fecha'     => $fecha,
                 'etiquetas' => array_map('trim', explode(',', sanitize_text_field($_POST['lead_etiquetas']))),
-                'imagen' => $imagen_url,
+                'imagen'    => $imagen_url,
+                'documento' => $documento_url
             ];
             update_option('golden_shark_leads', $leads);
             $lead_id = array_key_last($leads);
@@ -136,6 +146,10 @@ function golden_shark_render_leads()
                 $imagen_url = '';
             }
 
+            if (!empty($_POST['eliminar_documento'])) {
+                $documento_url = '';
+            }
+
             if (!empty($_FILES['lead_imagen']['tmp_name'])) {
                 $upload = wp_handle_upload($_FILES['lead_imagen'], ['test_form' => false]);
                 if (!isset($upload['error'])) {
@@ -143,13 +157,21 @@ function golden_shark_render_leads()
                 }
             }
 
+            if (!empty($_FILES['lead_documento']['tmp_name'])) {
+                $upload = wp_handle_upload($_FILES['lead_documento'], ['test_form' => false]);
+                if (!isset($upload['error'])) {
+                    $documento_url = esc_url_raw($upload['url']);
+                }
+            }
+
             $leads[$id] = [
-                'nombre' => sanitize_text_field($_POST['lead_nombre']),
-                'correo' => sanitize_email($_POST['lead_correo']),
-                'mensaje' => sanitize_textarea_field($_POST['lead_mensaje']),
-                'fecha' => $leads[$id]['fecha'],
+                'nombre'    => sanitize_text_field($_POST['lead_nombre']),
+                'correo'    => sanitize_email($_POST['lead_correo']),
+                'mensaje'   => sanitize_textarea_field($_POST['lead_mensaje']),
+                'fecha'     => $leads[$id]['fecha'],
                 'etiquetas' => array_map('trim', explode(',', sanitize_text_field($_POST['lead_etiquetas']))),
-                'imagen' => $imagen_url,
+                'imagen'    => $imagen_url,
+                'documento' => $documento_url,
             ];
             update_option('golden_shark_leads', $leads);
             golden_shark_registrar_historial_objeto('lead', $id, __('editado', 'golden-shark'), get_current_user_id());
@@ -274,6 +296,16 @@ function golden_shark_render_leads()
                                     <input type="file" name="lead_imagen" accept="image/*">
                                 </td>
                             </tr>
+                            <tr>
+                                <th><?php _e('Documento adjunto', 'golden-shark'); ?>:</th>
+                                <td>
+                                    <?php if (!empty($lead['documento'])): ?>
+                                        <a href="<?php echo esc_url($lead['documento']); ?>" target="_blank"><?php _e('📄 Ver documento actual', 'golden-shark'); ?></a><br>
+                                        <label><input type="checkbox" name="eliminar_documento"> <?php _e('Eliminar documento actual', 'golden-shark'); ?></label><br>
+                                    <?php endif; ?>
+                                    <input type="file" name="lead_documento" accept=".pdf,.doc,.docx,.txt">
+                                </td>
+                            </tr>
                         </table>
                         <p><input type="submit" class="button button-primary" value="<?php esc_attr_e('Guardar cambios', 'golden-shark'); ?>"></p>
                     </form>
@@ -307,6 +339,10 @@ function golden_shark_render_leads()
                     <tr>
                         <th><?php _e('Imagen adjunta', 'golden-shark') ?>:</th>
                         <td><input type="file" name="lead_imagen" accept="image/*"></td>
+                    </tr>
+                    <tr>
+                        <th><?php _e('Documento adjunto', 'golden-shark'); ?>:</th>
+                        <td><input type="file" name="lead_documento" accept=".pdf,.doc,.docx,.txt"></td>
                     </tr>
                 </table>
                 <p><input type="submit" class="button button-primary" value="<?php esc_attr_e('Guardar lead', 'golden-shark'); ?>"></p>

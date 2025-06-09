@@ -73,6 +73,13 @@ Todas las configuraciones principales (colores, mensajes y notificaciones) está
 
 ## 🗓️ Historial de cambios
 
+### v3.0 - Soporte de documentos y permisos
+- Soporte para adjuntar documentos internos (PDF, Word) en eventos.
+- Permisos avanzados por tipo de contenido (ej. configuración, logs, acceso básico).
+- Nuevo editor visual de reportes en el Dashboard con métricas internas personalizables.
+- Mejora de seguridad en subida de archivos y validación de extensiones.
+- Registro detallado de acciones relacionadas con archivos adjuntos y configuración visual.
+
 ### v2.9 - Seguridad y reportes avanzados
 - Control avanzado de roles y permisos por módulo (Ej. acceso básico, configuración, logs).
 - Bitácora de accesos al sistema con logs detallados por usuario, acción, IP y origen.

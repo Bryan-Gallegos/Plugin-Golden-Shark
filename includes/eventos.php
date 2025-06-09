@@ -79,6 +79,8 @@ function golden_shark_render_eventos()
         }
 
         $imagen_url = '';
+        $docuemnto_url = '';
+
         if (!empty($_FILES['evento_imagen']['tmp_name'])) {
             $upload = wp_handle_upload($_FILES['evento_imagen'], ['test_form' => false]);
             if (!isset($upload['error'])) {
@@ -86,13 +88,21 @@ function golden_shark_render_eventos()
             }
         }
 
+        if (!empty($_FILES['evento_documento']['tmp_name'])) {
+            $upload = wp_handle_upload($_FILES['evento_documento'], ['test_form' => false]);
+            if (!isset($upload['error'])) {
+                $docuemnto_url = esc_url_raw($upload['url']);
+            }
+        }
+
         $eventos[] = [
-            'titulo' => sanitize_text_field($_POST['evento_titulo']),
-            'fecha' => sanitize_text_field($_POST['evento_fecha']),
-            'lugar' => sanitize_text_field($_POST['evento_lugar']),
-            'tipo' => sanitize_text_field($_POST['evento_tipo']),
+            'titulo'    => sanitize_text_field($_POST['evento_titulo']),
+            'fecha'     => sanitize_text_field($_POST['evento_fecha']),
+            'lugar'     => sanitize_text_field($_POST['evento_lugar']),
+            'tipo'      => sanitize_text_field($_POST['evento_tipo']),
             'etiquetas' => array_map('trim', explode(',', sanitize_text_field($_POST['evento_etiquetas']))),
-            'imagen' => $imagen_url
+            'imagen'    => $imagen_url,
+            'documento' => $docuemnto_url,
         ];
         update_option('golden_shark_eventos', $eventos);
         $evento_id = array_key_last($eventos);
@@ -119,9 +129,14 @@ function golden_shark_render_eventos()
         if (isset($eventos[$id])) {
 
             $imagen_url = $eventos[$id]['imagen'] ?? '';
+            $documento_url = $eventos[$id]['documento'] ?? '';
 
             if (!empty($_POST['eliminar_imagen'])) {
                 $imagen_url = '';
+            }
+
+            if (!empty($_POST['eliminar_documento'])) {
+                $docuemnto_url = '';
             }
 
             if (!empty($_FILES['evento_imagen']['tmp_name'])) {
@@ -131,13 +146,21 @@ function golden_shark_render_eventos()
                 }
             }
 
+            if (!empty($_FILES['evento_documento']['tmp_name'])) {
+                $upload = wp_handle_upload($_FILES['evento_documento'], ['test_form' => false]);
+                if (!isset($upload['error'])) {
+                    $docuemnto_url = esc_url_raw($upload['url']);
+                }
+            }
+
             $eventos[$id] = [
-                'titulo' => sanitize_text_field($_POST['evento_titulo']),
-                'fecha' => sanitize_text_field($_POST['evento_fecha']),
-                'lugar' => sanitize_text_field($_POST['evento_lugar']),
-                'tipo' => sanitize_text_field($_POST['evento_tipo']),
+                'titulo'    => sanitize_text_field($_POST['evento_titulo']),
+                'fecha'     => sanitize_text_field($_POST['evento_fecha']),
+                'lugar'     => sanitize_text_field($_POST['evento_lugar']),
+                'tipo'      => sanitize_text_field($_POST['evento_tipo']),
                 'etiquetas' => array_map('trim', explode(',', sanitize_text_field($_POST['evento_etiquetas']))),
-                'imagen' => $imagen_url
+                'imagen'    => $imagen_url,
+                'documento' => $docuemnto_url,
             ];
             update_option('golden_shark_eventos', $eventos);
             golden_shark_guardar_historial_objeto('eventos', $id, __('Editado', 'golden-shark'));
@@ -225,6 +248,16 @@ function golden_shark_render_eventos()
                                     <input type="file" name="evento_imagen" accept="image/*">
                                 </td>
                             </tr>
+                            <tr>
+                                <th><?php __('Documento adjunto', 'golden-shark') ?>:</th>
+                                <td>
+                                    <?php if (!empty($evento['documento'])): ?>
+                                        <a href="<?php echo esc_url($evento['documento']); ?>" target="_blank"><?php _e('📄 Ver documento actual', 'golden-shark'); ?></a><br>
+                                        <label><input type="checkbox" name="eliminar_documento"><?php _e('Eliminar documento actual', 'golden-shark'); ?></label><br>
+                                    <?php endif; ?>
+                                    <input type="file" name="evento_documento" accept=".pdf,.doc,.docx">
+                                </td>
+                            </tr>
                         </table>
                         <p><input type="submit" class="button button-primary" value="<?php esc_attr_e('Guardar cambios', 'golden-shark'); ?>"></p>
                     </form>
@@ -270,6 +303,10 @@ function golden_shark_render_eventos()
                         <th><?php __('Imagen adjunta', 'golden-shark') ?>:</th>
                         <td><input type="file" name="evento_imagen" accept="image/*"></td>
                     </tr>
+                    <tr>
+                        <th><?php __('Documento adjunto', 'golden-shark'); ?>:</th>
+                        <td><input type="file" name="evento_documento" accept=".pdf,.doc,.docx"></td>
+                    </tr>
                 </table>
                 <p><input type="submit" class="button button-primary" value="<?php esc_attr_e('Guardar evento', 'golden-shark'); ?>"></p>
             </form>
@@ -280,7 +317,7 @@ function golden_shark_render_eventos()
                 <input type="hidden" name="exportar_csv" value="1">
 
                 <select name="filtro_tipo">
-                    <option value=""><?php __('Todos','golden-shark') ?></option>
+                    <option value=""><?php __('Todos', 'golden-shark') ?></option>
                     <option value="interno" <?php selected($_GET['tipo'] ?? '', 'interno'); ?>><?php __('Interno', 'golden-shark') ?></option>
                     <option value="reunion" <?php selected($_GET['tipo'] ?? '', 'reunion'); ?>><?php __('Reunión', 'golden-shark') ?></option>
                     <option value="lanzamiento" <?php selected($_GET['tipo'] ?? '', 'lanzamiento'); ?>><?php __('Lanzamiento', 'golden-shark') ?></option>
@@ -300,7 +337,7 @@ function golden_shark_render_eventos()
             <form method="get" style="margin-bottom: 20px;" class="gs-filtros-eventos">
                 <input type="hidden" name="page" value="golden-shark-eventos">
 
-                <label for="filtro_tipo"><strong><?php __('Tipo','golden-shark') ?>:</strong></label>
+                <label for="filtro_tipo"><strong><?php __('Tipo', 'golden-shark') ?>:</strong></label>
                 <select name="tipo" id="filtro_tipo">
                     <option value=""><?php __('Todos', 'golden-shark') ?></option>
                     <option value="interno" <?php selected($_GET['tipo'] ?? '', 'interno'); ?>><?php __('Interno', 'golden-shark') ?></option>

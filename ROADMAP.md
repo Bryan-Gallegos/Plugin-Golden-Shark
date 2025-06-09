@@ -7,6 +7,41 @@ Este documento describe el plan de evolución del plugin **Golden Shark Admin Pa
 ## ✅ Versión actual
 **v2.9** – Seguridad y reportes avanzados
 
+## ✅ v1.0 - Lanzamiento Base
+- [x] Sistema básico de leads, eventos y frases.
+- [x] Shortcodes esenciales ( `[lista_eventos]`, `[nota_aleatoria]`, `[total_leads]`).
+- [x] Estilos CSS unificados en `admin-style.css`.
+
+---
+
+## ✅ v1.1 - Personalización y Shortcodes
+- [x] Nuevos shortcodes: `[lista_eventos]`, `[nota_aleatoria]`, `[total_leads]`.
+- [x] Rediseño visual del dashboard.
+
+---
+
+## ✅ v12 - Notificaciones Internas
+- [x] Notificaciones automáticas al crear/editar/eliminar registros.
+- [x] Mensajes de éxito personalizados por usuario.
+
+---
+
+## ✅ v1.3 - Widget de Resumen
+- [x] Widget de WordPress con resumen de eventos, leads y frases.
+
+---
+
+## ✅ v1.4 - Gráficos en Dashboard
+- [x] Integración de Chart.js para gráficos interactivos.
+- [x] Paso seguro de datos PHP -> JavaScript con `wp_localize_script`.
+
+---
+
+## ✅ v1.5 - Historial Personalizado
+- [x] Historial individual por usuario.
+- [x] Visualización del historial en el dashboard.
+- [x] Base para futuras exportaciones (CSV/PDF).
+
 ---
 
 ## ✅ v1.6 – Exportaciones avanzadas y mejoras UX
@@ -146,15 +181,15 @@ Este documento describe el plan de evolución del plugin **Golden Shark Admin Pa
 - [x] Control avanzado de roles y permisos por módulo.
 - [x] Bitácora de acceso al sistema con alertas de seguridad.
 - [x] Reportes semanales programados (PDF o CSV por email).
-- [X] Integración con servicios externos vía API REST.
+- [x] Integración con servicios externos vía API REST.
 
 ---
 
-### 📌 v3.0 (en evaluación)
-- Soporte para adjuntar documentos internos (PDF, Word).
-- Mejorar permisos con condiciones por tipo de contenido.
-- Sincronización externa con Google Sheets o Notion.
-- Editor visual de reportes personalizados (tipo dashboard).
+## 📌 v3.0 - Soporte de documentos y permisos
+**Objetivo:** transformar el plugin en un hub colaborativo con gestión de archivos, permisos contextuales y dashboards personalizables para equipos multisitio.
+- [x] Soporte para adjuntar documentos internos (PDF, Word).
+- [x] Mejorar permisos con condiciones por tipo de contenido.
+- [x] Editor visual de reportes personalizados (tipo dashboard).
 
 ---
 
@@ -164,4 +199,4 @@ Golden Shark Admin Panel busca ser un **sistema interno robusto, privado y modul
 
 ---
 
-*Última actualización: 2025-06-03*
+*Última actualización: 2025-06-09*
